@@ -1,0 +1,52 @@
+{
+  "name": "Lodash Collection Helpers",
+  "main": "dist/lodash-collection-helpers.min.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/JSystemsTech/lodash-collection-helpers",
+  "authors": [
+    "JSystemsTech <jsystemstech@gmail.com>"
+  ],
+  "description": "Lodash plugin library for additional collection functions",
+  "keywords": [
+    "lodash-collection-helpers",
+    "lodash plugin",
+    "lodash-join",
+    "lodash join",
+    "_.pickAs",
+    "_.pickAllAs",
+    "_.select",
+    "_.selectAll",
+    "_.joinOn",
+    "_.leftJoin",
+    "_.rightJoin",
+    "_.innerJoin",
+    "_.fullJoin",
+    "_.isCollection",
+    "lodash-pickAs",
+    "lodash-pickAllAs",
+    "lodash-select",
+    "lodash-selectAll",
+    "lodash-joinOn",
+    "lodash-leftJoin",
+    "lodash-rightJoin",
+    "lodash-innerJoin",
+    "lodash-fullJoin",
+    "lodash-isCollection",
+    "lodash pickAs",
+    "lodash pickAllAs",
+    "lodash select",
+    "lodash selectAll",
+    "lodash joinOn",
+    "lodash leftJoin",
+    "lodash rightJoin",
+    "lodash innerJoin",
+    "lodash fullJoin",
+    "lodash isCollection"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ]
+}

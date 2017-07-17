@@ -1,0 +1,122 @@
+[
+  {
+    "customerId": "670c8101-5650-450b-83b9-02ef5363ad90",
+    "name": "Garza Villarreal",
+    "bank": "Isonus Investmants",
+    "balance": "$1,471.16"
+  },
+  {
+    "customerId": "bda9f12b-83b0-4d81-a403-f6646d1d9ef5",
+    "name": "Lessie Molina",
+    "bank": "Sonique Credit Union",
+    "balance": "$2,229.72"
+  },
+  {
+    "customerId": "4af9cceb-87c8-48ad-b362-b77ef25ccecd",
+    "name": "Miller Wolf",
+    "bank": "Terascape Investmants",
+    "balance": "$2,553.41"
+  },
+  {
+    "customerId": "082ca063-6430-4c62-8ead-79f5e01bf8a8",
+    "name": "Lizzie Dotson",
+    "bank": "Quilm Credit Union",
+    "balance": "$3,254.44"
+  },
+  {
+    "customerId": "25bef3e2-9ad0-464f-aed1-2e50c6dc385f",
+    "name": "Skinner Short",
+    "bank": "Qiao Investmants",
+    "balance": "$1,361.89"
+  },
+  {
+    "customerId": "c3adf555-be96-4164-8ad0-9b12268adae9",
+    "name": "Price Waters",
+    "bank": "Adornica Bank",
+    "balance": "$1,250.75"
+  },
+  {
+    "customerId": "1ac51c8a-c89e-40c6-a8d8-1187c2836214",
+    "name": "Walker Alvarez",
+    "bank": "Comtest Investmants",
+    "balance": "$3,050.35"
+  },
+  {
+    "customerId": "e29f60f0-2b76-44bb-a6f2-9ee84e0f2fe0",
+    "name": "Candice Petty",
+    "bank": "Duoflex Bank",
+    "balance": "$1,389.39"
+  },
+  {
+    "customerId": "1f33fcbc-3d33-413d-845c-e5ec7ab559e3",
+    "name": "Lilian Vaughn",
+    "bank": "Ebidco Investmants",
+    "balance": "$3,278.59"
+  },
+  {
+    "customerId": "93663edd-5334-43aa-b695-a85a838a12f8",
+    "name": "Janna Lang",
+    "bank": "Ecrater Investmants",
+    "balance": "$2,591.25"
+  },
+  {
+    "customerId": "05bfeb0a-224f-4659-a445-68d47775c618",
+    "name": "Kelly Harris",
+    "bank": "Kaggle Investmants",
+    "balance": "$1,969.09"
+  },
+  {
+    "customerId": "9f644555-f467-475c-8c31-ff01284a9f63",
+    "name": "Mccarthy Rollins",
+    "bank": "Dyno Investmants",
+    "balance": "$2,372.24"
+  },
+  {
+    "customerId": "b07a9115-63a6-4b9b-afdf-a9f0a7a65df2",
+    "name": "Petty Perez",
+    "bank": "Zoarere Credit Union",
+    "balance": "$3,926.33"
+  },
+  {
+    "customerId": "3aaa09a5-5671-46f6-8efd-6f6d46175a13",
+    "name": "Tucker Fulton",
+    "bank": "Geekola Bank",
+    "balance": "$2,998.74"
+  },
+  {
+    "customerId": "4d66ca38-3f56-4749-a685-d0be15f6fc1a",
+    "name": "Nunez Becker",
+    "bank": "Centrexin Credit Union",
+    "balance": "$1,048.26"
+  },
+  {
+    "customerId": "a30358fc-f819-4de4-b755-f68e6e0d231a",
+    "name": "Debbie Stevenson",
+    "bank": "Centregy Bank",
+    "balance": "$2,194.82"
+  },
+  {
+    "customerId": "6508707f-e68c-48d4-ac48-9ca73f6b6229",
+    "name": "Huber Todd",
+    "bank": "Xerex Investmants",
+    "balance": "$1,562.12"
+  },
+  {
+    "customerId": "c04362bf-056c-4d3c-a773-ac9a7849a8e1",
+    "name": "Katrina Summers",
+    "bank": "Intergeek Credit Union",
+    "balance": "$1,377.29"
+  },
+  {
+    "customerId": "a2754fd8-1177-41a7-b8ed-3c2b86ea6113",
+    "name": "Summer Carney",
+    "bank": "Accuprint Credit Union",
+    "balance": "$1,312.86"
+  },
+  {
+    "customerId": "c19e8ab0-7c3e-495d-98c2-cf926c279cab",
+    "name": "Etta Daniels",
+    "bank": "Exiand Credit Union",
+    "balance": "$2,485.41"
+  }
+]
