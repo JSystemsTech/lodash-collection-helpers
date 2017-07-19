@@ -54,11 +54,9 @@
                     if (_.isPlainObject(source)) {
                         return this._pickAsSingleObject(source, sourceMap, pickAll);
                     } else if (this._isCollection(source)) {
-                        var dest = [];
-                        _.each(source, function(sourceObj) {
-                            dest.push(this._pickAsSingleObject(sourceObj, sourceMap, pickAll));
+                        return _.map(source, function(sourceObj) {
+                            return this._pickAsSingleObject(sourceObj, sourceMap, pickAll);
                         }.bind(this));
-                        return dest;
                     }
                     return source;
                 },
@@ -68,46 +66,73 @@
                 _pickAllAs: function(source, sourceMap) {
                     return _privateAttributes.get(this)._executePickAs(source, sourceMap, true);
                 },
-                _executeJoinOn: function(innerJoin, destCollection, sourceCollection, destIdAttr, sourceIdAttr) {
-                    var finalDestCollection = [];
-                    sourceIdAttr = sourceIdAttr || destIdAttr;
-                    if (this._isCollection(destCollection) && this._isCollection(sourceCollection)) {
-                        _.each(destCollection, function(item) {
-                            var sourceObj = _.find(sourceCollection, _.set({}, sourceIdAttr, _.get(item, destIdAttr)));
-                            if (innerJoin) {
-                                if (_.isPlainObject(sourceObj)) {
-                                    finalDestCollection.push(_.defaults(_.cloneDeep(item), sourceObj));
-                                }
-                            } else {
-                                finalDestCollection.push(_.defaults(_.cloneDeep(item), sourceObj));
+                _executeJoinOn: function(innerJoin, leftCollection, rightCollection, leftIdAttr, rightIdAttr) {
+                    var itemsLeftJoined = _.map(leftCollection, function(item) {
+                        var sourceObj = _.find(rightCollection, _.set({}, rightIdAttr, _.get(item, leftIdAttr)));
+                        if (innerJoin) {
+                            if (_.isPlainObject(sourceObj)) {
+                                return _.defaults(_.cloneDeep(item), sourceObj);
                             }
-                        });
-                    }
-                    return finalDestCollection;
-                },
-                _joinOn: function(destCollection, sourceCollection, destIdAttr, sourceIdAttr) {
-                    return _privateAttributes.get(this)._executeJoinOn(false, destCollection, sourceCollection, destIdAttr, sourceIdAttr);
-                },
-                _rightJoin: function(destCollection, sourceCollection, destIdAttr, sourceIdAttr) {
-                    return _privateAttributes.get(this)._executeJoinOn(false, sourceCollection, destCollection, sourceIdAttr || destIdAttr, destIdAttr);
-                },
-                _innerJoin: function(destCollection, sourceCollection, destIdAttr, sourceIdAttr) {
-                    return _privateAttributes.get(this)._executeJoinOn(true, destCollection, sourceCollection, destIdAttr, sourceIdAttr);
-                },
-                _fullJoin: function(destCollection, sourceCollection, destIdAttr, sourceIdAttr) {
-                    if (!_privateAttributes.get(this)._isCollection(destCollection) || 
-                        !_privateAttributes.get(this)._isCollection(sourceCollection)) {
-                        return [];
-                    }
-                    sourceIdAttr = sourceIdAttr || destIdAttr;
-                    var finalDestCollection = _privateAttributes.get(this)._executeJoinOn(false, destCollection, sourceCollection, destIdAttr, sourceIdAttr);
-                    _.each(sourceCollection, function(item) {
-                        var destObj = _.find(finalDestCollection, _.set({}, destIdAttr, _.get(item, sourceIdAttr)));
-                        if (!_.isPlainObject(destObj)) {
-                            finalDestCollection.push(item);
+                            return;
+                        } else {
+                            return _.defaults(_.cloneDeep(item), sourceObj);
                         }
                     });
-                    return finalDestCollection;
+                    return _.reject(itemsLeftJoined, function(item) {
+                        return _.isUndefined(item);
+                    });
+                },
+                _getLeftAntiJoinCollection: function(leftCollection, rightCollection, leftIdAttr, rightIdAttr) {
+                    return _.reject(leftCollection, function(item) {
+                        var sourceObj = _.find(rightCollection, _.set({}, rightIdAttr, _.get(item, leftIdAttr)));
+                        return _.isPlainObject(sourceObj);
+                    });
+                },
+                _executeAntiJoinOn: function(fullAntiJoin, leftCollection, rightCollection, leftIdAttr, rightIdAttr) {
+                    var itemsOnlyInLeftCollection = this._getLeftAntiJoinCollection(leftCollection, rightCollection, leftIdAttr, rightIdAttr);
+                    if (fullAntiJoin) {
+                        var itemsOnlyInRightCollection = this._getLeftAntiJoinCollection(rightCollection, leftCollection, rightIdAttr, leftIdAttr);
+                        return itemsOnlyInLeftCollection.concat(itemsOnlyInRightCollection);
+                    }
+                    return itemsOnlyInLeftCollection;
+                },
+                _executeFullJoin: function(innerJoin, leftCollection, rightCollection, leftIdAttr, rightIdAttr) {
+                    var itemsLeftJoined = this._executeJoinOn(innerJoin, leftCollection, rightCollection, leftIdAttr, rightIdAttr);
+                    var itemsOnlyInRightCollection = this._getLeftAntiJoinCollection(rightCollection, leftCollection, rightIdAttr, leftIdAttr);
+                    return itemsLeftJoined.concat(itemsOnlyInRightCollection);
+                },
+                _validateBeforeExecuteJoin: function(executionFunctionName, innerOrFullAntiJoinFlag, leftCollection, rightCollection, leftIdAttr, rightIdAttr) {
+                    rightIdAttr = rightIdAttr || leftIdAttr;
+                    if (this._isCollection(leftCollection) && this._isCollection(rightCollection)) {
+                        return this[executionFunctionName](innerOrFullAntiJoinFlag, leftCollection, rightCollection, leftIdAttr, rightIdAttr);
+                    }
+                    return [];
+                },
+                _beforeValidate: function(prependArgs, mainArgs) {
+                    return this._validateBeforeExecuteJoin.apply(this, prependArgs.concat(Array.prototype.slice.call(mainArgs)))
+                },
+                _joinOn: function() {
+                    return _privateAttributes.get(this)._beforeValidate(['_executeJoinOn', false], arguments);
+                },
+                _rightJoin: function(destCollection, sourceCollection, destIdAttr, sourceIdAttr) {
+                    var args = [sourceCollection, destCollection, sourceIdAttr || destIdAttr, destIdAttr];
+                    return _privateAttributes.get(this)._beforeValidate(['_executeJoinOn', false], args);
+                },
+                _innerJoin: function() {
+                    return _privateAttributes.get(this)._beforeValidate(['_executeJoinOn', true], arguments);
+                },
+                _fullJoin: function() {
+                    return _privateAttributes.get(this)._beforeValidate(['_executeFullJoin', false], arguments);
+                },
+                _leftAntiJoin: function() {
+                    return _privateAttributes.get(this)._beforeValidate(['_executeAntiJoinOn', false], arguments);
+                },
+                _rightAntiJoin: function(destCollection, sourceCollection, destIdAttr, sourceIdAttr) {
+                    var args = [sourceCollection, destCollection, sourceIdAttr || destIdAttr, destIdAttr];
+                    return _privateAttributes.get(this)._beforeValidate(['_executeAntiJoinOn', false], args);
+                },
+                _fullAntiJoin: function() {
+                    return _privateAttributes.get(this)._beforeValidate(['_executeAntiJoinOn', true], arguments);
                 }
             });
         }
@@ -142,17 +167,18 @@
             return _privateAttributes.get(this)._fullJoin.apply(this, arguments);
         }
         getCollectionHelpers() {
+            var collectionHelpers = _privateAttributes.get(this);
             return {
-                isCollection: _privateAttributes.get(this)._isCollection.bind(this),
-                pickAs: _privateAttributes.get(this)._pickAs.bind(this),
-                pickAllAs: _privateAttributes.get(this)._pickAllAs.bind(this),
-                select: _privateAttributes.get(this)._pickAs.bind(this),
-                selectAll: _privateAttributes.get(this)._pickAllAs.bind(this),
-                joinOn: _privateAttributes.get(this)._joinOn.bind(this),
-                leftJoin: _privateAttributes.get(this)._joinOn.bind(this),
-                rightJoin: _privateAttributes.get(this)._rightJoin.bind(this),
-                innerJoin: _privateAttributes.get(this)._innerJoin.bind(this),
-                fullJoin: _privateAttributes.get(this)._fullJoin.bind(this)
+                isCollection: collectionHelpers._isCollection.bind(this),
+                pickAs: collectionHelpers._pickAs.bind(this),
+                pickAllAs: collectionHelpers._pickAllAs.bind(this),
+                select: collectionHelpers._pickAs.bind(this),
+                selectAll: collectionHelpers._pickAllAs.bind(this),
+                joinOn: collectionHelpers._joinOn.bind(this),
+                leftJoin: collectionHelpers._joinOn.bind(this),
+                rightJoin: collectionHelpers._rightJoin.bind(this),
+                innerJoin: collectionHelpers._innerJoin.bind(this),
+                fullJoin: collectionHelpers._fullJoin.bind(this)
             };
         }
     }

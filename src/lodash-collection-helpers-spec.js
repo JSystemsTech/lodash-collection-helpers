@@ -641,6 +641,18 @@ describe('Testing Lodash Collection Helpers', function() {
 				name: 'fullName'
 			});
 		});
+		it('When both collections have matching attribute names default value is from right side collection', function() {
+			var joinedCollection = lodashCollectionHelpers.rightJoin([{
+				id: 1,
+				value: 'Value One'
+			}], [{
+				uid: 1,
+				value: 'Value One other'
+			}], 'id', 'uid');
+			expect(joinedCollection[0].id).to.equal(1);
+			expect(joinedCollection[0].uid).to.equal(1);
+			expect(joinedCollection[0].value).to.equal('Value One other');
+		});
 		it('With same named match key', function() {
 			var joinedCollection = lodashCollectionHelpers.rightJoin(userInfo, fullNameInfo, 'uid');
 			expect(joinedCollection.length).to.equal(20);
