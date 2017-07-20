@@ -16,7 +16,9 @@ var eventStream = require('event-stream');
 var badgeUrl = require('shields-badge-url-custom');
 var _ = require('underscore');
 var gulpHelpers = require('./gulp-helpers');
-var jsdocParser = require('comment-parser');
+var documentation = require('documentation');
+var SOURCE_FILE_NAME = 'lodash-collection-helpers';
+var SOURCE_FILE_PATH = './src/' + SOURCE_FILE_NAME + '.js'
 
 gulp.task('test', function() {
     return gulp.src('./src/**/*-spec.js', {
@@ -39,79 +41,29 @@ gulp.task('coverage', function() {
                 .pipe(istanbul.writeReports())
         });
 });
-gulp.task('buildreadme', function() {
-    var tableOfContentsRows = [];
-    var filterTemplateRows = [];
-    var mainSource = './src/backbone-collection-predefined-filters.js';
-    var toTitleCase = function(str) {
-        return str.replace(/\w\S*/g, function(txt) {
-            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        });
-    }
-    return gulp.src(['./src/filter_templates/*/TEMPLATE_DOC.md'], {
-            base: './src/filter-templates/'
-        })
-        .pipe(gulpHelpers.addFilterOptionsTable(toTitleCase))
-        .pipe(flatmap(function(stream, file) {
-            var filterName = file.path.split('filter_templates/')[1].split('/TEMPLATE_DOC.md')[0];
-            var filterTag = 'filter-templates-' + filterName.replace('_', '-');
-            var filterTitle = toTitleCase(filterName.replace('_', ' ')) + ' Filter Template';
-            var tableOfContentsRow = '  * [' + filterTitle + '](#' + filterTag + ')';
-            var contents = String(file.contents);
-            var filterTemplateRow = '#### <a name="' + filterTag + '"></a>' + filterTitle + '\n   ' + contents + '\n';
-            tableOfContentsRows.push(tableOfContentsRow);
-            filterTemplateRows.push(filterTemplateRow);
-            return stream;
-        }))
-        .pipe(concat('result.md', {
-            newLine: '\n'
-        }))
-        .pipe(gulpHelpers.setFilterTemplateDocs(tableOfContentsRows, filterTemplateRows))
-        .pipe(gulpHelpers.setBadgeUrls())
-        .pipe(gulpHelpers.setBuildHistory())
-        .pipe(gulpHelpers.buildMDTablefromJSDoc(mainSource))
-        .pipe(rename('README.md'))
-        .pipe(buffer())
-        .pipe(gulp.dest('./'));
-});
-gulp.task('updatebuildhistory', function() {
-    return gulp.src(['./build_history.json'])
-        .pipe(gulpHelpers.addBuildHistory(util.env.buildnumber))
-        .pipe(buffer())
-        .pipe(gulp.dest('./'));
-});
+
 gulp.task('documentation', function() {
-    return gulp.src(['./src/backbone-collection-predefined-filters.js'])
-        .pipe(gulpHelpers.buildMDTablefromJSDoc())
-        .pipe(buffer())
-        .pipe(rename('./README_TEMPLATE.md'))
-        .pipe(gulp.dest('./'));
+    documentation.lint('/src/' + SOURCE_FILE_NAME + '.js').then(lintOutput => {
+        if (lintOutput) {
+            console.log(lintOutput);
+            process.exit(1);
+        } else {
+            process.exit(0);
+        }
+    });
 });
-gulp.task('setnpmversionnumber', function() {
-    return gulp.src(['./package.json'])
-        .pipe(gulpHelpers.getVersionNumber(util.env.buildnumber, true))
-        .pipe(buffer())
-        .pipe(gulp.dest('./'));
-});
-gulp.task('getversionnumber', function() {
-    return gulp.src(['./package.json'])
-        .pipe(gulpHelpers.getVersionNumber(util.env.buildnumber, false))
-        .pipe(buffer())
-        .pipe(rename('version_number.txt'))
-        .pipe(gulp.dest('./'));
-});
-gulp.task('browserify', function() {
-    var input = './src/backbone-collection-predefined-filters.js';
+
+gulp.task('minify', function() {
     return browserify({
-            entries: [path.resolve(input)],
-            standalone: 'backbone-collection-predefined-filters'
+            entries: [path.resolve(SOURCE_FILE_PATH)],
+            standalone: SOURCE_FILE_NAME
         })
         .bundle()
-        .pipe(source(input))
-        .pipe(rename('backbone-collection-predefined-filters.js'))
+        .pipe(source(SOURCE_FILE_PATH))
+        .pipe(rename(SOURCE_FILE_NAME + '.js'))
         .pipe(buffer())
         .pipe(gulp.dest('./dist'))
-        .pipe(rename('backbone-collection-predefined-filters.min.js'))
+        .pipe(rename('lodash-collection-helpers.min.js'))
         .pipe(uglify({
             compress: {
                 dead_code: true
@@ -120,4 +72,4 @@ gulp.task('browserify', function() {
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('default', ['browserify']);
+gulp.task('default', ['minify']);

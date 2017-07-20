@@ -109,7 +109,7 @@
                     return [];
                 },
                 _beforeValidate: function(prependArgs, mainArgs) {
-                    return this._validateBeforeExecuteJoin.apply(this, prependArgs.concat(Array.prototype.slice.call(mainArgs)))
+                    return this._validateBeforeExecuteJoin.apply(this, prependArgs.concat(Array.prototype.slice.call(mainArgs)));
                 },
                 _joinOn: function() {
                     return _privateAttributes.get(this)._beforeValidate(['_executeJoinOn', false], arguments);
@@ -135,65 +135,115 @@
                     return _privateAttributes.get(this)._beforeValidate(['_executeAntiJoinOn', true], arguments);
                 }
             });
-        }
-        isCollection() {
-            return _privateAttributes.get(this)._isCollection.apply(this, arguments);
-        }
-        pickAs() {
-            return _privateAttributes.get(this)._pickAs.apply(this, arguments);
-        }
-        pickAllAs() {
-            return _privateAttributes.get(this)._pickAllAs.apply(this, arguments);
-        }
-        select() {
-            return _privateAttributes.get(this)._pickAs.apply(this, arguments);
-        }
-        selectAll() {
-            return _privateAttributes.get(this)._pickAllAs.apply(this, arguments);
-        }
-        joinOn() {
-            return _privateAttributes.get(this)._joinOn.apply(this, arguments);
-        }
-        leftJoin() {
-            return _privateAttributes.get(this)._joinOn.apply(this, arguments);
-        }
-        rightJoin() {
-            return _privateAttributes.get(this)._rightJoin.apply(this, arguments);
-        }
-        innerJoin() {
-            return _privateAttributes.get(this)._innerJoin.apply(this, arguments);
-        }
-        fullJoin() {
-            return _privateAttributes.get(this)._fullJoin.apply(this, arguments);
-        }
-        leftAntiJoin() {
-            return _privateAttributes.get(this)._leftAntiJoin.apply(this, arguments);
-        }
-        rightAntiJoin() {
-            return _privateAttributes.get(this)._rightAntiJoin.apply(this, arguments);
-        }
-        fullAntiJoin() {
-            return _privateAttributes.get(this)._fullAntiJoin.apply(this, arguments);
-        }
-        getCollectionHelpers() {
-            var collectionHelpers = _privateAttributes.get(this);
-            return {
-                isCollection: collectionHelpers._isCollection.bind(this),
-                pickAs: collectionHelpers._pickAs.bind(this),
-                pickAllAs: collectionHelpers._pickAllAs.bind(this),
-                select: collectionHelpers._pickAs.bind(this),
-                selectAll: collectionHelpers._pickAllAs.bind(this),
-                joinOn: collectionHelpers._joinOn.bind(this),
-                leftJoin: collectionHelpers._joinOn.bind(this),
-                rightJoin: collectionHelpers._rightJoin.bind(this),
-                innerJoin: collectionHelpers._innerJoin.bind(this),
-                fullJoin: collectionHelpers._fullJoin.bind(this),
-                leftAntiJoin: collectionHelpers._leftAntiJoin.bind(this),
-                rightAntiJoin: collectionHelpers._rightAntiJoin.bind(this),
-                fullAntiJoin: collectionHelpers._fullAntiJoin.bind(this)
+            /**
+             * This function checks to see if input is an array of plain objects.
+             * @param [value] input any value or undefined
+             * @returns {boolean}
+             * @example 
+             * collectionHelpers.isCollection('some string')
+             * // returns false
+             * @example 
+             * collectionHelpers.isCollection([])
+             * // returns true
+             * @example 
+             * collectionHelpers.isCollection(['some string'])
+             * // returns false
+             * @example 
+             * collectionHelpers.isCollection([{id:1},{id:2}])
+             * // returns true
+             */
+            this.isCollection = function() {
+                return _privateAttributes.get(this)._isCollection.apply(this, arguments);
+            };
+            /**
+             * This function acts similarly to _.pick except it can take a collection or an object source value 
+             * and an array of key paths to pick or attribute mapping object to pick source keys as a different key value.
+             * @param {String|Array} source object or collection
+             * @param {Object|Array} attributeMap object of source key => destination key mappings or array of source keys to pick
+             * @returns {Object|Array} value returns object with selected keys from attributeMap
+             */
+            this.pickAs = function() {
+                return _privateAttributes.get(this)._pickAs.apply(this, arguments);
+            };
+            /**
+             * Like pickAs except that it picks all keys from the source
+             * and will use attribute mapping object accordingly.
+             * @param {String|Array} source object or collection
+             * @param {Object} attributeMap object of source key => destination key mappings or array of source keys to pick
+             * @returns {Object|Array} value returns object with selected keys from attributeMap
+             */
+            this.pickAllAs = function() {
+                return _privateAttributes.get(this)._pickAllAs.apply(this, arguments);
+            };
+            /**
+             * This function acts similarly to _.pick except it can take a collection or an object source value 
+             * and an array of key paths to pick or attribute mapping object to pick source keys as a different key value.
+             *
+             * alias: [pickAs](#pickas)
+             *
+             * @param {String|Array} source object or collection
+             * @param {Object|Array} attributeMap object of source key => destination key mappings or array of source keys to pick
+             * @returns {Object|Array} value returns object with selected keys from attributeMap
+             */
+            this.select = function() {
+                return _privateAttributes.get(this)._pickAs.apply(this, arguments);
+            };
+            /**
+             * Like pickAs except that it picks all keys from the source
+             * and will use attribute mapping object accordingly.
+             *
+             * alias: [pickAllAs](#pickallas)
+             *
+             * @param {String|Array} source object or collection
+             * @param {Object} attributeMap object of source key => destination key mappings or array of source keys to pick
+             * @returns {Object|Array} value returns object with selected keys from attributeMap
+             */
+            this.selectAll = function() {
+                return _privateAttributes.get(this)._pickAllAs.apply(this, arguments);
+            };
+            this.joinOn = function() {
+                return _privateAttributes.get(this)._joinOn.apply(this, arguments);
+            };
+            this.leftJoin = function() {
+                return _privateAttributes.get(this)._joinOn.apply(this, arguments);
+            };
+            this.rightJoin = function() {
+                return _privateAttributes.get(this)._rightJoin.apply(this, arguments);
+            };
+            this.innerJoin = function() {
+                return _privateAttributes.get(this)._innerJoin.apply(this, arguments);
+            };
+            this.fullJoin = function() {
+                return _privateAttributes.get(this)._fullJoin.apply(this, arguments);
+            };
+            this.leftAntiJoin = function() {
+                return _privateAttributes.get(this)._leftAntiJoin.apply(this, arguments);
+            };
+            this.rightAntiJoin = function() {
+                return _privateAttributes.get(this)._rightAntiJoin.apply(this, arguments);
+            };
+            this.fullAntiJoin = function() {
+                return _privateAttributes.get(this)._fullAntiJoin.apply(this, arguments);
+            };
+            this.getCollectionHelpers = function() {
+                var collectionHelpers = _privateAttributes.get(this);
+                return {
+                    isCollection: collectionHelpers._isCollection.bind(this),
+                    pickAs: collectionHelpers._pickAs.bind(this),
+                    pickAllAs: collectionHelpers._pickAllAs.bind(this),
+                    select: collectionHelpers._pickAs.bind(this),
+                    selectAll: collectionHelpers._pickAllAs.bind(this),
+                    joinOn: collectionHelpers._joinOn.bind(this),
+                    leftJoin: collectionHelpers._joinOn.bind(this),
+                    rightJoin: collectionHelpers._rightJoin.bind(this),
+                    innerJoin: collectionHelpers._innerJoin.bind(this),
+                    fullJoin: collectionHelpers._fullJoin.bind(this),
+                    leftAntiJoin: collectionHelpers._leftAntiJoin.bind(this),
+                    rightAntiJoin: collectionHelpers._rightAntiJoin.bind(this),
+                    fullAntiJoin: collectionHelpers._fullAntiJoin.bind(this)
+                };
             };
         }
     }
-
     return new CollectionHelpers();
 }));
