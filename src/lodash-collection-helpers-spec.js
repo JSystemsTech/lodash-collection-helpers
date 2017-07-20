@@ -9,17 +9,6 @@ var _ = require('lodash'),
 
 describe('Testing Lodash Collection Helpers', function() {
 	describe('Verify Test Data', function() {
-		// var bankUserInfo,
-		// userInfo,
-		// fullNameInfo,
-		// workInfo;
-		// beforeEach(function() {
-		// 	bankUserInfo = bankUserInfoData;
-		// 	userInfo = userInfoData;
-		// 	fullNameInfo = fullNameInfoData;
-		// 	workInfo = workInfoData;
-
-		// });
 		var testDataMap = {
 			bankUserInfo: {
 				data: bankUserInfoData,
@@ -60,8 +49,8 @@ describe('Testing Lodash Collection Helpers', function() {
 		it('Expect getCollectionHelpers to return a plain Object', function() {
 			expect(_.isPlainObject(helpers)).to.be(true);
 		});
-		it('Expect getCollectionHelpers to return a plain Object with 10 attributes', function() {
-			expect(_.keys(helpers).length).to.equal(10);
+		it('Expect getCollectionHelpers to return a plain Object with 13 attributes', function() {
+			expect(_.keys(helpers).length).to.equal(13);
 		});
 		_.each(helpers, function(helper, helperName) {
 			it('Expect getCollectionHelpers.' + helperName + ' to be a Function', function() {
@@ -436,6 +425,18 @@ describe('Testing Lodash Collection Helpers', function() {
 				name: 'fullName'
 			});
 		});
+		it('When both collections have matching attribute names default value is from left side collection', function() {
+			var joinedCollection = lodashCollectionHelpers.leftJoin([{
+				id: 1,
+				value: 'Value One'
+			}], [{
+				uid: 1,
+				value: 'Value One other'
+			}], 'id', 'uid');
+			expect(joinedCollection[0].id).to.equal(1);
+			expect(joinedCollection[0].uid).to.equal(1);
+			expect(joinedCollection[0].value).to.equal('Value One');
+		});
 		it('With invalid collections returns empty array', function() {
 			var joinedCollection = lodashCollectionHelpers.joinOn("userInfo", "fullNameInfo", 'uid');
 			expect(_.isArray(joinedCollection)).to.be(true);
@@ -540,6 +541,18 @@ describe('Testing Lodash Collection Helpers', function() {
 			fullNameInfo = lodashCollectionHelpers.selectAll(fullNameInfoData, {
 				name: 'fullName'
 			});
+		});
+		it('When both collections have matching attribute names default value is from left side collection', function() {
+			var joinedCollection = lodashCollectionHelpers.leftJoin([{
+				id: 1,
+				value: 'Value One'
+			}], [{
+				uid: 1,
+				value: 'Value One other'
+			}], 'id', 'uid');
+			expect(joinedCollection[0].id).to.equal(1);
+			expect(joinedCollection[0].uid).to.equal(1);
+			expect(joinedCollection[0].value).to.equal('Value One');
 		});
 		it('With same named match key', function() {
 			var joinedCollection = lodashCollectionHelpers.leftJoin(userInfo, fullNameInfo, 'uid');
@@ -749,6 +762,18 @@ describe('Testing Lodash Collection Helpers', function() {
 				name: 'fullName'
 			});
 		});
+		it('When both collections have matching attribute names default value is from left side collection', function() {
+			var joinedCollection = lodashCollectionHelpers.leftJoin([{
+				id: 1,
+				value: 'Value One'
+			}], [{
+				uid: 1,
+				value: 'Value One other'
+			}], 'id', 'uid');
+			expect(joinedCollection[0].id).to.equal(1);
+			expect(joinedCollection[0].uid).to.equal(1);
+			expect(joinedCollection[0].value).to.equal('Value One');
+		});
 		it('With same named match key', function() {
 			var joinedCollection = lodashCollectionHelpers.innerJoin(userInfo, fullNameInfo, 'uid');
 			expect(joinedCollection.length).to.equal(20);
@@ -831,7 +856,18 @@ describe('Testing Lodash Collection Helpers', function() {
 				name: 'fullName'
 			});
 		});
-
+		it('When both collections have matching attribute names default value is from left side collection', function() {
+			var joinedCollection = lodashCollectionHelpers.leftJoin([{
+				id: 1,
+				value: 'Value One'
+			}], [{
+				uid: 1,
+				value: 'Value One other'
+			}], 'id', 'uid');
+			expect(joinedCollection[0].id).to.equal(1);
+			expect(joinedCollection[0].uid).to.equal(1);
+			expect(joinedCollection[0].value).to.equal('Value One');
+		});
 		it('With invalid collections returns empty array', function() {
 			var joinedCollection = lodashCollectionHelpers.fullJoin('userInfo', 'fullNameInfo', 'uid');
 			expect(_.isArray(joinedCollection)).to.be(true);
@@ -970,6 +1006,218 @@ describe('Testing Lodash Collection Helpers', function() {
 						expect(item.gender).to.equal(originalUserInfo.gender);
 						expect(item.isActive).to.equal(originalUserInfo.isActive);
 					}
+				}
+			});
+		});
+	});
+	describe('Testing leftAntiJoin', function() {
+		var bankUserInfo,
+			userInfo,
+			fullNameInfo;
+		beforeEach(function() {
+			bankUserInfo = bankUserInfoData;
+			userInfo = userInfoData;
+			fullNameInfo = lodashCollectionHelpers.selectAll(fullNameInfoData, {
+				name: 'fullName'
+			});
+		});
+		it('With same named match key', function() {
+			fullNameInfo = _.takeRight(fullNameInfo, 5);
+			var joinedCollection = lodashCollectionHelpers.leftAntiJoin(userInfo, fullNameInfo, 'uid');
+			expect(joinedCollection.length).to.equal(15);
+			_.each(joinedCollection, function(item) {
+				var originalUserInfo = _.find(userInfo, {
+					uid: item.uid
+				});
+				expect(_.keys(item).length).to.equal(6);
+				expect(item.uid).to.equal(originalUserInfo.uid);
+				expect(item.name).to.equal(originalUserInfo.name);
+				expect(item.age).to.equal(originalUserInfo.age);
+				expect(item.eyeColor).to.equal(originalUserInfo.eyeColor);
+				expect(item.gender).to.equal(originalUserInfo.gender);
+				expect(item.isActive).to.equal(originalUserInfo.isActive);
+			});
+		});
+		it('With same named match key & should not have any data to anti join', function() {
+			var joinedCollection = lodashCollectionHelpers.leftAntiJoin(userInfo, fullNameInfo, 'uid');
+			expect(joinedCollection.length).to.equal(0);
+		});
+		it('With same named match key & all data to anti join', function() {
+			var joinedCollection = lodashCollectionHelpers.leftAntiJoin(userInfo, bankUserInfo, 'uid');
+			expect(joinedCollection.length).to.equal(20);
+			_.each(joinedCollection, function(item) {
+				var originalUserInfo = _.find(userInfo, {
+					uid: item.uid
+				});
+				expect(_.keys(item).length).to.equal(6);
+				expect(item.uid).to.equal(originalUserInfo.uid);
+				expect(item.name).to.equal(originalUserInfo.name);
+				expect(item.age).to.equal(originalUserInfo.age);
+				expect(item.eyeColor).to.equal(originalUserInfo.eyeColor);
+				expect(item.gender).to.equal(originalUserInfo.gender);
+				expect(item.isActive).to.equal(originalUserInfo.isActive);
+			});
+		});
+		it('With differently named keys', function() {
+			bankUserInfo = _.takeRight(bankUserInfo, 5);
+			var joinedCollection = lodashCollectionHelpers.leftAntiJoin(userInfo, bankUserInfo, 'uid', 'customerId');
+			expect(joinedCollection.length).to.equal(15);
+			_.each(joinedCollection, function(item) {
+				var originalUserInfo = _.find(userInfo, {
+					uid: item.uid
+				});
+				expect(_.keys(item).length).to.equal(6);
+				expect(item.uid).to.equal(originalUserInfo.uid);
+				expect(item.name).to.equal(originalUserInfo.name);
+				expect(item.age).to.equal(originalUserInfo.age);
+				expect(item.eyeColor).to.equal(originalUserInfo.eyeColor);
+				expect(item.gender).to.equal(originalUserInfo.gender);
+				expect(item.isActive).to.equal(originalUserInfo.isActive);
+			});
+		});
+	});
+	describe('Testing rightAntiJoin', function() {
+		var bankUserInfo,
+			userInfo,
+			fullNameInfo;
+		beforeEach(function() {
+			bankUserInfo = bankUserInfoData;
+			userInfo = userInfoData;
+			fullNameInfo = lodashCollectionHelpers.selectAll(fullNameInfoData, {
+				name: 'fullName'
+			});
+		});
+		it('With same named match key', function() {
+			userInfo = _.takeRight(userInfo, 5);
+			var joinedCollection = lodashCollectionHelpers.rightAntiJoin(userInfo, fullNameInfo, 'uid');
+			expect(joinedCollection.length).to.equal(15);
+			_.each(joinedCollection, function(item) {
+				var originalFullNameInfo = _.find(fullNameInfo, {
+					uid: item.uid
+				});
+				expect(_.keys(item).length).to.equal(2);
+				expect(item.uid).to.equal(originalFullNameInfo.uid);
+				expect(item.fullName).to.equal(originalFullNameInfo.fullName);
+			});
+		});
+		it('With same named match key & should not have any data to anti join', function() {
+			var joinedCollection = lodashCollectionHelpers.rightAntiJoin(userInfo, fullNameInfo, 'uid');
+			expect(joinedCollection.length).to.equal(0);
+		});
+		it('With same named match key & all data to anti join', function() {
+			var joinedCollection = lodashCollectionHelpers.rightAntiJoin(userInfo, bankUserInfo, 'uid');
+			expect(joinedCollection.length).to.equal(20);
+			_.each(joinedCollection, function(item) {
+				expect(_.keys(item).length).to.equal(4);
+				var originalBankUserInfo = _.find(bankUserInfo, {
+					customerId: item.customerId
+				});
+				expect(item.customerId).to.equal(originalBankUserInfo.customerId);
+				expect(item.name).to.equal(originalBankUserInfo.name);
+				expect(item.bank).to.equal(originalBankUserInfo.bank);
+				expect(item.balance).to.equal(originalBankUserInfo.balance);
+			});
+		});
+		it('With differently named keys', function() {
+			userInfo = _.takeRight(userInfo, 5);
+			var joinedCollection = lodashCollectionHelpers.rightAntiJoin(userInfo, bankUserInfo, 'uid', 'customerId');
+			expect(joinedCollection.length).to.equal(15);
+			_.each(joinedCollection, function(item) {
+				expect(_.keys(item).length).to.equal(4);
+				var originalBankUserInfo = _.find(bankUserInfo, {
+					customerId: item.customerId
+				});
+				expect(item.customerId).to.equal(originalBankUserInfo.customerId);
+				expect(item.name).to.equal(originalBankUserInfo.name);
+				expect(item.bank).to.equal(originalBankUserInfo.bank);
+				expect(item.balance).to.equal(originalBankUserInfo.balance);
+			});
+		});
+	});
+	describe('Testing fullAntiJoin', function() {
+		var leftCollection,
+			rightCollection1,
+			rightCollection2,
+			rightCollection3,
+			userInfo,
+			fullNameInfo;
+		beforeEach(function() {
+			leftCollection = [{
+				uid: 1,
+				value: 'only on left'
+			}, {
+				uid: 2,
+				value: 'sharedLeft'
+			}];
+			rightCollection1 = [{
+				uid: 3,
+				value: 'only on right'
+			}, {
+				uid: 2,
+				value: 'sharedRight'
+			}];
+			rightCollection2 = [{
+				id: 3,
+				value: 'only on right'
+			}, {
+				id: 2,
+				value: 'sharedRight'
+			}];
+			rightCollection3 = [{
+				uid: 3,
+				value: 'only on right1'
+			}, {
+				uid: 4,
+				value: 'sharedRight2'
+			}];
+			userInfo = userInfoData;
+			fullNameInfo = lodashCollectionHelpers.selectAll(fullNameInfoData, {
+				name: 'fullName'
+			});
+		});
+		it('With same named match key', function() {
+			var joinedCollection = lodashCollectionHelpers.fullAntiJoin(leftCollection, rightCollection1, 'uid');
+			expect(joinedCollection.length).to.equal(2);
+			_.each(joinedCollection, function(item) {
+				expect(_.keys(item).length).to.equal(2);
+				if (item.uid === 1) {
+					expect(item.uid).to.equal(leftCollection[0].uid);
+					expect(item.value).to.equal(leftCollection[0].value);
+				} else {
+					expect(item.uid).to.equal(rightCollection1[0].uid);
+					expect(item.value).to.equal(rightCollection1[0].value);
+				}
+			});
+		});
+		it('With same named match key & should not have any data to anti join', function() {
+			var joinedCollection = lodashCollectionHelpers.fullAntiJoin(userInfo, fullNameInfo, 'uid');
+			expect(joinedCollection.length).to.equal(0);
+		});
+		it('With same named match key & all data to anti join', function() {
+			var joinedCollection = lodashCollectionHelpers.fullAntiJoin(leftCollection, rightCollection3, 'uid');
+			expect(joinedCollection.length).to.equal(4);
+			_.each(joinedCollection, function(item, index) {
+				expect(_.keys(item).length).to.equal(2);
+				if (item.uid === 1 || item.uid === 2) {
+					expect(item.uid).to.equal(leftCollection[index].uid);
+					expect(item.value).to.equal(leftCollection[index].value);
+				} else {
+					expect(item.uid).to.equal(rightCollection3[index - 2].uid);
+					expect(item.value).to.equal(rightCollection3[index - 2].value);
+				}
+			});
+		});
+		it('With differently named keys', function() {
+			var joinedCollection = lodashCollectionHelpers.fullAntiJoin(leftCollection, rightCollection2, 'uid', 'id');
+			expect(joinedCollection.length).to.equal(2);
+			_.each(joinedCollection, function(item) {
+				expect(_.keys(item).length).to.equal(2);
+				if (item.uid === 1) {
+					expect(item.uid).to.equal(leftCollection[0].uid);
+					expect(item.value).to.equal(leftCollection[0].value);
+				} else {
+					expect(item.uid).to.equal(rightCollection2[0].uid);
+					expect(item.value).to.equal(rightCollection2[0].value);
 				}
 			});
 		});

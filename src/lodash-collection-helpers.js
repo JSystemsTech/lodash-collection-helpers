@@ -114,8 +114,8 @@
                 _joinOn: function() {
                     return _privateAttributes.get(this)._beforeValidate(['_executeJoinOn', false], arguments);
                 },
-                _rightJoin: function(destCollection, sourceCollection, destIdAttr, sourceIdAttr) {
-                    var args = [sourceCollection, destCollection, sourceIdAttr || destIdAttr, destIdAttr];
+                _rightJoin: function(leftCollection, rightCollection, leftIdAttr, rightIdAttr) {
+                    var args = [rightCollection, leftCollection, rightIdAttr || leftIdAttr, leftIdAttr];
                     return _privateAttributes.get(this)._beforeValidate(['_executeJoinOn', false], args);
                 },
                 _innerJoin: function() {
@@ -127,8 +127,8 @@
                 _leftAntiJoin: function() {
                     return _privateAttributes.get(this)._beforeValidate(['_executeAntiJoinOn', false], arguments);
                 },
-                _rightAntiJoin: function(destCollection, sourceCollection, destIdAttr, sourceIdAttr) {
-                    var args = [sourceCollection, destCollection, sourceIdAttr || destIdAttr, destIdAttr];
+                _rightAntiJoin: function(leftCollection, rightCollection, leftIdAttr, rightIdAttr) {
+                    var args = [rightCollection, leftCollection, rightIdAttr || leftIdAttr, leftIdAttr];
                     return _privateAttributes.get(this)._beforeValidate(['_executeAntiJoinOn', false], args);
                 },
                 _fullAntiJoin: function() {
@@ -166,6 +166,15 @@
         fullJoin() {
             return _privateAttributes.get(this)._fullJoin.apply(this, arguments);
         }
+        leftAntiJoin() {
+            return _privateAttributes.get(this)._leftAntiJoin.apply(this, arguments);
+        }
+        rightAntiJoin() {
+            return _privateAttributes.get(this)._rightAntiJoin.apply(this, arguments);
+        }
+        fullAntiJoin() {
+            return _privateAttributes.get(this)._fullAntiJoin.apply(this, arguments);
+        }
         getCollectionHelpers() {
             var collectionHelpers = _privateAttributes.get(this);
             return {
@@ -178,7 +187,10 @@
                 leftJoin: collectionHelpers._joinOn.bind(this),
                 rightJoin: collectionHelpers._rightJoin.bind(this),
                 innerJoin: collectionHelpers._innerJoin.bind(this),
-                fullJoin: collectionHelpers._fullJoin.bind(this)
+                fullJoin: collectionHelpers._fullJoin.bind(this),
+                leftAntiJoin: collectionHelpers._leftAntiJoin.bind(this),
+                rightAntiJoin: collectionHelpers._rightAntiJoin.bind(this),
+                fullAntiJoin: collectionHelpers._fullAntiJoin.bind(this)
             };
         }
     }
