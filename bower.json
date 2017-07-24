@@ -1,6 +1,6 @@
 {
   "name": "lodash-collection-helpers",
-  "main": "dist/lodash-collection-helpers.min.js",
+  "main": "dist/lodash-collection-helpers-es2015.min.js",
   "version": "1.0.0",
   "homepage": "https://github.com/JSystemsTech/lodash-collection-helpers",
   "authors": [
@@ -11,6 +11,7 @@
     "lodash collection helpers",
     "lodash-collection-helpers",
     "lodash plugin",
+    "join",
     "lodash-join",
     "lodash join",
     "_.pickAs",
