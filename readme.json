@@ -17,13 +17,13 @@
 	}, {
 		"title": "Usage",
 		"content": [{
-			"type": "code",
+			"type": "code_block",
 			"syntax": "javascript",
 			"code": "var collectionHelpers = require('lodash-collection-helpers');"
 		}, {
 			"content": "Need an ES5 version?"
 		}, {
-			"type": "code",
+			"type": "code_block",
 			"syntax": "javascript",
 			"code": "var collectionHelpers = require('lodash-collection-helpers/dist/lodash-collection-helpers-es2015');"
 		}]
@@ -44,5 +44,5 @@
 			]
 		}
 	}],
-	"badges": ["npm", "downloads", "travis", "coverage", "dependencies", "license"]
+	"badges": ["npm", "downloads", "travis", "coverage", "dependencies", "license", "bower"]
 }
