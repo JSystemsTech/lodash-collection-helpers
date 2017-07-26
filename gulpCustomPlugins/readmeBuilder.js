@@ -4,6 +4,7 @@
     // CommonJS
     if (typeof exports == "object" && typeof require == "function") {
         module.exports = factory(require("lodash"),
+            require("uuid"),
             require("../src/lodash-collection-helpers"),
             require("../readme"),
             require("../package"),
@@ -11,9 +12,9 @@
     }
     // AMD
     else if (typeof define == "function" && define.amd) {
-        define(["lodash", "./src/lodash-collection-helpers", "./readme", "./package", "./bower"], factory);
+        define(["lodash", "uuid", "./src/lodash-collection-helpers", "./readme", "./package", "./bower"], factory);
     }
-}(function(_, CollectionHelpers, readmeDotJSON, packageDotJSON, bowerDotJSON) {
+}(function(_, uuid, CollectionHelpers, readmeDotJSON, packageDotJSON, bowerDotJSON) {
     var config = CollectionHelpers.leftJoin(
         [CollectionHelpers.selectAll(packageDotJSON, {
             main: 'npm.main'
@@ -23,8 +24,9 @@
         'name');
     var name = _.get(config, '[0].name', '');
     var user = 'JSystemsTech';
+    var targetBranch = 'v1-0-0-dev';
     var badges = {
-        bower:'<a href="https://github.com/' + user + '/' + name + '#README"><img src="https://github.com/' + user + '/' + name + '/raw/v1-0-0-dev/gulpCustomPlugins/customBadges/bower-badge.png" alt="Bower Package" height="30" width="130"></a>',
+        bower: '<a href="https://github.com/' + user + '/' + name + '#README"><img src="https://github.com/' + user + '/' + name + '/raw/' + targetBranch + '/gulpCustomPlugins/customBadges/bower-badge.png" alt="Bower Package" height="30" width="130"></a>',
         license: '[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license-url]',
         npm: '[![NPM version](http://img.shields.io/npm/v/' + name + '.svg?style=flat)][npm-url]',
         downloads: '[![NPM downloads](http://img.shields.io/npm/dm/' + name + '.svg?style=flat)][npm-url]',
@@ -38,7 +40,7 @@
         '[travis-url]: https://travis-ci.org/' + user + '/' + name + '?branch=master',
         '[dependencies-url]: https://david-dm.org/' + user + '/' + name,
         '[coverage-url]: https://coveralls.io/repos/github/' + user + '/' + name + '?branch=master',
-        '[documentation-url]: https://github.com/' + user + '/' + name + '#DOCUMENTATION'
+        '[documentation-url]: https://github.com/' + user + '/' + name + '/blob/' + targetBranch + 'DOCUMENTATION.md'
     ].join('\n');
     var tableColumnAllignmentMap = {
         left: '----',
@@ -77,7 +79,7 @@
                 return buildTable(sectionContent.columns, sectionContent.rows);
             } else if (sectionContent.type === 'code_block') {
                 return getCodeBlock(sectionContent.syntax, sectionContent.code);
-            }else {
+            } else {
                 return getSectionContent(_.get(sectionContent, 'content', ''));
             }
         } else if (_.isString(sectionContent)) {
@@ -86,13 +88,13 @@
     };
 
     var compileToMdFormat = function(argument) {
-
+        var pagetopID = uuid.v4();
         var regions = [
-            getBadges(_.get(readmeDotJSON, 'badges', [])), '## <a name="pagetop"></a>Table of Contents\n'
+            getBadges(_.get(readmeDotJSON, 'badges', [])), '## <a name="' + pagetopID + '></a>Table of Contents\n'
         ]
 
         _.each(_.get(readmeDotJSON, 'sections', []), function(section, index) {
-            var sectionID = _.kebabCase(section.title);
+            var sectionID = uuid.v4();
             var tableOfContentsEntry = (index + 1) + '. [' + section.title + '](#' + sectionID + ')\n';
             regions[1] = regions[1] + tableOfContentsEntry;
             var sectionHeader = '## <a name="' + sectionID + '"></a>' + section.title + '\n';
@@ -100,7 +102,7 @@
 
             regions.push(sectionHeader + sectionContent);
         });
-        regions = regions.concat(['[Return to Top](#pagetop)\n', links]);
+        regions = regions.concat(['[Return to Top](#' + pagetopID + ')\n', links]);
         return regions.join('\n');
 
     };
