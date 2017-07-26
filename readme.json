@@ -26,6 +26,58 @@
 			"type": "code_block",
 			"syntax": "javascript",
 			"code": "var collectionHelpers = require('lodash-collection-helpers/dist/lodash-collection-helpers-es2015');"
+		}, {
+			"type": "table",
+			"columns": [{
+				"lable": "Available Helpers in the Library"
+			}],
+			"rows": [
+				["isCollection"],
+				["pickAs"],
+				["pickAllAs"],
+				["select"],
+				["selectAll"],
+				["joinOn"],
+				["leftJoin"],
+				["rightJoin"],
+				["innerJoin"],
+				["fullJoin"],
+				["leftAntiJoin"],
+				["rightAntiJoin"],
+				["fullAntiJoin"],
+				["getCollectionHelpers"]
+			]
+		}, {
+			"content": "For further instruction on how to use this library please referense the [Documentation][documentation-url]"
+		}]
+	}, {
+		"title": "Lodash Integration",
+		"content": [{
+			"content": "Prefer to call these helpers directlly from your projest's lodash reference?\nSimply execute code like this example below and you are all set."
+		}, {
+			"type": "code_block",
+			"syntax": "javascript",
+			"code": "var collectionHelpers = require('lodash-collection-helpers');\nvar _ = require('lodash');\n_.mixin(collectionHelpers.getCollectionHelpers());"
+		}, {
+			"type": "table",
+			"columns": [{
+				"lable": "Integrated Lodash Function"
+			}],
+			"rows": [
+				["_.isCollection"],
+				["_.pickAs"],
+				["_.pickAllAs"],
+				["_.select"],
+				["_.selectAll"],
+				["_.joinOn"],
+				["_.leftJoin"],
+				["_.rightJoin"],
+				["_.innerJoin"],
+				["_.fullJoin"],
+				["_.leftAntiJoin"],
+				["_.rightAntiJoin"],
+				["_.fullAntiJoin"]
+			]
 		}]
 	}, {
 		"title": "Contributing",

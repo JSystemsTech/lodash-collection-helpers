@@ -2,8 +2,9 @@
 ## <a name="pagetop"></a>Table of Contents
 1. [Installation](#installation)
 2. [Usage](#usage)
-3. [Contributing](#contributing)
-4. [Release History](#release-history)
+3. [Lodash Integration](#lodash-integration)
+4. [Contributing](#contributing)
+5. [Release History](#release-history)
 
 ## <a name="installation"></a>Installation
 | Installation Type | Command |
@@ -22,6 +23,51 @@ Need an ES5 version?
 var collectionHelpers = require('lodash-collection-helpers/dist/lodash-collection-helpers-es2015');
 ```
 
+| Available Helpers in the Library |
+| ---- |
+| isCollection |
+| pickAs |
+| pickAllAs |
+| select |
+| selectAll |
+| joinOn |
+| leftJoin |
+| rightJoin |
+| innerJoin |
+| fullJoin |
+| leftAntiJoin |
+| rightAntiJoin |
+| fullAntiJoin |
+| getCollectionHelpers |
+
+For further instruction on how to use this library please referense the [Documentation][documentation-url]
+
+## <a name="lodash-integration"></a>Lodash Integration
+Prefer to call these helpers directlly from your projest's lodash reference?
+Simply execute code like this example below and you are all set.
+
+``` javascript
+var collectionHelpers = require('lodash-collection-helpers');
+var _ = require('lodash');
+_.mixin(collectionHelpers.getCollectionHelpers());
+```
+
+| Integrated Lodash Function |
+| ---- |
+| _.isCollection |
+| _.pickAs |
+| _.pickAllAs |
+| _.select |
+| _.selectAll |
+| _.joinOn |
+| _.leftJoin |
+| _.rightJoin |
+| _.innerJoin |
+| _.fullJoin |
+| _.leftAntiJoin |
+| _.rightAntiJoin |
+| _.fullAntiJoin |
+
 ## <a name="contributing"></a>Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality. Lint and test your code.
@@ -38,3 +84,4 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 [travis-url]: https://travis-ci.org/JSystemsTech/lodash-collection-helpers?branch=master
 [dependencies-url]: https://david-dm.org/JSystemsTech/lodash-collection-helpers
 [coverage-url]: https://coveralls.io/repos/github/JSystemsTech/lodash-collection-helpers?branch=master
+[documentation-url]: https://github.com/JSystemsTech/lodash-collection-helpers#DOCUMENTATION

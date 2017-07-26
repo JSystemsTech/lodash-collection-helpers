@@ -37,7 +37,8 @@
         '[npm-url]: https://www.npmjs.com/package/' + name,
         '[travis-url]: https://travis-ci.org/' + user + '/' + name + '?branch=master',
         '[dependencies-url]: https://david-dm.org/' + user + '/' + name,
-        '[coverage-url]: https://coveralls.io/repos/github/' + user + '/' + name + '?branch=master'
+        '[coverage-url]: https://coveralls.io/repos/github/' + user + '/' + name + '?branch=master',
+        '[documentation-url]: https://github.com/' + user + '/' + name + '#DOCUMENTATION'
     ].join('\n');
     var tableColumnAllignmentMap = {
         left: '----',
