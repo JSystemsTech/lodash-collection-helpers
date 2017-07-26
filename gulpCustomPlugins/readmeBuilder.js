@@ -40,7 +40,7 @@
         '[travis-url]: https://travis-ci.org/' + user + '/' + name + '?branch=master',
         '[dependencies-url]: https://david-dm.org/' + user + '/' + name,
         '[coverage-url]: https://coveralls.io/repos/github/' + user + '/' + name + '?branch=master',
-        '[documentation-url]: https://github.com/' + user + '/' + name + '/blob/' + targetBranch + 'DOCUMENTATION.md'
+        '[documentation-url]: https://github.com/' + user + '/' + name + '/blob/' + targetBranch + '/DOCUMENTATION.md'
     ].join('\n');
     var tableColumnAllignmentMap = {
         left: '----',
@@ -90,7 +90,7 @@
     var compileToMdFormat = function(argument) {
         var pagetopID = uuid.v4();
         var regions = [
-            getBadges(_.get(readmeDotJSON, 'badges', [])), '## <a name="' + pagetopID + '></a>Table of Contents\n'
+            getBadges(_.get(readmeDotJSON, 'badges', [])), '## <a name="' + pagetopID + '"></a>Table of Contents\n'
         ]
 
         _.each(_.get(readmeDotJSON, 'sections', []), function(section, index) {
