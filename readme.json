@@ -32,20 +32,20 @@
 				"lable": "Available Helpers in the Library"
 			}],
 			"rows": [
-				["isCollection"],
-				["pickAs"],
-				["pickAllAs"],
-				["select"],
-				["selectAll"],
-				["joinOn"],
-				["leftJoin"],
-				["rightJoin"],
-				["innerJoin"],
-				["fullJoin"],
-				["leftAntiJoin"],
-				["rightAntiJoin"],
-				["fullAntiJoin"],
-				["getCollectionHelpers"]
+				["[isCollection][isCollection-url]"],
+				["[pickAs][pickAs-url]"],
+				["[pickAllAs][pickAllAs-url]"],
+				["[select][select-url]"],
+				["[selectAll][selectAll-url]"],
+				["[joinOn][joinOn-url]"],
+				["[leftJoin][leftJoin-url]"],
+				["[rightJoin][rightJoin-url]"],
+				["[innerJoin][innerJoin-url]"],
+				["[fullJoin][fullJoin-url]"],
+				["[leftAntiJoin][leftAntiJoin-url]"],
+				["[rightAntiJoin][rightAntiJoin-url]"],
+				["[fullAntiJoin][fullAntiJoin-url]"],
+				["[getCollectionHelpers][getCollectionHelpers-url]"]
 			]
 		}, {
 			"content": "For further instruction on how to use this library please referense the [Documentation][documentation-url]"
@@ -64,19 +64,19 @@
 				"lable": "Integrated Lodash Function"
 			}],
 			"rows": [
-				["_.isCollection"],
-				["_.pickAs"],
-				["_.pickAllAs"],
-				["_.select"],
-				["_.selectAll"],
-				["_.joinOn"],
-				["_.leftJoin"],
-				["_.rightJoin"],
-				["_.innerJoin"],
-				["_.fullJoin"],
-				["_.leftAntiJoin"],
-				["_.rightAntiJoin"],
-				["_.fullAntiJoin"]
+				["[_.isCollection][isCollection-url]"],
+				["[_.pickAs][pickAs-url]"],
+				["[_.pickAllAs][pickAllAs-url]"],
+				["[_.select][select-url]"],
+				["[_.selectAll][selectAll-url]"],
+				["[_.joinOn][joinOn-url]"],
+				["[_.leftJoin][leftJoin-url]"],
+				["[_.rightJoin][rightJoin-url]"],
+				["[_.innerJoin][innerJoin-url]"],
+				["[_.fullJoin][fullJoin-url]"],
+				["[_.leftAntiJoin][leftAntiJoin-url]"],
+				["[_.rightAntiJoin][rightAntiJoin-url]"],
+				["[_.fullAntiJoin][fullAntiJoin-url]"]
 			]
 		}]
 	}, {

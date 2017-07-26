@@ -41,7 +41,14 @@
         '[dependencies-url]: https://david-dm.org/' + user + '/' + name,
         '[coverage-url]: https://coveralls.io/repos/github/' + user + '/' + name + '?branch=master',
         '[documentation-url]: https://github.com/' + user + '/' + name + '/blob/' + targetBranch + '/DOCUMENTATION.md'
-    ].join('\n');
+    ];
+
+    documenationLinks = _.map(_.keys(CollectionHelpers.getCollectionHelpers()), function(key) {
+        return '[' + key + '-url]: https://github.com/' + user + '/' + name + '/blob/' + targetBranch + '/DOCUMENTATION.md#' + key.toLowerCase();
+    });
+    documenationLinks.push('[getCollectionHelpers-url]: https://github.com/' + user + '/' + name + '/blob/' + targetBranch + '/DOCUMENTATION.md#getcollectionhelpers');
+    links = links.concat(documenationLinks).join('\n')
+
     var tableColumnAllignmentMap = {
         left: '----',
         center: ':----:',
