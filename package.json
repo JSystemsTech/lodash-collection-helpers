@@ -89,7 +89,6 @@
   },
   "homepage": "https://github.com/JSystemsTech/lodash-collection-helpers#readme",
   "devDependencies": {
-    "child_process": "^1.0.2",
     "documentation": "^4.0.0-rc.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
@@ -97,8 +96,8 @@
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8",
     "istanbul": "^0.4.5",
-    "map-stream": "0.0.7",
     "mocha": "^3.1.2",
+    "mocha-spec-json-reporter": "0.0.2",
     "must": "^0.13.2",
     "sinon": "^1.15.3",
     "through2": "^2.0.3"

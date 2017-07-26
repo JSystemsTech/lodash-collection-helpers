@@ -15,22 +15,21 @@
 			]
 		}
 	}, {
-		"title": "Contributing",
-		"content": "In lieu of a formal styleguide, take care to maintain the existing coding style.\nAdd unit tests for any new or changed functionality. Lint and test your code."
-	}, {
 		"title": "Usage",
 		"content": [{
 			"type": "code",
 			"syntax": "javascript",
 			"code": "var collectionHelpers = require('lodash-collection-helpers');"
-		},{
-			"type": "string",
+		}, {
 			"content": "Need an ES5 version?"
-		},{
+		}, {
 			"type": "code",
 			"syntax": "javascript",
 			"code": "var collectionHelpers = require('lodash-collection-helpers/dist/lodash-collection-helpers-es2015');"
 		}]
+	}, {
+		"title": "Contributing",
+		"content": "In lieu of a formal styleguide, take care to maintain the existing coding style.\nAdd unit tests for any new or changed functionality. Lint and test your code."
 	}, {
 		"title": "Release History",
 		"content": {

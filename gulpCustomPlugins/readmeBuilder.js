@@ -73,10 +73,10 @@
         } else if (_.isPlainObject(sectionContent)) {
             if (sectionContent.type === 'table') {
                 return buildTable(sectionContent.columns, sectionContent.rows);
-            } else if (sectionContent.type === 'code') {
+            } else if (sectionContent.type === 'code_block') {
                 return getCodeBlock(sectionContent.syntax, sectionContent.code);
-            }else if (sectionContent.type === 'string') {
-                return sectionContent.content + '\n';
+            }else {
+                return getSectionContent(_.get(sectionContent, 'content', ''));
             }
         } else if (_.isString(sectionContent)) {
             return sectionContent + '\n';

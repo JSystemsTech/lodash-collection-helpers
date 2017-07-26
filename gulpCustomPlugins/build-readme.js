@@ -1,5 +1,3 @@
-// map-stream is used to create a stream that runs an async function
-var map = require('map-stream');
 // gulp-util is used to created well-formed plugin errors
 var gutil = require('gulp-util');
 var _ = require('lodash');
