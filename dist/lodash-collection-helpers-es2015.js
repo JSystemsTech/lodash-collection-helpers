@@ -14,7 +14,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
     // AMD
     else if (typeof define == "function" && define.amd) {
-            define(["lodash", "backbone"], factory);
+            define(["lodash", "uuid"], factory);
         }
 })(function (_, uuid) {
     "use strict";

@@ -1,0 +1,49 @@
+{
+	"sections": [{
+		"title": "Installation",
+		"content": {
+			"type": "table",
+			"columns": [{
+				"lable": "Installation Type",
+				"allignment": "center"
+			}, {
+				"lable": "Command"
+			}],
+			"rows": [
+				["npm", "npm install lodash-collection-helpers --save"],
+				["bower", "bower install lodash-collection-helpers"]
+			]
+		}
+	}, {
+		"title": "Contributing",
+		"content": "In lieu of a formal styleguide, take care to maintain the existing coding style.\nAdd unit tests for any new or changed functionality. Lint and test your code."
+	}, {
+		"title": "Usage",
+		"content": [{
+			"type": "code",
+			"syntax": "javascript",
+			"code": "var collectionHelpers = require('lodash-collection-helpers');"
+		},{
+			"type": "string",
+			"content": "Need an ES5 version?"
+		},{
+			"type": "code",
+			"syntax": "javascript",
+			"code": "var collectionHelpers = require('lodash-collection-helpers/dist/lodash-collection-helpers-es2015');"
+		}]
+	}, {
+		"title": "Release History",
+		"content": {
+			"type": "table",
+			"columns": [{
+				"lable": "Release Number"
+			}, {
+				"lable": "Comment"
+			}],
+			"rows": [
+				["1.0.0", "Initial release"]
+			]
+		}
+	}],
+	"badges": ["npm", "downloads", "travis", "coverage", "dependencies", "license"]
+}
