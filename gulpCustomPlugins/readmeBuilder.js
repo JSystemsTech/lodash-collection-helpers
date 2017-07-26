@@ -27,8 +27,8 @@
         license: '[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license-url]',
         npm: '[![NPM version](http://img.shields.io/npm/v/' + name + '.svg?style=flat)][npm-url]',
         downloads: '[![NPM downloads](http://img.shields.io/npm/dm/' + name + '.svg?style=flat)][npm-url]',
-        travis: '[![Build Status](https://travis-ci.org/' + user + '/' + name + '.svg?branch=master))][travis-url]',
-        dependencies: '[Dependency Status](https://david-dm.org/' + user + '/' + name + '.svg?style=flat)][dependencies-url]',
+        travis: '[![Build Status](https://travis-ci.org/' + user + '/' + name + '.svg?branch=master)][travis-url]',
+        dependencies: '[![Dependency Status](https://david-dm.org/' + user + '/' + name + '.svg?style=flat)][dependencies-url]',
         coverage: '[![Coverage Status](https://coveralls.io/repos/github/' + user + '/' + name + '/badge.svg?branch=master)][coverage-url]'
     };
     var links = [
@@ -98,7 +98,7 @@
 
             regions.push(sectionHeader + sectionContent);
         });
-        regions = regions.concat(['[Return to Top](#pagetop)', links]);
+        regions = regions.concat(['[Return to Top](#pagetop)\n', links]);
         return regions.join('\n');
 
     };
