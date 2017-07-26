@@ -24,7 +24,7 @@
     var name = _.get(config, '[0].name', '');
     var user = 'JSystemsTech';
     var badges = {
-        bower:'<a href="https://github.com/' + user + '/' + name + '#README"><img src="https://github.com/' + user + '/' + name + '/raw/gulpCustomPlugins/customBadges/bower-badge.png" alt="Bower Package" height="30" width="250""></a>',
+        bower:'<a href="https://github.com/' + user + '/' + name + '#README"><img src="https://github.com/' + user + '/' + name + '/raw/gulpCustomPlugins/customBadges/bower-badge.png" alt="Bower Package" height="30" width="250"></a>',
         license: '[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license-url]',
         npm: '[![NPM version](http://img.shields.io/npm/v/' + name + '.svg?style=flat)][npm-url]',
         downloads: '[![NPM downloads](http://img.shields.io/npm/dm/' + name + '.svg?style=flat)][npm-url]',
