@@ -342,6 +342,8 @@
              * Merges matched data from two collections from matching id values and returns
              * the union of the left collection and the intersection of data that exist in both collections
              *
+             * ![joinOn](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/leftJoin.png)
+             *
              * @param {Array} leftCollection collection to join into from rightCollection
              * @param {Array} rightCollection collection to join into leftCollection
              * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
@@ -370,6 +372,8 @@
              *
              * alias: [JoinOn](#joinon)
              *
+             * ![leftJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/leftJoin.png)
+             *
              * @param {Array} leftCollection collection to join into from rightCollection
              * @param {Array} rightCollection collection to join into leftCollection
              * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
@@ -395,6 +399,8 @@
             /**
              * Merges matched data from two collections from matching id values and returns
              * the union of the right collection and the intersection of data that exist in both collections
+             *
+             * ![rightJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/rightJoin.png)
              *
              * @param {Array} leftCollection collection to join into rightCollection
              * @param {Array} rightCollection collection to join into from leftCollection
@@ -422,6 +428,8 @@
              * Merges matched data from two collections from matching id values and returns
              * the intersection of data that exist in both collections 
              *
+             * ![innerJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/innerJoin.png)
+             *
              * @param {Array} leftCollection collection to match in rightCollection
              * @param {Array} rightCollection collection to match in leftCollection
              * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
@@ -447,6 +455,8 @@
             /**
              * Merges data from two collections from matching id values and returns
              * the union of both collections
+             *
+             * ![fullJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/fullJoin.png)
              *
              * @param {Array} leftCollection collection to match in rightCollection
              * @param {Array} rightCollection collection to match in leftCollection
@@ -479,6 +489,8 @@
              * without the data from the intersection of data that exist in both collections
              * based on matching id values.
              *
+             * ![leftAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/leftAntiJoin.png)
+             *
              * @param {Array} leftCollection collection to match in rightCollection
              * @param {Array} rightCollection collection to match in leftCollection
              * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
@@ -506,6 +518,8 @@
              * without the data from the intersection of data that exist in both collections
              * based on matching id values.
              *
+             * ![rightAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/rightAntiJoin.png)
+             *
              * @param {Array} leftCollection collection to match in rightCollection
              * @param {Array} rightCollection collection to match in leftCollection
              * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
@@ -532,6 +546,8 @@
              * Takes two collections and returns the union of data from both collections  
              * without the data from the intersection of data that exist in both collections
              * based on matching id values.
+             *
+             * ![fullAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/fullAntiJoin.png)
              *
              * @param {Array} leftCollection collection to match in rightCollection
              * @param {Array} rightCollection collection to match in leftCollection

@@ -291,6 +291,8 @@ Returns **([Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 Merges matched data from two collections from matching id values and returns
 the union of the left collection and the intersection of data that exist in both collections
 
+![joinOn](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/leftJoin.png)
+
 **Parameters**
 
 -   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to join into from rightCollection
@@ -326,6 +328,8 @@ the union of the left collection and the intersection of data that exist in both
 
 alias: [JoinOn](#joinon)
 
+![leftJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/leftJoin.png)
+
 **Parameters**
 
 -   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to join into from rightCollection
@@ -359,6 +363,8 @@ Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 Merges matched data from two collections from matching id values and returns
 the union of the right collection and the intersection of data that exist in both collections
 
+![rightJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/rightJoin.png)
+
 **Parameters**
 
 -   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to join into rightCollection
@@ -390,7 +396,9 @@ Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 ## innerJoin
 
 Merges matched data from two collections from matching id values and returns
-the intersection of data that exist in both collections
+the intersection of data that exist in both collections 
+
+![innerJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/innerJoin.png)
 
 **Parameters**
 
@@ -424,6 +432,8 @@ Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 Merges data from two collections from matching id values and returns
 the union of both collections
+
+![fullJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/fullJoin.png)
 
 **Parameters**
 
@@ -463,6 +473,8 @@ Takes two collections and returns data from the left collection
 without the data from the intersection of data that exist in both collections
 based on matching id values.
 
+![leftAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/leftAntiJoin.png)
+
 **Parameters**
 
 -   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in rightCollection
@@ -497,6 +509,8 @@ Takes two collections and returns data from the right collection
 without the data from the intersection of data that exist in both collections
 based on matching id values.
 
+![rightAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/rightAntiJoin.png)
+
 **Parameters**
 
 -   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in rightCollection
@@ -530,6 +544,8 @@ Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 Takes two collections and returns the union of data from both collections  
 without the data from the intersection of data that exist in both collections
 based on matching id values.
+
+![fullAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/fullAntiJoin.png)
 
 **Parameters**
 
