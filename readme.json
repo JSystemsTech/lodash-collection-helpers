@@ -25,7 +25,7 @@
 		}, {
 			"type": "code_block",
 			"syntax": "javascript",
-			"code": "var collectionHelpers = require('lodash-collection-helpers/dist/lodash-collection-helpers-es2015');"
+			"code": "var collectionHelpers = require('lodash-collection-helpers/dist/lodash-collection-helpers-es5');"
 		}, {
 			"type": "table",
 			"columns": [{

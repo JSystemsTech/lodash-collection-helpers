@@ -1,7 +1,7 @@
 'use strict';
 var _ = require('lodash'),
 	expect = require('must'),
-	lodashCollectionHelpers = require('./lodash-collection-helpers-es2015'),
+	lodashCollectionHelpers = require('./lodash-collection-helpers-es5.min'),
 	bankUserInfoData = require('../test/bankUserInfo'),
 	userInfoData = require('../test/userInfo'),
 	fullNameInfoData = require('../test/fullNameInfo'),

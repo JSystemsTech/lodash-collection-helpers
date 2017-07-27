@@ -1,18 +1,18 @@
 [![NPM version](http://img.shields.io/npm/v/lodash-collection-helpers.svg?style=flat)][npm-url] [![NPM downloads](http://img.shields.io/npm/dm/lodash-collection-helpers.svg?style=flat)][npm-url] [![Build Status](https://travis-ci.org/JSystemsTech/lodash-collection-helpers.svg?branch=master)][travis-url] [![Coverage Status](https://coveralls.io/repos/github/JSystemsTech/lodash-collection-helpers/badge.svg?branch=master)][coverage-url] [![Dependency Status](https://david-dm.org/JSystemsTech/lodash-collection-helpers.svg?style=flat)][dependencies-url] [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license-url] <a href="https://github.com/JSystemsTech/lodash-collection-helpers#README"><img src="https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/gulpCustomPlugins/customBadges/bower-badge.png" alt="Bower Package" height="30" width="130"></a>
-## <a name="35fe52f5-7b4c-4e87-95b7-f845863cf7b4"></a>Table of Contents
-1. [Installation](#25f773f5-48d8-48df-8f6f-0c9699dc098f)
-2. [Usage](#adc22dee-da3c-4212-a74b-5016741f2965)
-3. [Lodash Integration](#4e73a9c7-b7b3-4b10-8542-12370abe548d)
-4. [Contributing](#d8394c6f-13e4-46e7-aa9e-3adb17d7e0d2)
-5. [Release History](#a88eebd7-3c26-4695-a317-847416d30c18)
+## <a name="ff6b1cd0-66ec-49df-888d-55a93bf46757"></a>Table of Contents
+1. [Installation](#375e606b-90b1-4d8c-ab08-09e9e2cff9f6)
+2. [Usage](#b1c7439e-f5ac-49a3-977b-1f63adfdd6a0)
+3. [Lodash Integration](#13bf5954-bb69-424e-b837-b83544af1321)
+4. [Contributing](#17edc855-e9d0-4aee-b854-3d6aefbb51bc)
+5. [Release History](#c1fbd920-fe82-4697-9e09-65b770ffb79d)
 
-## <a name="25f773f5-48d8-48df-8f6f-0c9699dc098f"></a>Installation
+## <a name="375e606b-90b1-4d8c-ab08-09e9e2cff9f6"></a>Installation
 | Installation Type | Command |
 | :----: | ---- |
 | npm | npm install lodash-collection-helpers --save |
 | bower | bower install lodash-collection-helpers |
 
-## <a name="adc22dee-da3c-4212-a74b-5016741f2965"></a>Usage
+## <a name="b1c7439e-f5ac-49a3-977b-1f63adfdd6a0"></a>Usage
 ``` javascript
 var collectionHelpers = require('lodash-collection-helpers');
 ```
@@ -42,7 +42,7 @@ var collectionHelpers = require('lodash-collection-helpers/dist/lodash-collectio
 
 For further instruction on how to use this library please referense the [Documentation][documentation-url]
 
-## <a name="4e73a9c7-b7b3-4b10-8542-12370abe548d"></a>Lodash Integration
+## <a name="13bf5954-bb69-424e-b837-b83544af1321"></a>Lodash Integration
 Prefer to call these helpers directlly from your projest's lodash reference?
 Simply execute code like this example below and you are all set.
 
@@ -68,16 +68,16 @@ _.mixin(collectionHelpers.getCollectionHelpers());
 | [_.rightAntiJoin][rightAntiJoin-url] |
 | [_.fullAntiJoin][fullAntiJoin-url] |
 
-## <a name="d8394c6f-13e4-46e7-aa9e-3adb17d7e0d2"></a>Contributing
+## <a name="17edc855-e9d0-4aee-b854-3d6aefbb51bc"></a>Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality. Lint and test your code.
 
-## <a name="a88eebd7-3c26-4695-a317-847416d30c18"></a>Release History
+## <a name="c1fbd920-fe82-4697-9e09-65b770ffb79d"></a>Release History
 | Release Number | Comment |
 | ---- | ---- |
 | 1.0.0 | Initial release |
 
-[Return to Top](#35fe52f5-7b4c-4e87-95b7-f845863cf7b4)
+[Return to Top](#ff6b1cd0-66ec-49df-888d-55a93bf46757)
 
 [license-url]: LICENSE
 [npm-url]: https://www.npmjs.com/package/lodash-collection-helpers
