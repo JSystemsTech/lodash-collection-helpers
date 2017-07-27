@@ -30,11 +30,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 if (!_.isArray(collection)) {
                     return false;
                 }
-                var isCollection = true;
-                _.each(collection, function (item) {
-                    isCollection = isCollection && _.isPlainObject(item);
+                return _.every(collection, function (item) {
+                    return _.isPlainObject(item);
                 });
-                return isCollection;
             },
             _pickAsCore: function _pickAsCore(sourceObj, sourceAttrName, dest, destAttrName) {
                 _.set(dest, destAttrName, _.get(sourceObj, sourceAttrName));

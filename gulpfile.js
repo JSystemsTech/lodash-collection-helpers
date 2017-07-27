@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var git = require('gulp-git');
 var _ = require('lodash');
 var buildReadme = require('./gulpCustomPlugins/build-readme.js');
 var SOURCE_FILE_NAME = 'lodash-collection-helpers';
@@ -38,5 +39,11 @@ gulp.task('minify', ['transpile'], function() {
 });
 
 gulp.task('package', ['minify', 'buildreadme']);
+
+gulp.task('status', function(){
+  git.status({args: '--porcelain'}, function (err, stdout) {
+    if (err) throw err;
+  });
+});
 
 gulp.task('default', ['transpile']);
