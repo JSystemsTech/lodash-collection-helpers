@@ -1,0 +1,100 @@
+{
+	"sections": [{
+		"title": "Installation",
+		"content": {
+			"type": "table",
+			"columns": [{
+				"lable": "Installation Type",
+				"allignment": "center"
+			}, {
+				"lable": "Command"
+			}],
+			"rows": [
+				["npm", "npm install lodash-collection-helpers --save"],
+				["bower", "bower install lodash-collection-helpers"]
+			]
+		}
+	}, {
+		"title": "Usage",
+		"content": [{
+			"type": "code_block",
+			"syntax": "javascript",
+			"code": "var collectionHelpers = require('lodash-collection-helpers');"
+		}, {
+			"content": "Need an ES5 version?"
+		}, {
+			"type": "code_block",
+			"syntax": "javascript",
+			"code": "var collectionHelpers = require('lodash-collection-helpers/dist/lodash-collection-helpers-es5');"
+		}, {
+			"type": "table",
+			"columns": [{
+				"lable": "Available Helpers in the Library"
+			}],
+			"rows": [
+				["[isCollection][isCollection-url]"],
+				["[pickAs][pickAs-url]"],
+				["[pickAllAs][pickAllAs-url]"],
+				["[select][select-url]"],
+				["[selectAll][selectAll-url]"],
+				["[joinOn][joinOn-url]"],
+				["[leftJoin][leftJoin-url]"],
+				["[rightJoin][rightJoin-url]"],
+				["[innerJoin][innerJoin-url]"],
+				["[fullJoin][fullJoin-url]"],
+				["[leftAntiJoin][leftAntiJoin-url]"],
+				["[rightAntiJoin][rightAntiJoin-url]"],
+				["[fullAntiJoin][fullAntiJoin-url]"],
+				["[getCollectionHelpers][getCollectionHelpers-url]"]
+			]
+		}, {
+			"content": "For further instruction on how to use this library please referense the [Documentation][documentation-url]"
+		}]
+	}, {
+		"title": "Lodash Integration",
+		"content": [{
+			"content": "Prefer to call these helpers directlly from your projest's lodash reference?\nSimply execute code like this example below and you are all set."
+		}, {
+			"type": "code_block",
+			"syntax": "javascript",
+			"code": "var collectionHelpers = require('lodash-collection-helpers');\nvar _ = require('lodash');\n_.mixin(collectionHelpers.getCollectionHelpers());"
+		}, {
+			"type": "table",
+			"columns": [{
+				"lable": "Integrated Lodash Function"
+			}],
+			"rows": [
+				["[_.isCollection][isCollection-url]"],
+				["[_.pickAs][pickAs-url]"],
+				["[_.pickAllAs][pickAllAs-url]"],
+				["[_.select][select-url]"],
+				["[_.selectAll][selectAll-url]"],
+				["[_.joinOn][joinOn-url]"],
+				["[_.leftJoin][leftJoin-url]"],
+				["[_.rightJoin][rightJoin-url]"],
+				["[_.innerJoin][innerJoin-url]"],
+				["[_.fullJoin][fullJoin-url]"],
+				["[_.leftAntiJoin][leftAntiJoin-url]"],
+				["[_.rightAntiJoin][rightAntiJoin-url]"],
+				["[_.fullAntiJoin][fullAntiJoin-url]"]
+			]
+		}]
+	}, {
+		"title": "Contributing",
+		"content": "In lieu of a formal styleguide, take care to maintain the existing coding style.\nAdd unit tests for any new or changed functionality. Lint and test your code."
+	}, {
+		"title": "Release History",
+		"content": {
+			"type": "table",
+			"columns": [{
+				"lable": "Release Number"
+			}, {
+				"lable": "Comment"
+			}],
+			"rows": [
+				["1.0.0", "Initial release"]
+			]
+		}
+	}],
+	"badges": ["npm", "downloads", "travis", "coverage", "dependencies", "license", "bower"]
+}

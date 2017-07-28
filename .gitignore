@@ -1,0 +1,17 @@
+coverage/
+node_modules/
+npm-debug.log
+
+*.swp
+*~
+*.iml
+.idea/
+*.ipr
+*.iws
+.~*
+.settings/
+.project
+.metadata
+coverage-summary.json
+mocha-output.json
+version_number.txt

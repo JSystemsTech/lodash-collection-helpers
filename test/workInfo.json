@@ -1,0 +1,222 @@
+[
+  {
+    "employeeId": "670c8101-5650-450b-83b9-02ef5363ad90",
+    "name": "Garza Villarreal",
+    "company": "SYNTAC",
+    "email": "garzavillarreal@syntac.com",
+    "phone": "(928) 508-2074",
+    "details": {
+      "greeting": "Hello, Garza Villarreal!",
+      "other": "Other details for Garza Villarreal"
+    }
+  },
+  {
+    "employeeId": "bda9f12b-83b0-4d81-a403-f6646d1d9ef5",
+    "name": "Lessie Molina",
+    "company": "LUDAK",
+    "email": "lessiemolina@ludak.com",
+    "phone": "(878) 487-2021",
+    "details": {
+      "greeting": "Hello, Lessie Molina!",
+      "other": "Other details for Lessie Molina"
+    }
+  },
+  {
+    "employeeId": "4af9cceb-87c8-48ad-b362-b77ef25ccecd",
+    "name": "Miller Wolf",
+    "company": "QUONATA",
+    "email": "millerwolf@quonata.com",
+    "phone": "(873) 500-2210",
+    "details": {
+      "greeting": "Hello, Miller Wolf!",
+      "other": "Other details for Miller Wolf"
+    }
+  },
+  {
+    "employeeId": "082ca063-6430-4c62-8ead-79f5e01bf8a8",
+    "name": "Lizzie Dotson",
+    "company": "FURNAFIX",
+    "email": "lizziedotson@furnafix.com",
+    "phone": "(896) 425-3656",
+    "details": {
+      "greeting": "Hello, Lizzie Dotson!",
+      "other": "Other details for Lizzie Dotson"
+    }
+  },
+  {
+    "employeeId": "25bef3e2-9ad0-464f-aed1-2e50c6dc385f",
+    "name": "Skinner Short",
+    "company": "ANIMALIA",
+    "email": "skinnershort@animalia.com",
+    "phone": "(803) 497-3782",
+    "details": {
+      "greeting": "Hello, Skinner Short!",
+      "other": "Other details for Skinner Short"
+    }
+  },
+  {
+    "employeeId": "c3adf555-be96-4164-8ad0-9b12268adae9",
+    "name": "Price Waters",
+    "company": "JASPER",
+    "email": "pricewaters@jasper.com",
+    "phone": "(987) 497-2124",
+    "details": {
+      "greeting": "Hello, Price Waters!",
+      "other": "Other details for Price Waters"
+    }
+  },
+  {
+    "employeeId": "1ac51c8a-c89e-40c6-a8d8-1187c2836214",
+    "name": "Walker Alvarez",
+    "company": "EXOBLUE",
+    "email": "walkeralvarez@exoblue.com",
+    "phone": "(908) 540-3288",
+    "details": {
+      "greeting": "Hello, Walker Alvarez!",
+      "other": "Other details for Walker Alvarez"
+    }
+  },
+  {
+    "employeeId": "e29f60f0-2b76-44bb-a6f2-9ee84e0f2fe0",
+    "name": "Candice Petty",
+    "company": "EQUITAX",
+    "email": "candicepetty@equitax.com",
+    "phone": "(954) 456-2336",
+    "details": {
+      "greeting": "Hello, Candice Petty!",
+      "other": "Other details for Candice Petty"
+    }
+  },
+  {
+    "employeeId": "1f33fcbc-3d33-413d-845c-e5ec7ab559e3",
+    "name": "Lilian Vaughn",
+    "company": "COMTENT",
+    "email": "lilianvaughn@comtent.com",
+    "phone": "(963) 434-2069",
+    "details": {
+      "greeting": "Hello, Lilian Vaughn!",
+      "other": "Other details for Lilian Vaughn"
+    }
+  },
+  {
+    "employeeId": "93663edd-5334-43aa-b695-a85a838a12f8",
+    "name": "Janna Lang",
+    "company": "STELAECOR",
+    "email": "jannalang@stelaecor.com",
+    "phone": "(918) 564-2775",
+    "details": {
+      "greeting": "Hello, Janna Lang!",
+      "other": "Other details for Janna Lang"
+    }
+  },
+  {
+    "employeeId": "05bfeb0a-224f-4659-a445-68d47775c618",
+    "name": "Kelly Harris",
+    "company": "ZILLA",
+    "email": "kellyharris@zilla.com",
+    "phone": "(913) 551-3782",
+    "details": {
+      "greeting": "Hello, Kelly Harris!",
+      "other": "Other details for Kelly Harris"
+    }
+  },
+  {
+    "employeeId": "9f644555-f467-475c-8c31-ff01284a9f63",
+    "name": "Mccarthy Rollins",
+    "company": "QNEKT",
+    "email": "mccarthyrollins@qnekt.com",
+    "phone": "(937) 548-3834",
+    "details": {
+      "greeting": "Hello, Mccarthy Rollins!",
+      "other": "Other details for Mccarthy Rollins"
+    }
+  },
+  {
+    "employeeId": "b07a9115-63a6-4b9b-afdf-a9f0a7a65df2",
+    "name": "Petty Perez",
+    "company": "RENOVIZE",
+    "email": "pettyperez@renovize.com",
+    "phone": "(885) 456-3666",
+    "details": {
+      "greeting": "Hello, Petty Perez!",
+      "other": "Other details for Petty Perez"
+    }
+  },
+  {
+    "employeeId": "3aaa09a5-5671-46f6-8efd-6f6d46175a13",
+    "name": "Tucker Fulton",
+    "company": "SOFTMICRO",
+    "email": "tuckerfulton@softmicro.com",
+    "phone": "(850) 427-2399",
+    "details": {
+      "greeting": "Hello, Tucker Fulton!",
+      "other": "Other details for Tucker Fulton"
+    }
+  },
+  {
+    "employeeId": "4d66ca38-3f56-4749-a685-d0be15f6fc1a",
+    "name": "Nunez Becker",
+    "company": "CALCULA",
+    "email": "nunezbecker@calcula.com",
+    "phone": "(931) 493-3366",
+    "details": {
+      "greeting": "Hello, Nunez Becker!",
+      "other": "Other details for Nunez Becker"
+    }
+  },
+  {
+    "employeeId": "a30358fc-f819-4de4-b755-f68e6e0d231a",
+    "name": "Debbie Stevenson",
+    "company": "QUORDATE",
+    "email": "debbiestevenson@quordate.com",
+    "phone": "(992) 496-3945",
+    "details": {
+      "greeting": "Hello, Debbie Stevenson!",
+      "other": "Other details for Debbie Stevenson"
+    }
+  },
+  {
+    "employeeId": "6508707f-e68c-48d4-ac48-9ca73f6b6229",
+    "name": "Huber Todd",
+    "company": "BOSTONIC",
+    "email": "hubertodd@bostonic.com",
+    "phone": "(859) 513-2099",
+    "details": {
+      "greeting": "Hello, Huber Todd!",
+      "other": "Other details for Huber Todd"
+    }
+  },
+  {
+    "employeeId": "c04362bf-056c-4d3c-a773-ac9a7849a8e1",
+    "name": "Katrina Summers",
+    "company": "REMOTION",
+    "email": "katrinasummers@remotion.com",
+    "phone": "(841) 437-2155",
+    "details": {
+      "greeting": "Hello, Katrina Summers!",
+      "other": "Other details for Katrina Summers"
+    }
+  },
+  {
+    "employeeId": "a2754fd8-1177-41a7-b8ed-3c2b86ea6113",
+    "name": "Summer Carney",
+    "company": "GAPTEC",
+    "email": "summercarney@gaptec.com",
+    "phone": "(989) 558-3243",
+    "details": {
+      "greeting": "Hello, Summer Carney!",
+      "other": "Other details for Summer Carney"
+    }
+  },
+  {
+    "employeeId": "c19e8ab0-7c3e-495d-98c2-cf926c279cab",
+    "name": "Etta Daniels",
+    "company": "AEORA",
+    "email": "ettadaniels@aeora.com",
+    "phone": "(833) 540-2037",
+    "details": {
+      "greeting": "Hello, Etta Daniels!",
+      "other": "Other details for Etta Daniels"
+    }
+  }
+]
