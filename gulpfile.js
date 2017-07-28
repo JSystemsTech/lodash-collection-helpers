@@ -43,20 +43,21 @@ gulp.task('minify', ['transpile'], function() {
 gulp.task('package', ['minify', 'buildreadme']);
 
 gulp.task('postdevsuccess', function() {
-    return gulp.src('./*').pipe(git.commit('Travis CI build success: adding updated auto generated files [ci skip]', {
-            args: '-A'
-        }))
-        .pipe(git.addRemote('origin-master', 'https://' + gutil.env.authToken + '@github.com/JSystemsTech/backbone-collection-predefined-filters.git', function(err) {
-            if (err) throw err;
-        }))
-        .pipe(git.tag(packageDotJSON.version, '', function(err) {
-            if (err) throw err;
-        }))
-        .pipe(git.push('origin', 'master', {
-            args: " --quiet"
-        }, function(err) {
-            if (err) throw err;
+    gulp.src('./*')
+        .pipe(git.commit('Travis CI build success: adding updated auto generated files [ci skip]', {
+            args: '--all'
         }));
+    git.addRemote('origin-master', 'https://' + gutil.env.authToken + '@github.com/JSystemsTech/backbone-collection-predefined-filters.git', function(err) {
+        if (err) throw err;
+    });
+    git.tag(packageDotJSON.version, '', function(err) {
+        if (err) throw err;
+    });
+    git.push('origin', 'master', {
+        args: " --quiet"
+    }, function(err) {
+        if (err) throw err;
+    });
 });
 
 gulp.task('default', ['transpile']);
