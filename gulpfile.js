@@ -5,6 +5,8 @@ var babel = require('gulp-babel');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var git = require('gulp-git');
+var gutil = require('gulp-util');
+var packageDotJSON = require('./package');
 var _ = require('lodash');
 var buildReadme = require('./gulpCustomPlugins/build-readme.js');
 var SOURCE_FILE_NAME = 'lodash-collection-helpers';
@@ -40,10 +42,21 @@ gulp.task('minify', ['transpile'], function() {
 
 gulp.task('package', ['minify', 'buildreadme']);
 
-gulp.task('status', function(){
-  git.status({args: '--porcelain'}, function (err, stdout) {
-    if (err) throw err;
-  });
+gulp.task('postdevsuccess', function() {
+    return gulp.src('./*').pipe(git.commit('Travis CI build success: adding updated auto generated files [ci skip]', {
+            args: '-A'
+        }))
+        .pipe(git.addRemote('origin-master', 'https://' + gutil.env.authToken + '@github.com/JSystemsTech/backbone-collection-predefined-filters.git', function(err) {
+            if (err) throw err;
+        }))
+        .pipe(git.tag(packageDotJSON.version, '', function(err) {
+            if (err) throw err;
+        }))
+        .pipe(git.push('origin', 'master', {
+            args: " --quiet"
+        }, function(err) {
+            if (err) throw err;
+        }));
 });
 
 gulp.task('default', ['transpile']);
