@@ -5,5 +5,5 @@ install:
 - npm install
 script:
 - npm run cover
-- npm run unit
+- npm test
 - npm run bowerunit
