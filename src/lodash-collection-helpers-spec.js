@@ -437,7 +437,6 @@ describe('Testing Lodash Collection Helpers', function() {
 				},
 				value: 'Value One other'
 			}], 'ids.id', 'uids.uid');
-			console.log(joinedCollection);
 			expect(joinedCollection[0].ids.id).to.equal(1);
 			expect(joinedCollection[0].uids.uid).to.equal(1);
 			expect(joinedCollection[0].value).to.equal('Value One');

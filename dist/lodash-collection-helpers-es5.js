@@ -354,7 +354,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * Merges matched data from two collections from matching id values and returns
          * the union of the left collection and the intersection of data that exist in both collections
          *
-         * ![joinOn](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/leftJoin.png)
+         * ![joinOn](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/leftJoin.png)
          *
          * @param {Array} leftCollection collection to join into from rightCollection
          * @param {Array} rightCollection collection to join into leftCollection
@@ -384,7 +384,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          *
          * alias: [JoinOn](#joinon)
          *
-         * ![leftJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/leftJoin.png)
+         * ![leftJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/leftJoin.png)
          *
          * @param {Array} leftCollection collection to join into from rightCollection
          * @param {Array} rightCollection collection to join into leftCollection
@@ -412,7 +412,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * Merges matched data from two collections from matching id values and returns
          * the union of the right collection and the intersection of data that exist in both collections
          *
-         * ![rightJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/rightJoin.png)
+         * ![rightJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/rightJoin.png)
          *
          * @param {Array} leftCollection collection to join into rightCollection
          * @param {Array} rightCollection collection to join into from leftCollection
@@ -440,7 +440,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * Merges matched data from two collections from matching id values and returns
          * the intersection of data that exist in both collections 
          *
-         * ![innerJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/innerJoin.png)
+         * ![innerJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/innerJoin.png)
          *
          * @param {Array} leftCollection collection to match in rightCollection
          * @param {Array} rightCollection collection to match in leftCollection
@@ -468,7 +468,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * Merges data from two collections from matching id values and returns
          * the union of both collections
          *
-         * ![fullJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/fullJoin.png)
+         * ![fullJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/fullJoin.png)
          *
          * @param {Array} leftCollection collection to match in rightCollection
          * @param {Array} rightCollection collection to match in leftCollection
@@ -501,7 +501,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * without the data from the intersection of data that exist in both collections
          * based on matching id values.
          *
-         * ![leftAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/leftAntiJoin.png)
+         * ![leftAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/leftAntiJoin.png)
          *
          * @param {Array} leftCollection collection to match in rightCollection
          * @param {Array} rightCollection collection to match in leftCollection
@@ -530,7 +530,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * without the data from the intersection of data that exist in both collections
          * based on matching id values.
          *
-         * ![rightAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/rightAntiJoin.png)
+         * ![rightAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/rightAntiJoin.png)
          *
          * @param {Array} leftCollection collection to match in rightCollection
          * @param {Array} rightCollection collection to match in leftCollection
@@ -559,7 +559,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * without the data from the intersection of data that exist in both collections
          * based on matching id values.
          *
-         * ![fullAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/v1-0-0-dev/documentation-images/fullAntiJoin.png)
+         * ![fullAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/fullAntiJoin.png)
          *
          * @param {Array} leftCollection collection to match in rightCollection
          * @param {Array} rightCollection collection to match in leftCollection

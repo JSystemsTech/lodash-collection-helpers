@@ -24,7 +24,7 @@
         'name');
     var name = _.get(config, '[0].name', '');
     var user = 'JSystemsTech';
-    var targetBranch = 'v1-0-0-dev';
+    var targetBranch = 'master';
     var badges = {
         bower: '<a href="https://github.com/' + user + '/' + name + '#README"><img src="https://github.com/' + user + '/' + name + '/raw/' + targetBranch + '/gulpCustomPlugins/customBadges/bower-badge.png" alt="Bower Package" height="30" width="130"></a>',
         license: '[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license-url]',
