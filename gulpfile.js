@@ -5,7 +5,6 @@ var babel = require('gulp-babel');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var git = require('gulp-git');
-var gutil = require('gulp-util');
 var packageDotJSON = require('./package');
 var _ = require('lodash');
 var buildReadme = require('./gulpCustomPlugins/build-readme.js');
@@ -41,24 +40,5 @@ gulp.task('minify', ['transpile'], function() {
 });
 
 gulp.task('package', ['minify', 'buildreadme']);
-
-gulp.task('postdevsuccess', function() {
-    gulp.src('./*')
-        .pipe(git.commit('Travis CI build success: adding updated auto generated files [ci skip]', {
-            args: '-a'
-        }));
-    console.log(gutil.env.authToken);
-    git.addRemote('origin-master', 'https://' + gutil.env.authToken + '@github.com/JSystemsTech/backbone-collection-predefined-filters.git', function(err) {
-        if (err) throw err;
-    });
-    git.tag(packageDotJSON.version, '', function(err) {
-        if (err) throw err;
-    });
-    git.push('origin', 'master', {
-        args: ' --quiet'
-    }, function(err) {
-        if (err) throw err;
-    });
-});
 
 gulp.task('default', ['transpile']);
