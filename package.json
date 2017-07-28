@@ -90,6 +90,7 @@
   "homepage": "https://github.com/JSystemsTech/lodash-collection-helpers#readme",
   "devDependencies": {
     "babel-preset-es2015": "^6.24.1",
+    "coveralls": "^2.13.1",
     "documentation": "^4.0.0-rc.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
