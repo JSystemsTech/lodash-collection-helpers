@@ -76,7 +76,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             },
             _executeJoinOn: function _executeJoinOn(innerJoin, leftCollection, rightCollection, leftIdAttr, rightIdAttr) {
                 var itemsLeftJoined = _.map(leftCollection, function (item) {
-                    var sourceObj = _.find(rightCollection, _.set({}, rightIdAttr, _.get(item, leftIdAttr)));
+                    var sourceObj = _.find(rightCollection, function (rightItem) {
+                        return _.get(item, leftIdAttr) === _.get(rightItem, rightIdAttr);
+                    });
                     if (innerJoin) {
                         if (_.isPlainObject(sourceObj)) {
                             return _.defaults(_.cloneDeep(item), sourceObj);

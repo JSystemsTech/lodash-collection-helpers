@@ -412,6 +412,22 @@ describe('Testing Lodash Collection Helpers when integrated with the main _ obje
 				name: 'fullName'
 			});
 		});
+		it('When both collections have nested Id attributes', function() {
+			var joinedCollection = _.leftJoin([{
+				ids: {
+					id: 1
+				},
+				value: 'Value One'
+			}], [{
+				uids: {
+					uid: 1
+				},
+				value: 'Value One other'
+			}], 'ids.id', 'uids.uid');
+			expect(joinedCollection[0].ids.id).to.equal(1);
+			expect(joinedCollection[0].uids.uid).to.equal(1);
+			expect(joinedCollection[0].value).to.equal('Value One');
+		});
 		it('When both collections have matching attribute names default value is from left side collection', function() {
 			var joinedCollection = _.leftJoin([{
 				id: 1,
