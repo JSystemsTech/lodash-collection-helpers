@@ -45,8 +45,9 @@ gulp.task('package', ['minify', 'buildreadme']);
 gulp.task('postdevsuccess', function() {
     gulp.src('./*')
         .pipe(git.commit('Travis CI build success: adding updated auto generated files [ci skip]', {
-            args: '--all'
+            args: '-a'
         }));
+    console.log(gutil.env.authToken);
     git.addRemote('origin-master', 'https://' + gutil.env.authToken + '@github.com/JSystemsTech/backbone-collection-predefined-filters.git', function(err) {
         if (err) throw err;
     });
@@ -54,7 +55,7 @@ gulp.task('postdevsuccess', function() {
         if (err) throw err;
     });
     git.push('origin', 'master', {
-        args: " --quiet"
+        args: ' --quiet'
     }, function(err) {
         if (err) throw err;
     });
