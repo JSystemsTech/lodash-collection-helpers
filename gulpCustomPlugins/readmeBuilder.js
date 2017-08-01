@@ -78,7 +78,7 @@
             var value = toBadgeText(_.get(item, 'value'));
             var badgeURL = 'https://img.shields.io/badge/' + label + '-' + value + '-green.svg?style=social';
             return '![' + _.get(item, 'label') + '](' + badgeURL + ')';
-        }).join('\n') + '\n';
+        }).join('<br>') + '\n';
     };
     var getBadges = function(badgesToUse) {
         return _.map(_.pick(badges, badgesToUse), function(badge) {

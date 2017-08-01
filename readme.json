@@ -11,7 +11,8 @@
 			}],
 			"rows": [
 				["npm", "npm install lodash-collection-helpers --save"],
-				["bower", "bower install lodash-collection-helpers"]
+				["bower", "bower install lodash-collection-helpers"],
+				["yarn", "yarn add lodash-collection-helpers"]
 			]
 		}
 	}, {
