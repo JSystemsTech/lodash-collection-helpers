@@ -4,10 +4,10 @@
 		"content": {
 			"type": "table",
 			"columns": [{
-				"lable": "Installation Type",
+				"label": "Installation Type",
 				"allignment": "center"
 			}, {
-				"lable": "Command"
+				"label": "Command"
 			}],
 			"rows": [
 				["npm", "npm install lodash-collection-helpers --save"],
@@ -29,7 +29,7 @@
 		}, {
 			"type": "table",
 			"columns": [{
-				"lable": "Available Helpers in the Library"
+				"label": "Available Helpers in the Library"
 			}],
 			"rows": [
 				["[isCollection][isCollection-url]"],
@@ -61,7 +61,7 @@
 		}, {
 			"type": "table",
 			"columns": [{
-				"lable": "Integrated Lodash Function"
+				"label": "Integrated Lodash Function"
 			}],
 			"rows": [
 				["[_.isCollection][isCollection-url]"],
@@ -85,15 +85,14 @@
 	}, {
 		"title": "Release History",
 		"content": {
-			"type": "table",
-			"columns": [{
-				"lable": "Release Number"
+			"type": "badge-list",
+			"list": [{
+				"label": "1.1.0",
+				"value": "Add indexBy and uniqify helpers"
 			}, {
-				"lable": "Comment"
-			}],
-			"rows": [
-				["1.0.0", "Initial release"]
-			]
+				"label": "1.0.0",
+				"value": "Initial release"
+			}]
 		}
 	}],
 	"badges": ["npm", "downloads", "travis", "coverage", "dependencies", "license", "bower"]

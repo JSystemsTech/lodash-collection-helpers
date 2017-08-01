@@ -8,7 +8,8 @@
     "bowerunit": "mocha --require mocha-helper.js --recursive dist/*-spec.js",
     "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R mocha-spec-json-reporter src/*-spec.js",
     "report": "node_modules/istanbul/lib/cli.js report json-summary",
-    "documentation": "documentation build ./src/lodash-collection-helpers.js -f md -o DOCUMENTATION.md"
+    "documentation": "documentation build ./src/lodash-collection-helpers.js -f md -o DOCUMENTATION.md",
+    "build": "npm-run-all test bowerunit cover"
   },
   "repository": {
     "type": "git",
@@ -101,6 +102,7 @@
     "mocha": "^3.1.2",
     "mocha-spec-json-reporter": "0.0.2",
     "must": "^0.13.2",
+    "npm-run-all": "^4.0.2",
     "sinon": "^1.15.3",
     "through2": "^2.0.3"
   }

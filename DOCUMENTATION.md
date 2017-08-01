@@ -5,10 +5,7 @@
 -   [isCollection](#iscollection)
 -   [pickAs](#pickas)
 -   [pickAllAs](#pickallas)
--   [select](#select)
--   [selectAll](#selectall)
 -   [joinOn](#joinon)
--   [leftJoin](#leftjoin)
 -   [rightJoin](#rightjoin)
 -   [innerJoin](#innerjoin)
 -   [fullJoin](#fulljoin)
@@ -16,6 +13,9 @@
 -   [rightAntiJoin](#rightantijoin)
 -   [fullAntiJoin](#fullantijoin)
 -   [getCollectionHelpers](#getcollectionhelpers)
+-   [select](#select)
+-   [selectAll](#selectall)
+-   [leftJoin](#leftjoin)
 
 ## isCollection
 
@@ -48,6 +48,10 @@ collectionHelpers.isCollection([{id:1},{id:2}])
 ```
 
 Returns **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** 
+
+**Meta**
+
+-   **since**: 1.0.0
 
 ## pickAs
 
@@ -97,6 +101,10 @@ collectionHelpers.pickAs({
 ```
 
 Returns **([Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array))** value returns object with selected keys from attributeMap
+
+**Meta**
+
+-   **since**: 1.0.0
 
 ## pickAllAs
 
@@ -168,12 +176,320 @@ collectionHelpers.pickAllAs({
 
 Returns **([Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array))** value returns object with selected keys from attributeMap
 
+**Meta**
+
+-   **since**: 1.0.0
+
+## joinOn
+
+Merges matched data from two collections from matching id values and returns
+the union of the left collection and the intersection of data that exist in both collections
+
+![joinOn](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/leftJoin.png)
+
+**Parameters**
+
+-   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to join into from rightCollection
+-   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to join into leftCollection
+-   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
+-   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
+
+**Examples**
+
+```javascript
+var leftCollection = [{id: 'some-id-1', value: 'Some Value 1'},{id: 'some-id-2', value: 'Some Value 2'}];
+var rightCollection = [{id: 'some-id-1', other: 'Other Value 1'}];
+var leftIdAttr = 'id';
+collectionHelpers.joinOn(leftCollection, rightCollection, leftIdAttr);
+//returns [{id: 'some-id-1', value: 'Some Value 1', other: 'Other Value 1'},{id: 'some-id-2', value: 'Some Value 2'}]
+```
+
+```javascript
+var leftCollection = [{id: 'some-id-1', value: 'Some Value 1'},{id: 'some-id-2', value: 'Some Value 2'}];
+var rightCollection = [{rightId: 'some-id-1', other: 'Other Value 1'}];
+var leftIdAttr = 'id';
+var rightIdAttr = 'rightId';
+collectionHelpers.joinOn(leftCollection, rightCollection, leftIdAttr, rightIdAttr);
+//returns [{id: 'some-id-1', value: 'Some Value 1', other: 'Other Value 1'},{id: 'some-id-2', value: 'Some Value 2'}]
+```
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** Returns `collection` of merged data where data id attributes are matched
+
+**Meta**
+
+-   **since**: 1.0.0
+
+## rightJoin
+
+Merges matched data from two collections from matching id values and returns
+the union of the right collection and the intersection of data that exist in both collections
+
+![rightJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/rightJoin.png)
+
+**Parameters**
+
+-   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to join into rightCollection
+-   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to join into from leftCollection
+-   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
+-   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
+
+**Examples**
+
+```javascript
+var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'}];
+var rightCollection = [{id: 'some-id-1', value: 'Some Value 1'},{id: 'some-id-2', value: 'Some Value 2'}];
+var leftIdAttr = 'id';
+collectionHelpers.rightJoin(leftCollection, rightCollection, leftIdAttr);
+//returns [{id: 'some-id-1', value: 'Some Value 1', other: 'Other Value 1'},{id: 'some-id-2', value: 'Some Value 2'}]
+```
+
+```javascript
+var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'}];
+var rightCollection = [{rightId: 'some-id-1', value: 'Some Value 1'},{rightId: 'some-id-2', value: 'Some Value 2'}];
+var leftIdAttr = 'id';
+var rightIdAttr = 'rightId';
+collectionHelpers.rightJoin(leftCollection, rightCollection, leftIdAttr, rightIdAttr);
+//returns [{rightId: 'some-id-1', value: 'Some Value 1', other: 'Other Value 1'},{rightId: 'some-id-2', value: 'Some Value 2'}]
+```
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** Returns `collection` of merged data where data id attributes are matched
+
+**Meta**
+
+-   **since**: 1.0.0
+
+## innerJoin
+
+Merges matched data from two collections from matching id values and returns
+the intersection of data that exist in both collections 
+
+![innerJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/innerJoin.png)
+
+**Parameters**
+
+-   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in rightCollection
+-   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in leftCollection
+-   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
+-   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
+
+**Examples**
+
+```javascript
+var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
+var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
+var leftIdAttr = 'id';
+collectionHelpers.innerJoin(leftCollection, rightCollection, leftIdAttr);
+//returns [{id: 'shared', value: 'Shared Value', other: 'Shared other'}]
+```
+
+```javascript
+var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
+var rightCollection = [{rightId: 'shared', value: 'Shared Value'},{rightId: 'some-id-2', value: 'Some Value 2'}];
+var leftIdAttr = 'id';
+var rightIdAttr = 'rightId';
+collectionHelpers.innerJoin(leftCollection, rightCollection, leftIdAttr);
+//returns [{id: 'shared', value: 'Shared Value', other: 'Shared other'}]
+```
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** Returns `collection` of merged data where data id attributes are matched
+
+**Meta**
+
+-   **since**: 1.0.0
+
+## fullJoin
+
+Merges data from two collections from matching id values and returns
+the union of both collections
+
+![fullJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/fullJoin.png)
+
+**Parameters**
+
+-   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in rightCollection
+-   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in leftCollection
+-   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
+-   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
+
+**Examples**
+
+```javascript
+var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
+var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
+var leftIdAttr = 'id';
+collectionHelpers.fullJoin(leftCollection, rightCollection, leftIdAttr);
+//returns [{id: 'some-id-1', other: 'Other Value 1'},
+// {id: 'shared', value: 'Shared Value', other: 'Shared other'},
+// {rightId: 'some-id-2', value: 'Some Value 2'}]
+```
+
+```javascript
+var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
+var rightCollection = [{rightId: 'shared', value: 'Shared Value'},{rightId: 'some-id-2', value: 'Some Value 2'}];
+var leftIdAttr = 'id';
+var rightIdAttr = 'rightId';
+collectionHelpers.fullJoin(leftCollection, rightCollection, leftIdAttr);
+//returns [{id: 'some-id-1', other: 'Other Value 1'},
+// {id: 'shared', value: 'Shared Value', other: 'Shared other'},
+// {rightId: 'some-id-2', value: 'Some Value 2'}]
+```
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** Returns `collection` of merged data where data id attributes are matched
+
+**Meta**
+
+-   **since**: 1.0.0
+
+## leftAntiJoin
+
+Takes two collections and returns data from the left collection  
+without the data from the intersection of data that exist in both collections
+based on matching id values.
+
+![leftAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/leftAntiJoin.png)
+
+**Parameters**
+
+-   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in rightCollection
+-   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in leftCollection
+-   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
+-   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
+
+**Examples**
+
+```javascript
+var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
+var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
+var leftIdAttr = 'id';
+collectionHelpers.leftAntiJoin(leftCollection, rightCollection, leftIdAttr);
+//returns [{id: 'some-id-1', other: 'Other Value 1'}]
+```
+
+```javascript
+var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
+var rightCollection = [{rightId: 'shared', value: 'Shared Value'},{rightId: 'some-id-2', value: 'Some Value 2'}];
+var leftIdAttr = 'id';
+var rightIdAttr = 'rightId';
+collectionHelpers.leftAntiJoin(leftCollection, rightCollection, leftIdAttr);
+//returns [{id: 'some-id-1', other: 'Other Value 1'}]
+```
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** Returns `collection` of merged data where data id attributes are matched
+
+**Meta**
+
+-   **since**: 1.0.0
+
+## rightAntiJoin
+
+Takes two collections and returns data from the right collection  
+without the data from the intersection of data that exist in both collections
+based on matching id values.
+
+![rightAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/rightAntiJoin.png)
+
+**Parameters**
+
+-   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in rightCollection
+-   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in leftCollection
+-   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
+-   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
+
+**Examples**
+
+```javascript
+var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
+var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
+var leftIdAttr = 'id';
+collectionHelpers.rightAntiJoin(leftCollection, rightCollection, leftIdAttr);
+//returns [{rightId: 'some-id-2', value: 'Some Value 2'}]
+```
+
+```javascript
+var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
+var rightCollection = [{rightId: 'shared', value: 'Shared Value'},{rightId: 'some-id-2', value: 'Some Value 2'}];
+var leftIdAttr = 'id';
+var rightIdAttr = 'rightId';
+collectionHelpers.rightAntiJoin(leftCollection, rightCollection, leftIdAttr);
+//returns [{rightId: 'some-id-2', value: 'Some Value 2'}]
+```
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** Returns `collection` of merged data where data id attributes are matched
+
+**Meta**
+
+-   **since**: 1.0.0
+
+## fullAntiJoin
+
+Takes two collections and returns the union of data from both collections  
+without the data from the intersection of data that exist in both collections
+based on matching id values.
+
+![fullAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/fullAntiJoin.png)
+
+**Parameters**
+
+-   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in rightCollection
+-   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in leftCollection
+-   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
+-   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
+
+**Examples**
+
+```javascript
+var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
+var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
+var leftIdAttr = 'id';
+collectionHelpers.fullAntiJoin(leftCollection, rightCollection, leftIdAttr);
+//returns [{id: 'some-id-1', other: 'Other Value 1'},{id: 'some-id-2', value: 'Some Value 2'}]
+```
+
+```javascript
+var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
+var rightCollection = [{rightId: 'shared', value: 'Shared Value'},{rightId: 'some-id-2', value: 'Some Value 2'}];
+var leftIdAttr = 'id';
+var rightIdAttr = 'rightId';
+collectionHelpers.fullAntiJoin(leftCollection, rightCollection, leftIdAttr);
+//returns [{id: 'some-id-1', other: 'Other Value 1'},{rightId: 'some-id-2', value: 'Some Value 2'}]
+```
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** Returns `collection` of merged data where data id attributes are matched
+
+**Meta**
+
+-   **since**: 1.0.0
+
+## getCollectionHelpers
+
+Function that returns the following list of collection helper
+functions in this library.
+
+-   [pickAs](#pickas)
+-   [pickAllAs](#pickallas)
+-   [select](#select)
+-   [selectAll](#selectall)
+-   [joinOn](#joinon)
+-   [leftJoin](#leftjoin)
+-   [rightJoin](#rightjoin)
+-   [innerJoin](#innerjoin)
+-   [fullJoin](#fulljoin)
+-   [leftAntiJoin](#leftantijoin)
+-   [rightAntiJoin](#rightantijoin)
+-   [fullAntiJoin](#fullantijoin)
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+**Meta**
+
+-   **since**: 1.0.0
+
 ## select
+
+-   **See: [pickAs](#pickas)**
 
 This function acts similarly to \_.pick except it can take a collection or an object source value 
 and an array of key paths to pick or attribute mapping object to pick source keys as a different key value.
-
-alias: [pickAs](#pickas)
 
 **Parameters**
 
@@ -219,12 +535,16 @@ collectionHelpers.select({
 
 Returns **([Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array))** value returns object with selected keys from attributeMap
 
+**Meta**
+
+-   **since**: 1.0.0
+
 ## selectAll
+
+-   **See: [pickAllAs](#pickallas)**
 
 Like pickAs except that it picks all keys from the source
 and will use attribute mapping object accordingly.
-
-alias: [pickAllAs](#pickallas)
 
 **Parameters**
 
@@ -286,47 +606,16 @@ collectionHelpers.selectAll({
 
 Returns **([Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array))** with selected keys from attributeMap
 
-## joinOn
+**Meta**
 
-Merges matched data from two collections from matching id values and returns
-the union of the left collection and the intersection of data that exist in both collections
-
-![joinOn](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/leftJoin.png)
-
-**Parameters**
-
--   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to join into from rightCollection
--   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to join into leftCollection
--   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
--   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
-
-**Examples**
-
-```javascript
-var leftCollection = [{id: 'some-id-1', value: 'Some Value 1'},{id: 'some-id-2', value: 'Some Value 2'}];
-var rightCollection = [{id: 'some-id-1', other: 'Other Value 1'}];
-var leftIdAttr = 'id';
-collectionHelpers.joinOn(leftCollection, rightCollection, leftIdAttr);
-//returns [{id: 'some-id-1', value: 'Some Value 1', other: 'Other Value 1'},{id: 'some-id-2', value: 'Some Value 2'}]
-```
-
-```javascript
-var leftCollection = [{id: 'some-id-1', value: 'Some Value 1'},{id: 'some-id-2', value: 'Some Value 2'}];
-var rightCollection = [{rightId: 'some-id-1', other: 'Other Value 1'}];
-var leftIdAttr = 'id';
-var rightIdAttr = 'rightId';
-collectionHelpers.joinOn(leftCollection, rightCollection, leftIdAttr, rightIdAttr);
-//returns [{id: 'some-id-1', value: 'Some Value 1', other: 'Other Value 1'},{id: 'some-id-2', value: 'Some Value 2'}]
-```
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** a collection of merged data where data id attributes are matched
+-   **since**: 1.0.0
 
 ## leftJoin
 
+-   **See: [joinOn](#joinon)**
+
 Merges matched data from two collections from matching id values and returns
 the union of the left collection and the intersection of data that exist in both collections
-
-alias: [JoinOn](#joinon)
 
 ![leftJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/leftJoin.png)
 
@@ -356,241 +645,8 @@ collectionHelpers.leftJoin(leftCollection, rightCollection, leftIdAttr, rightIdA
 //returns [{id: 'some-id-1', value: 'Some Value 1', other: 'Other Value 1'},{id: 'some-id-2', value: 'Some Value 2'}]
 ```
 
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** a collection of merged data where data id attributes are matched
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** Returns `collection` of merged data where data id attributes are matched
 
-## rightJoin
+**Meta**
 
-Merges matched data from two collections from matching id values and returns
-the union of the right collection and the intersection of data that exist in both collections
-
-![rightJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/rightJoin.png)
-
-**Parameters**
-
--   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to join into rightCollection
--   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to join into from leftCollection
--   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
--   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
-
-**Examples**
-
-```javascript
-var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'}];
-var rightCollection = [{id: 'some-id-1', value: 'Some Value 1'},{id: 'some-id-2', value: 'Some Value 2'}];
-var leftIdAttr = 'id';
-collectionHelpers.rightJoin(leftCollection, rightCollection, leftIdAttr);
-//returns [{id: 'some-id-1', value: 'Some Value 1', other: 'Other Value 1'},{id: 'some-id-2', value: 'Some Value 2'}]
-```
-
-```javascript
-var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'}];
-var rightCollection = [{rightId: 'some-id-1', value: 'Some Value 1'},{rightId: 'some-id-2', value: 'Some Value 2'}];
-var leftIdAttr = 'id';
-var rightIdAttr = 'rightId';
-collectionHelpers.rightJoin(leftCollection, rightCollection, leftIdAttr, rightIdAttr);
-//returns [{rightId: 'some-id-1', value: 'Some Value 1', other: 'Other Value 1'},{rightId: 'some-id-2', value: 'Some Value 2'}]
-```
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** a collection of merged data where data id attributes are matched
-
-## innerJoin
-
-Merges matched data from two collections from matching id values and returns
-the intersection of data that exist in both collections 
-
-![innerJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/innerJoin.png)
-
-**Parameters**
-
--   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in rightCollection
--   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in leftCollection
--   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
--   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
-
-**Examples**
-
-```javascript
-var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
-var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
-var leftIdAttr = 'id';
-collectionHelpers.innerJoin(leftCollection, rightCollection, leftIdAttr);
-//returns [{id: 'shared', value: 'Shared Value', other: 'Shared other'}]
-```
-
-```javascript
-var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
-var rightCollection = [{rightId: 'shared', value: 'Shared Value'},{rightId: 'some-id-2', value: 'Some Value 2'}];
-var leftIdAttr = 'id';
-var rightIdAttr = 'rightId';
-collectionHelpers.innerJoin(leftCollection, rightCollection, leftIdAttr);
-//returns [{id: 'shared', value: 'Shared Value', other: 'Shared other'}]
-```
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** a collection of merged data where data id attributes are matched
-
-## fullJoin
-
-Merges data from two collections from matching id values and returns
-the union of both collections
-
-![fullJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/fullJoin.png)
-
-**Parameters**
-
--   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in rightCollection
--   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in leftCollection
--   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
--   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
-
-**Examples**
-
-```javascript
-var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
-var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
-var leftIdAttr = 'id';
-collectionHelpers.fullJoin(leftCollection, rightCollection, leftIdAttr);
-//returns [{id: 'some-id-1', other: 'Other Value 1'},
-// {id: 'shared', value: 'Shared Value', other: 'Shared other'},
-// {rightId: 'some-id-2', value: 'Some Value 2'}]
-```
-
-```javascript
-var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
-var rightCollection = [{rightId: 'shared', value: 'Shared Value'},{rightId: 'some-id-2', value: 'Some Value 2'}];
-var leftIdAttr = 'id';
-var rightIdAttr = 'rightId';
-collectionHelpers.fullJoin(leftCollection, rightCollection, leftIdAttr);
-//returns [{id: 'some-id-1', other: 'Other Value 1'},
-// {id: 'shared', value: 'Shared Value', other: 'Shared other'},
-// {rightId: 'some-id-2', value: 'Some Value 2'}]
-```
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** a collection of merged data where data id attributes are matched
-
-## leftAntiJoin
-
-Takes two collections and returns data from the left collection  
-without the data from the intersection of data that exist in both collections
-based on matching id values.
-
-![leftAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/leftAntiJoin.png)
-
-**Parameters**
-
--   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in rightCollection
--   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in leftCollection
--   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
--   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
-
-**Examples**
-
-```javascript
-var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
-var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
-var leftIdAttr = 'id';
-collectionHelpers.leftAntiJoin(leftCollection, rightCollection, leftIdAttr);
-//returns [{id: 'some-id-1', other: 'Other Value 1'}]
-```
-
-```javascript
-var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
-var rightCollection = [{rightId: 'shared', value: 'Shared Value'},{rightId: 'some-id-2', value: 'Some Value 2'}];
-var leftIdAttr = 'id';
-var rightIdAttr = 'rightId';
-collectionHelpers.leftAntiJoin(leftCollection, rightCollection, leftIdAttr);
-//returns [{id: 'some-id-1', other: 'Other Value 1'}]
-```
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** a collection of merged data where data id attributes are matched
-
-## rightAntiJoin
-
-Takes two collections and returns data from the right collection  
-without the data from the intersection of data that exist in both collections
-based on matching id values.
-
-![rightAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/rightAntiJoin.png)
-
-**Parameters**
-
--   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in rightCollection
--   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in leftCollection
--   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
--   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
-
-**Examples**
-
-```javascript
-var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
-var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
-var leftIdAttr = 'id';
-collectionHelpers.rightAntiJoin(leftCollection, rightCollection, leftIdAttr);
-//returns [{rightId: 'some-id-2', value: 'Some Value 2'}]
-```
-
-```javascript
-var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
-var rightCollection = [{rightId: 'shared', value: 'Shared Value'},{rightId: 'some-id-2', value: 'Some Value 2'}];
-var leftIdAttr = 'id';
-var rightIdAttr = 'rightId';
-collectionHelpers.rightAntiJoin(leftCollection, rightCollection, leftIdAttr);
-//returns [{rightId: 'some-id-2', value: 'Some Value 2'}]
-```
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** a collection of merged data where data id attributes are matched
-
-## fullAntiJoin
-
-Takes two collections and returns the union of data from both collections  
-without the data from the intersection of data that exist in both collections
-based on matching id values.
-
-![fullAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/fullAntiJoin.png)
-
-**Parameters**
-
--   `leftCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in rightCollection
--   `rightCollection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** collection to match in leftCollection
--   `leftIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** leftCollection attribute name to use for comparing match values
--   `rightIdAttr` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** rightCollection attribute name to use for comparing match values (optional, default `leftIdAttr`)
-
-**Examples**
-
-```javascript
-var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
-var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
-var leftIdAttr = 'id';
-collectionHelpers.fullAntiJoin(leftCollection, rightCollection, leftIdAttr);
-//returns [{id: 'some-id-1', other: 'Other Value 1'},{id: 'some-id-2', value: 'Some Value 2'}]
-```
-
-```javascript
-var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
-var rightCollection = [{rightId: 'shared', value: 'Shared Value'},{rightId: 'some-id-2', value: 'Some Value 2'}];
-var leftIdAttr = 'id';
-var rightIdAttr = 'rightId';
-collectionHelpers.fullAntiJoin(leftCollection, rightCollection, leftIdAttr);
-//returns [{id: 'some-id-1', other: 'Other Value 1'},{rightId: 'some-id-2', value: 'Some Value 2'}]
-```
-
-Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** a collection of merged data where data id attributes are matched
-
-## getCollectionHelpers
-
-Function that returns the following list of collection helper
-functions in this library.
-
--   [pickAs](#pickas)
--   [pickAllAs](#pickallas)
--   [select](#select)
--   [selectAll](#selectall)
--   [joinOn](#joinon)
--   [leftJoin](#leftjoin)
--   [rightJoin](#rightjoin)
--   [innerJoin](#innerjoin)
--   [fullJoin](#fulljoin)
--   [leftAntiJoin](#leftantijoin)
--   [rightAntiJoin](#rightantijoin)
--   [fullAntiJoin](#fullantijoin)
-
-Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+-   **since**: 1.0.0

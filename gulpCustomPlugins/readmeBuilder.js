@@ -6,15 +6,16 @@
         module.exports = factory(require("lodash"),
             require("uuid"),
             require("../src/lodash-collection-helpers"),
+            require("../devconfig"),
             require("../readme"),
             require("../package"),
             require("../bower"));
     }
     // AMD
     else if (typeof define == "function" && define.amd) {
-        define(["lodash", "uuid", "./src/lodash-collection-helpers", "./readme", "./package", "./bower"], factory);
+        define(["lodash", "uuid", "../src/lodash-collection-helpers", "../devconfig", "../readme", "../package", "../bower"], factory);
     }
-}(function(_, uuid, CollectionHelpers, readmeDotJSON, packageDotJSON, bowerDotJSON) {
+}(function(_, uuid, CollectionHelpers, devConfig, readmeDotJSON, packageDotJSON, bowerDotJSON) {
     var config = CollectionHelpers.leftJoin(
         [CollectionHelpers.selectAll(packageDotJSON, {
             main: 'npm.main'
@@ -24,7 +25,7 @@
         'name');
     var name = _.get(config, '[0].name', '');
     var user = 'JSystemsTech';
-    var targetBranch = 'master';
+    var targetBranch = devConfig.branch;
     var badges = {
         bower: '<a href="https://github.com/' + user + '/' + name + '#README"><img src="https://github.com/' + user + '/' + name + '/raw/' + targetBranch + '/gulpCustomPlugins/customBadges/bower-badge.png" alt="Bower Package" height="30" width="130"></a>',
         license: '[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license-url]',
@@ -59,7 +60,7 @@
             return tableColumnAllignmentMap[_.get(column, 'allignment', 'left')];
         });
         var tableHeaderLabels = _.map(columns, function(column) {
-            return _.get(column, 'lable', '');
+            return _.get(column, 'label', '');
         });
         var tableRows = _.map(rows, function(row) {
             return '| ' + row.join(' | ') + ' |';
@@ -67,6 +68,17 @@
         var tableHeaders = '| ' + tableHeaderLabels.join(' | ') + ' |\n';
         var tableAlingmentRow = '| ' + tableMDConfigRow.join(' | ') + ' |\n';
         return tableHeaders + tableAlingmentRow + tableRows;
+    };
+    var toBadgeText = function(value) {
+        return value.replace(/ /g, "_").replace(/-/g, "--");
+    };
+    var buildBadgeList = function(list) {
+        return _.map(list, function(item) {
+            var label = toBadgeText(_.get(item, 'label'));
+            var value = toBadgeText(_.get(item, 'value'));
+            var badgeURL = 'https://img.shields.io/badge/' + label + '-' + value + '-green.svg?style=social';
+            return '![' + _.get(item, 'label') + '](' + badgeURL + ')';
+        }).join('\n') + '\n';
     };
     var getBadges = function(badgesToUse) {
         return _.map(_.pick(badges, badgesToUse), function(badge) {
@@ -86,6 +98,8 @@
                 return buildTable(sectionContent.columns, sectionContent.rows);
             } else if (sectionContent.type === 'code_block') {
                 return getCodeBlock(sectionContent.syntax, sectionContent.code);
+            } else if (sectionContent.type === 'badge-list') {
+                return buildBadgeList(sectionContent.list);
             } else {
                 return getSectionContent(_.get(sectionContent, 'content', ''));
             }
