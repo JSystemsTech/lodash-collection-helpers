@@ -33,14 +33,16 @@
         npm: '[![NPM version](http://img.shields.io/npm/v/' + name + '.svg?style=flat)][npm-url]',
         downloads: '[![NPM downloads](http://img.shields.io/npm/dm/' + name + '.svg?style=flat)][npm-url]',
         travis: '[![Build Status](https://travis-ci.org/' + user + '/' + name + '.svg?branch=' + escapedBranch + ')][travis-url]',
-        dependencies: '[![Dependency Status](https://david-dm.org/' + user + '/' + name + '.svg?style=flat)][dependencies-url]',
+        dependencies: '[![Dependency Status](https://david-dm.org/' + user + '/' + name + '.svg?style=flat&branch=' + escapedBranch + ')][dependencies-url]',
+        'dev-dependencies': '[![devDependencies Status](https://david-dm.org/' + user + '/' + name + '/dev-status.svg?branch=' + escapedBranch + ')][dev-dependencies-url]',
         coverage: '[![Coverage Status](https://coveralls.io/repos/github/' + user + '/' + name + '/badge.svg?branch=' + escapedBranch + ')][coverage-url]'
     };
     var links = [
         '[license-url]: LICENSE',
         '[npm-url]: https://www.npmjs.com/package/' + name,
         '[travis-url]: https://travis-ci.org/' + user + '/' + name + '?branch=' + escapedBranch,
-        '[dependencies-url]: https://david-dm.org/' + user + '/' + name,
+        '[dependencies-url]: https://david-dm.org/' + user + '/' + name + '?branch=' + escapedBranch,
+        '[dev-dependencies-url]:https://david-dm.org/' + user + '/' + name + '?type=dev&branch=' + escapedBranch,
         '[coverage-url]: https://coveralls.io/repos/github/' + user + '/' + name + '?branch=' + escapedBranch,
         '[documentation-url]: https://github.com/' + user + '/' + name + '/blob/' + targetBranch + '/DOCUMENTATION.md'
     ];

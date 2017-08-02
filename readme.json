@@ -96,5 +96,5 @@
 			}]
 		}
 	}],
-	"badges": ["npm", "downloads", "travis", "coverage", "dependencies", "license", "bower"]
+	"badges": ["npm", "downloads", "travis", "coverage", "dependencies", "dev-dependencies", "license", "bower"]
 }
