@@ -44,7 +44,8 @@
         '[dependencies-url]: https://david-dm.org/' + user + '/' + name + '?branch=' + escapedBranch,
         '[dev-dependencies-url]:https://david-dm.org/' + user + '/' + name + '?type=dev&branch=' + escapedBranch,
         '[coverage-url]: https://coveralls.io/repos/github/' + user + '/' + name + '?branch=' + escapedBranch,
-        '[documentation-url]: https://github.com/' + user + '/' + name + '/blob/' + targetBranch + '/DOCUMENTATION.md'
+        '[documentation-url]: https://github.com/' + user + '/' + name + '/blob/' + targetBranch + '/DOCUMENTATION.md',
+        '[readme-url]: https://github.com/' + user + '/' + name + '/blob/' + targetBranch + '/README.md'
     ];
 
     documenationLinks = _.map(_.keys(CollectionHelpers.getCollectionHelpers()), function(key) {
@@ -58,7 +59,11 @@
         center: ':----:',
         right: '----:'
     };
-    var buildTable = function(columns, rows) {
+    var buildTable = function(columns, rows, header) {
+        var mainHeader = '';
+        if (header) {
+            mainHeader = '### ' + _.startCase(header) + '\n';
+        }
         var tableMDConfigRow = _.map(columns, function(column) {
             return tableColumnAllignmentMap[_.get(column, 'allignment', 'left')];
         });
@@ -70,7 +75,7 @@
         }).join('\n') + '\n';
         var tableHeaders = '| ' + tableHeaderLabels.join(' | ') + ' |\n';
         var tableAlingmentRow = '| ' + tableMDConfigRow.join(' | ') + ' |\n';
-        return tableHeaders + tableAlingmentRow + tableRows;
+        return mainHeader + tableHeaders + tableAlingmentRow + tableRows;
     };
     var toBadgeText = function(value) {
         return value.replace(/ /g, "_").replace(/-/g, "--");
@@ -98,7 +103,7 @@
             }).join('\n');
         } else if (_.isPlainObject(sectionContent)) {
             if (sectionContent.type === 'table') {
-                return buildTable(sectionContent.columns, sectionContent.rows);
+                return buildTable(sectionContent.columns, sectionContent.rows, sectionContent.header);
             } else if (sectionContent.type === 'code_block') {
                 return getCodeBlock(sectionContent.syntax, sectionContent.code);
             } else if (sectionContent.type === 'badge-list') {
@@ -113,20 +118,23 @@
 
     var compileToMdFormat = function(argument) {
         var pagetopID = uuid.v4();
-        var regions = [
-            getBadges(_.get(readmeDotJSON, 'badges', [])), '## <a name="' + pagetopID + '"></a>Table of Contents\n'
-        ]
-
-        _.each(_.get(readmeDotJSON, 'sections', []), function(section, index) {
+        var title = '# ' + _.startCase(name);
+        var description = '*' + _.get(config, '[0].description', '') + '*\n';
+        var badges = getBadges(_.get(readmeDotJSON, 'badges', []));
+        var tableOfContents = ['## <a name="' + pagetopID + '"></a>Table of Contents'];
+        var mainContent = _.map(_.get(readmeDotJSON, 'sections', []), function(section, index) {
             var sectionID = uuid.v4();
-            var tableOfContentsEntry = (index + 1) + '. [' + section.title + '](#' + sectionID + ')\n';
-            regions[1] = regions[1] + tableOfContentsEntry;
-            var sectionHeader = '## <a name="' + sectionID + '"></a>' + section.title + '\n';
+            var formattedTitle = _.startCase(section.title);
+            var tableOfContentsEntry = (index + 1) + '. [' + formattedTitle + '](#' + sectionID + ')\n';
+            //regions[1] = regions[1] + tableOfContentsEntry;
+            tableOfContents.push(tableOfContentsEntry);
+            var sectionHeader = '## <a name="' + sectionID + '"></a>' + formattedTitle + '\n';
             var sectionContent = getSectionContent(_.get(section, 'content', ''));
 
-            regions.push(sectionHeader + sectionContent);
+            return sectionHeader + sectionContent;
         });
-        regions = regions.concat(['[Return to Top](#' + pagetopID + ')\n', links]);
+        console.log(mainContent);
+        var regions = [title, description, badges, tableOfContents.join('\n'), mainContent.join('\n'), '[Return to Top](#' + pagetopID + ')\n', links];
         return regions.join('\n');
 
     };

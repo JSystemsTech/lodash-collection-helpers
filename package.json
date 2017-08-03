@@ -4,12 +4,13 @@
   "description": "Lodash plugin library for additional collection functions",
   "main": "src/lodash-collection-helpers.js",
   "scripts": {
-    "test": "mocha --require mocha-helper.js --recursive src/*-spec.js",
+    "unit": "mocha --require mocha-helper.js --recursive src/*-spec.js",
     "bowerunit": "mocha --require mocha-helper.js --recursive dist/*-spec.js",
-    "cover": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R mocha-spec-json-reporter src/*-spec.js",
-    "report": "node_modules/istanbul/lib/cli.js report json-summary",
+    "coverage": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R mocha-spec-json-reporter src/*-spec.js",
     "documentation": "documentation build ./src/lodash-collection-helpers.js -f md -o DOCUMENTATION.md",
-    "build": "npm-run-all test bowerunit cover"
+    "bundle":"gulp package",
+    "test": "npm-run-all unit bowerunit coverage",
+    "build": "npm-run-all documentation bundle test"
   },
   "repository": {
     "type": "git",
