@@ -43,7 +43,7 @@
         '[travis-url]: https://travis-ci.org/' + user + '/' + name + '?branch=' + escapedBranch,
         '[dependencies-url]: https://david-dm.org/' + user + '/' + name + '?branch=' + escapedBranch,
         '[dev-dependencies-url]:https://david-dm.org/' + user + '/' + name + '?type=dev&branch=' + escapedBranch,
-        '[coverage-url]: https://coveralls.io/repos/github/' + user + '/' + name + '?branch=' + escapedBranch,
+        '[coverage-url]: https://coveralls.io/github/' + user + '/' + name + '?branch=' + escapedBranch,
         '[documentation-url]: https://github.com/' + user + '/' + name + '/blob/' + targetBranch + '/DOCUMENTATION.md',
         '[readme-url]: https://github.com/' + user + '/' + name + '/blob/' + targetBranch + '/README.md'
     ];
