@@ -6,6 +6,7 @@
         module.exports = factory(require("lodash"),
             require("uuid"),
             require("../src/lodash-collection-helpers"),
+            require("../coverage-summary"),
             require("../devconfig"),
             require("../readme"),
             require("../package"),
@@ -13,9 +14,9 @@
     }
     // AMD
     else if (typeof define == "function" && define.amd) {
-        define(["lodash", "uuid", "../src/lodash-collection-helpers", "../devconfig", "../readme", "../package", "../bower"], factory);
+        define(["lodash", "uuid", "../src/lodash-collection-helpers", "../coverage-summary", "../devconfig", "../readme", "../package", "../bower"], factory);
     }
-}(function(_, uuid, CollectionHelpers, devConfig, readmeDotJSON, packageDotJSON, bowerDotJSON) {
+}(function(_, uuid, CollectionHelpers, coverageSummary, devConfig, readmeDotJSON, packageDotJSON, bowerDotJSON) {
     var config = CollectionHelpers.leftJoin(
         [CollectionHelpers.selectAll(packageDotJSON, {
             main: 'npm.main'
@@ -40,6 +41,7 @@
     };
     var links = [
         '[license-url]: LICENSE',
+        '[code-of-conduct-url]: CODE_OF_CONDUCT',
         '[npm-url]: https://www.npmjs.com/package/' + name,
         '[travis-url]: https://travis-ci.org/' + user + '/' + name + '?branch=' + escapedBranch,
         '[dependencies-url]: https://david-dm.org/' + user + '/' + name + '?branch=' + escapedBranch,
@@ -59,6 +61,39 @@
         left: '----',
         center: ':----:',
         right: '----:'
+    };
+    var coverageState = {
+        failed: '![#f03c15](https://placehold.it/15/f03c15/000000?text=+) `Needs more work.`',
+        passed: '![#c5f015](https://placehold.it/15/c5f015/000000?text=+) `Good to go!`'
+    };
+    var getCoverageDetails = function() {
+        var coverageDetails = CollectionHelpers.select(coverageSummary, {
+            'total.lines': 'lines',
+            'total.statements': 'statements',
+            'total.functions': 'functions',
+            'total.branches': 'branches',
+        });
+        var tables = _.map(coverageDetails, function(details, key) {
+            var formattedDetails = CollectionHelpers.selectAll(details, {
+                'pct': 'percent'
+            });
+            var state = coverageState.failed;
+            var columns = _.map(formattedDetails, function(stat, statKey) {
+                if (statKey === 'percent' && stat === 100) {
+                    state = coverageState.passed;
+                }
+                return {
+                    label: _.startCase(statKey)
+                };
+            });
+
+            var rows = [_.map(formattedDetails, function(stat) {
+                return stat;
+            })];
+
+            return buildTable(columns, rows, key) + state + '\n';
+        });
+        return tables.join('\n') + '\n';
     };
     var buildTable = function(columns, rows, header) {
         var mainHeader = '';
@@ -109,6 +144,8 @@
                 return getCodeBlock(sectionContent.syntax, sectionContent.code);
             } else if (sectionContent.type === 'badge-list') {
                 return buildBadgeList(sectionContent.list);
+            } else if (sectionContent.type === 'coverage-details') {
+                return getCoverageDetails();
             } else {
                 return getSectionContent(_.get(sectionContent, 'content', ''));
             }

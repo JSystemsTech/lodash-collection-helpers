@@ -115,7 +115,14 @@
 				["gulp minify", "Transpiles source code to ES5 file and minifys ES5 code to minified file"],
 				["gulp package", "Transpiles source code to ES5 file, minifys ES5 code to minified file, then builds [README.md][readme-url] file"]
 			]
+		},{
+			"content":"See [CODE OF CONDUCT][code-of-conduct-url] for general contribution rules"
 		}]
+	}, {
+		"title": "Coverage Details",
+		"content": {
+			"type": "coverage-details"
+		}
 	}, {
 		"title": "Release History",
 		"content": {
