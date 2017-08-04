@@ -28,44 +28,46 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _privateAttributes.set(this, {
             _indexBy: function _indexBy(collection, iteree) {
                 var indexedCollection = {};
-                if (_privateAttributes.get(this)._isCollection(collection) && (_.isString(iteree) || _.isFunction(iteree))) {
+                if (_privateAttributes.get(this)._isCollection(collection)) {
                     _.each(collection, function (item, index) {
                         var indexedKey;
                         if (_.isFunction(iteree)) {
-                            indexedKey = _.toString(iteree(item, index));
+                            indexedKey = iteree(item, index);
                         } else if (_.isString(iteree)) {
-                            indexedKey = _.toString(_.get(item, iteree));
+                            indexedKey = _.get(item, iteree);
                         }
-                        if (_.isString(indexedKey)) {
-                            if (_.isPlainObject(_.get(indexedCollection, indexedKey))) {
-                                indexedKey = indexedKey + '(' + index + ')';
-                            }
-                            _.set(indexedCollection, indexedKey, _.cloneDeep(item));
+                        if (!_.isString(indexedKey)) {
+                            indexedKey = _.toString(index);
                         }
+                        if (_.isPlainObject(_.get(indexedCollection, indexedKey))) {
+                            indexedKey = indexedKey + '(' + index + ')';
+                        }
+                        _.set(indexedCollection, indexedKey, _.cloneDeep(item));
                     });
                 }
                 return indexedCollection;
             },
-            _uniqify: function _uniqify(collection, idAttr, itteree) {
-                idAttr = idAttr || 'uuid';
-                if (_privateAttributes.get(this)._isCollection(collection)) {
-                    if (uuid) {
-                        _.each(collection, function (item, index) {
-                            var uuidValue = uuid();
-                            if (_.isFunction(itteree)) {
-                                var calculatedUUID = itteree(item, index);
-                                if (_.isString(calculatedUUID)) {
-                                    uuidValue = calculatedUUID;
-                                }
-                            }
-                            if (_.isPlainObject(_.find(collection, _.set({}, idAttr, uuidValue)))) {
-                                uuidValue = uuidValue + '(' + index + ')';
-                            }
-                            _.set(item, idAttr, uuidValue);
-                        });
-                    }
+            _uniqify: function _uniqify(collection, idAttr, iteree) {
+                if (!_.isString(idAttr) || _.isEmpty(idAttr)) {
+                    idAttr = 'uuid';
                 }
-                return collection;
+                var cloneCollection = _.cloneDeep(collection);
+                if (_privateAttributes.get(this)._isCollection(cloneCollection)) {
+                    _.each(cloneCollection, function (item, index) {
+                        var uuidValue = uuid();
+                        if (_.isFunction(iteree)) {
+                            var calculatedUUID = iteree(item, index);
+                            if (_.isString(calculatedUUID)) {
+                                uuidValue = calculatedUUID;
+                            }
+                        }
+                        if (_.isPlainObject(_.find(cloneCollection, _.set({}, idAttr, uuidValue)))) {
+                            uuidValue = uuidValue + '(' + index + ')';
+                        }
+                        _.set(item, idAttr, uuidValue);
+                    });
+                }
+                return cloneCollection;
             },
             _isCollection: function _isCollection(collection) {
                 if (!_.isArray(collection)) {
@@ -679,7 +681,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 fullJoin: collectionHelpers._fullJoin.bind(this),
                 leftAntiJoin: collectionHelpers._leftAntiJoin.bind(this),
                 rightAntiJoin: collectionHelpers._rightAntiJoin.bind(this),
-                fullAntiJoin: collectionHelpers._fullAntiJoin.bind(this)
+                fullAntiJoin: collectionHelpers._fullAntiJoin.bind(this),
+                indexBy: collectionHelpers._indexBy.bind(this),
+                uniqify: collectionHelpers._uniqify.bind(this)
             };
         };
     };
