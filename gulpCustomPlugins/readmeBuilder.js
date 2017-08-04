@@ -35,7 +35,8 @@
         travis: '[![Build Status](https://travis-ci.org/' + user + '/' + name + '.svg?branch=' + escapedBranch + ')][travis-url]',
         dependencies: '[![Dependency Status](https://david-dm.org/' + user + '/' + name + '.svg?style=flat&branch=' + escapedBranch + ')][dependencies-url]',
         'dev-dependencies': '[![devDependencies Status](https://david-dm.org/' + user + '/' + name + '/dev-status.svg?branch=' + escapedBranch + ')][dev-dependencies-url]',
-        coverage: '[![Coverage Status](https://coveralls.io/repos/github/' + user + '/' + name + '/badge.svg?branch=' + escapedBranch + ')][coverage-url]'
+        //coverage: '[![Coverage Status](https://coveralls.io/repos/github/' + user + '/' + name + '/badge.svg?branch=' + escapedBranch + ')][coverage-url]'
+        coverage: '<a href="https://coveralls.io/github/' + user + '/' + name + '?branch=' + targetBranch + '"><img src="https://coveralls.io/repos/github/' + user + '/' + name + '/badge.svg?branch=' + targetBranch + '" alt="Coverage Status" /></a>'
     };
     var links = [
         '[license-url]: LICENSE',

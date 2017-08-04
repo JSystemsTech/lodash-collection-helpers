@@ -1,26 +1,26 @@
 # Lodash Collection Helpers
 *Lodash plugin library for additional collection functions*
 
-[![NPM version](http://img.shields.io/npm/v/lodash-collection-helpers.svg?style=flat)][npm-url] [![NPM downloads](http://img.shields.io/npm/dm/lodash-collection-helpers.svg?style=flat)][npm-url] [![Build Status](https://travis-ci.org/JSystemsTech/lodash-collection-helpers.svg?branch=release%2F1-1-0)][travis-url] [![Coverage Status](https://coveralls.io/repos/github/JSystemsTech/lodash-collection-helpers/badge.svg?branch=release%2F1-1-0)][coverage-url] [![Dependency Status](https://david-dm.org/JSystemsTech/lodash-collection-helpers.svg?style=flat&branch=release%2F1-1-0)][dependencies-url] [![devDependencies Status](https://david-dm.org/JSystemsTech/lodash-collection-helpers/dev-status.svg?branch=release%2F1-1-0)][dev-dependencies-url] [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license-url] <a href="https://github.com/JSystemsTech/lodash-collection-helpers#README"><img src="https://github.com/JSystemsTech/lodash-collection-helpers/raw/release/1-1-0/gulpCustomPlugins/customBadges/bower-badge.png" alt="Bower Package" height="30" width="130"></a>
-## <a name="abb8356e-5325-4876-b628-f824acf09dfd"></a>Table of Contents
-1. [Installation](#a125f74a-a262-4dee-89c0-fa2ff519580e)
+[![NPM version](http://img.shields.io/npm/v/lodash-collection-helpers.svg?style=flat)][npm-url] [![NPM downloads](http://img.shields.io/npm/dm/lodash-collection-helpers.svg?style=flat)][npm-url] [![Build Status](https://travis-ci.org/JSystemsTech/lodash-collection-helpers.svg?branch=release%2F1-1-0)][travis-url] <a href="https://coveralls.io/github/JSystemsTech/lodash-collection-helpers?branch=release/1-1-0"><img src="https://coveralls.io/repos/github/JSystemsTech/lodash-collection-helpers/badge.svg?branch=release/1-1-0" alt="Coverage Status" /></a> [![Dependency Status](https://david-dm.org/JSystemsTech/lodash-collection-helpers.svg?style=flat&branch=release%2F1-1-0)][dependencies-url] [![devDependencies Status](https://david-dm.org/JSystemsTech/lodash-collection-helpers/dev-status.svg?branch=release%2F1-1-0)][dev-dependencies-url] [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license-url] <a href="https://github.com/JSystemsTech/lodash-collection-helpers#README"><img src="https://github.com/JSystemsTech/lodash-collection-helpers/raw/release/1-1-0/gulpCustomPlugins/customBadges/bower-badge.png" alt="Bower Package" height="30" width="130"></a>
+## <a name="065414f2-ae69-4867-95de-aa96fc982de9"></a>Table of Contents
+1. [Installation](#6edeaf80-ab74-4137-8b06-6cc1d019e9dc)
 
-2. [Usage](#5267136d-07aa-4e9b-899e-a51757568973)
+2. [Usage](#82c17e19-ab00-455f-a7f8-1a09fee9a022)
 
-3. [Lodash Integration](#fda26944-cbc0-46c5-acac-dd9fe0084e05)
+3. [Lodash Integration](#cf76e88b-447a-44d2-881b-35b25fe6157e)
 
-4. [Contributing](#0a6e30b7-c6b2-42d3-9028-d350ca4d4b81)
+4. [Contributing](#a5dafdf8-e782-4828-bf0d-1bf141a9c12d)
 
-5. [Release History](#9af18b6e-90bd-4d2d-92ec-b470919ee275)
+5. [Release History](#29e2fd47-2a84-45cb-abfe-fb3551cc2970)
 
-## <a name="a125f74a-a262-4dee-89c0-fa2ff519580e"></a>Installation
+## <a name="6edeaf80-ab74-4137-8b06-6cc1d019e9dc"></a>Installation
 | Installation Type | Command |
 | :----: | ---- |
 | npm | npm install lodash-collection-helpers --save |
 | bower | bower install lodash-collection-helpers |
 | yarn | yarn add lodash-collection-helpers |
 
-## <a name="5267136d-07aa-4e9b-899e-a51757568973"></a>Usage
+## <a name="82c17e19-ab00-455f-a7f8-1a09fee9a022"></a>Usage
 ``` javascript
 var collectionHelpers = require('lodash-collection-helpers');
 ```
@@ -50,7 +50,7 @@ var collectionHelpers = require('lodash-collection-helpers/dist/lodash-collectio
 
 For further instruction on how to use this library please referense the [Documentation][documentation-url]
 
-## <a name="fda26944-cbc0-46c5-acac-dd9fe0084e05"></a>Lodash Integration
+## <a name="cf76e88b-447a-44d2-881b-35b25fe6157e"></a>Lodash Integration
 Prefer to call these helpers directlly from your projest's lodash reference?
 Simply execute code like this example below and you are all set.
 
@@ -76,7 +76,7 @@ _.mixin(collectionHelpers.getCollectionHelpers());
 | [_.rightAntiJoin][rightAntiJoin-url] |
 | [_.fullAntiJoin][fullAntiJoin-url] |
 
-## <a name="0a6e30b7-c6b2-42d3-9028-d350ca4d4b81"></a>Contributing
+## <a name="a5dafdf8-e782-4828-bf0d-1bf141a9c12d"></a>Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality. Lint and test your code.
 
@@ -99,10 +99,10 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 | gulp minify | Transpiles source code to ES5 file and minifys ES5 code to minified file |
 | gulp package | Transpiles source code to ES5 file, minifys ES5 code to minified file, then builds [README.md][readme-url] file |
 
-## <a name="9af18b6e-90bd-4d2d-92ec-b470919ee275"></a>Release History
+## <a name="29e2fd47-2a84-45cb-abfe-fb3551cc2970"></a>Release History
 ![1.1.0](https://img.shields.io/badge/1.1.0-Add_indexBy_and_uniqify_helpers-green.svg?style=social)<br>![1.0.0](https://img.shields.io/badge/1.0.0-Initial_release-green.svg?style=social)
 
-[Return to Top](#abb8356e-5325-4876-b628-f824acf09dfd)
+[Return to Top](#065414f2-ae69-4867-95de-aa96fc982de9)
 
 [license-url]: LICENSE
 [npm-url]: https://www.npmjs.com/package/lodash-collection-helpers
