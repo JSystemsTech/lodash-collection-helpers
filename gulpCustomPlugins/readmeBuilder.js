@@ -133,7 +133,6 @@
 
             return sectionHeader + sectionContent;
         });
-        console.log(mainContent);
         var regions = [title, description, badges, tableOfContents.join('\n'), mainContent.join('\n'), '[Return to Top](#' + pagetopID + ')\n', links];
         return regions.join('\n');
 
