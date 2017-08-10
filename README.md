@@ -2,27 +2,27 @@
 *Lodash plugin library for additional collection functions*
 
 [![NPM version](http://img.shields.io/npm/v/lodash-collection-helpers.svg?style=flat)][npm-url] [![NPM downloads](http://img.shields.io/npm/dm/lodash-collection-helpers.svg?style=flat)][npm-url] [![Build Status](https://travis-ci.org/JSystemsTech/lodash-collection-helpers.svg?branch=release%2F1-1-0)][travis-url] <a href="https://coveralls.io/github/JSystemsTech/lodash-collection-helpers?branch=release/1-1-0"><img src="https://coveralls.io/repos/github/JSystemsTech/lodash-collection-helpers/badge.svg?branch=release/1-1-0" alt="Coverage Status" /></a> [![Dependency Status](https://david-dm.org/JSystemsTech/lodash-collection-helpers.svg?style=flat&branch=release%2F1-1-0)][dependencies-url] [![devDependencies Status](https://david-dm.org/JSystemsTech/lodash-collection-helpers/dev-status.svg?branch=release%2F1-1-0)][dev-dependencies-url] [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license-url] <a href="https://github.com/JSystemsTech/lodash-collection-helpers#README"><img src="https://github.com/JSystemsTech/lodash-collection-helpers/raw/release/1-1-0/gulpCustomPlugins/customBadges/bower-badge.png" alt="Bower Package" height="30" width="130"></a>
-## <a name="266ef6b0-94ee-4794-acfe-678e04f0b6d2"></a>Table of Contents
-1. [Installation](#6162a5fa-76e4-4ac2-a9dc-3f0bf4fea159)
+## <a name="table-of-contents_2"></a>Table of Contents
+1. [Installation](#installation_3)
 
-2. [Usage](#fecd9420-4ec9-4e90-88c3-f09c70a3f2e4)
+2. [Usage](#usage_4)
 
-3. [Lodash Integration](#7cd99eb7-057e-4e70-918b-2055f5349287)
+3. [Lodash Integration](#lodash-integration_5)
 
-4. [Contributing](#26ca35ab-b8f0-4382-913e-08edec200c59)
+4. [Contributing](#contributing_6)
 
-5. [Coverage Details](#76ed40c9-ef73-4408-a107-aec37dc60d07)
+5. [Coverage Details](#coverage-details_7)
 
-6. [Release History](#e951b611-62ee-4e1d-b130-0005f23d5e6a)
+6. [Release History](#release-history_8)
 
-## <a name="6162a5fa-76e4-4ac2-a9dc-3f0bf4fea159"></a>Installation
+## <a name="installation_3"></a>Installation
 | Installation Type | Command |
 | :----: | ---- |
 | npm | npm install lodash-collection-helpers --save |
 | bower | bower install lodash-collection-helpers |
 | yarn | yarn add lodash-collection-helpers |
 
-## <a name="fecd9420-4ec9-4e90-88c3-f09c70a3f2e4"></a>Usage
+## <a name="usage_4"></a>Usage
 ``` javascript
 var collectionHelpers = require('lodash-collection-helpers');
 ```
@@ -52,7 +52,7 @@ var collectionHelpers = require('lodash-collection-helpers/dist/lodash-collectio
 
 For further instruction on how to use this library please referense the [Documentation][documentation-url]
 
-## <a name="7cd99eb7-057e-4e70-918b-2055f5349287"></a>Lodash Integration
+## <a name="lodash-integration_5"></a>Lodash Integration
 Prefer to call these helpers directlly from your projest's lodash reference?
 Simply execute code like this example below and you are all set.
 
@@ -78,7 +78,7 @@ _.mixin(collectionHelpers.getCollectionHelpers());
 | [_.rightAntiJoin][rightAntiJoin-url] |
 | [_.fullAntiJoin][fullAntiJoin-url] |
 
-## <a name="26ca35ab-b8f0-4382-913e-08edec200c59"></a>Contributing
+## <a name="contributing_6"></a>Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style.
 Add unit tests for any new or changed functionality. Lint and test your code.
 
@@ -103,7 +103,7 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 See [CODE OF CONDUCT][code-of-conduct-url] for general contribution rules
 
-## <a name="76ed40c9-ef73-4408-a107-aec37dc60d07"></a>Coverage Details
+## <a name="coverage-details_7"></a>Coverage Details
 ### Lines
 | Total | Covered | Skipped | Percent |
 | ---- | ---- | ---- | ---- |
@@ -129,10 +129,10 @@ See [CODE OF CONDUCT][code-of-conduct-url] for general contribution rules
 ![#c5f015](https://placehold.it/15/c5f015/000000?text=+) `Good to go!`
 
 
-## <a name="e951b611-62ee-4e1d-b130-0005f23d5e6a"></a>Release History
-![1.1.0](https://img.shields.io/badge/1.1.0-Add_indexBy_and_uniqify_helpers-green.svg?style=social)<br>![1.0.0](https://img.shields.io/badge/1.0.0-Initial_release-green.svg?style=social)
+## <a name="release-history_8"></a>Release History
+![1.1.0](https://img.shields.io/badge/1.1.0-Add_indexBy_and_uniqify_helpers._Deprecate_uuid_dependancy-green.svg?style=social)<br>![1.0.0](https://img.shields.io/badge/1.0.0-Initial_release-green.svg?style=social)
 
-[Return to Top](#266ef6b0-94ee-4794-acfe-678e04f0b6d2)
+[Return to Top](#table-of-contents_2)
 
 [license-url]: LICENSE
 [code-of-conduct-url]: CODE_OF_CONDUCT

@@ -4,7 +4,6 @@
     // CommonJS
     if (typeof exports == "object" && typeof require == "function") {
         module.exports = factory(require("lodash"),
-            require("uuid"),
             require("../src/lodash-collection-helpers"),
             require("../coverage-summary"),
             require("../devconfig"),
@@ -14,9 +13,9 @@
     }
     // AMD
     else if (typeof define == "function" && define.amd) {
-        define(["lodash", "uuid", "../src/lodash-collection-helpers", "../coverage-summary", "../devconfig", "../readme", "../package", "../bower"], factory);
+        define(["lodash", "../src/lodash-collection-helpers", "../coverage-summary", "../devconfig", "../readme", "../package", "../bower"], factory);
     }
-}(function(_, uuid, CollectionHelpers, coverageSummary, devConfig, readmeDotJSON, packageDotJSON, bowerDotJSON) {
+}(function(_, CollectionHelpers, coverageSummary, devConfig, readmeDotJSON, packageDotJSON, bowerDotJSON) {
     var config = CollectionHelpers.leftJoin(
         [CollectionHelpers.selectAll(packageDotJSON, {
             main: 'npm.main'
@@ -155,13 +154,13 @@
     };
 
     var compileToMdFormat = function(argument) {
-        var pagetopID = uuid.v4();
+        var pagetopID = _.uniqueId('table-of-contents_')
         var title = '# ' + _.startCase(name);
         var description = '*' + _.get(config, '[0].description', '') + '*\n';
         var badges = getBadges(_.get(readmeDotJSON, 'badges', []));
         var tableOfContents = ['## <a name="' + pagetopID + '"></a>Table of Contents'];
         var mainContent = _.map(_.get(readmeDotJSON, 'sections', []), function(section, index) {
-            var sectionID = uuid.v4();
+            var sectionID = _.uniqueId(_.kebabCase(section.title) + '_');
             var formattedTitle = _.startCase(section.title);
             var tableOfContentsEntry = (index + 1) + '. [' + formattedTitle + '](#' + sectionID + ')\n';
             //regions[1] = regions[1] + tableOfContentsEntry;

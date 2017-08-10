@@ -129,7 +129,7 @@
 			"type": "badge-list",
 			"list": [{
 				"label": "1.1.0",
-				"value": "Add indexBy and uniqify helpers"
+				"value": "Add indexBy and uniqify helpers. Deprecate uuid dependancy"
 			}, {
 				"label": "1.0.0",
 				"value": "Initial release"

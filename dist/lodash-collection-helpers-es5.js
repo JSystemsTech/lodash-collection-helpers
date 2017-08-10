@@ -10,13 +10,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     // CommonJS
 
     if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) == "object" && typeof require == "function") {
-        module.exports = factory(require("lodash"), require("uuid"));
+        module.exports = factory(require("lodash"));
     }
     // AMD
     else if (typeof define == "function" && define.amd) {
-            define(["lodash", "uuid"], factory);
+            define(["lodash"], factory);
         }
-})(function (_, uuid) {
+})(function (_) {
     "use strict";
 
     var _privateAttributes = new WeakMap();
@@ -24,7 +24,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var CollectionHelpers = function CollectionHelpers() {
         _classCallCheck(this, CollectionHelpers);
 
-        this._instanceId = uuid.v4();
+        this._instanceId = _.uniqueId('instanceId_');
         _privateAttributes.set(this, {
             _indexBy: function _indexBy(collection, iteree) {
                 var indexedCollection = {};
@@ -54,7 +54,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 var cloneCollection = _.cloneDeep(collection);
                 if (_privateAttributes.get(this)._isCollection(cloneCollection)) {
                     _.each(cloneCollection, function (item, index) {
-                        var uuidValue = uuid();
+                        var uuidValue = _.uniqueId(idAttr + '_');
                         if (_.isFunction(iteree)) {
                             var calculatedUUID = iteree(item, index);
                             if (_.isString(calculatedUUID)) {
