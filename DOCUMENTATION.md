@@ -2,6 +2,9 @@
 
 ### Table of Contents
 
+-   [itereeCallback](#itereecallback)
+-   [indexBy](#indexby)
+-   [uniqify](#uniqify)
 -   [isCollection](#iscollection)
 -   [pickAs](#pickas)
 -   [pickAllAs](#pickallas)
@@ -17,13 +20,113 @@
 -   [selectAll](#selectall)
 -   [leftJoin](#leftjoin)
 
+## itereeCallback
+
+Iteree function that retuns a string value.
+
+Type: [Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function)
+
+**Parameters**
+
+-   `item` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Item in the Collection
+-   `index` **Integer** Index of Item in the Collection
+
+Returns **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** Must return a string
+
+## indexBy
+
+-   **See: [itereeCallback](#itereecallback)**
+
+This function takes a collection and creates an object with key values given by the iteree.
+
+**Parameters**
+
+-   `collection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** The Collection to index
+-   `iteree` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) | itereeCallback)?** Item key to use as index value or function to run.
+    <br>If a duplicate index is found the collection item's index is appended to the index value.
+    <br>If no iteree is defined the default index is the index of the item in the collection.
+
+**Examples**
+
+```javascript
+var collection = [{test:1, data: 'test1'}, {test:2, data: 'test2'}];
+collectionHelpers.indexBy(collection);
+// returns {'0':{test:1, data: 'test1'}, '1':{test:2, data: 'test2'}}
+```
+
+```javascript
+var collection = [{test:1, data: 'test1'}, {test:2, data: 'test2'}];
+collectionHelpers.indexBy(collection, 'data');
+// returns {'test1':{test:1, data: 'test1'}, 'test2':{test:2, data: 'test2'}}
+```
+
+```javascript
+var collection = [{test:1, data: 'test'}, {test:2, data: 'test'}, {test:3, data: 'test'}];
+collectionHelpers.indexBy(collection, 'data');
+// returns {'test':{test:1, data: 'test'}, 'test(1)':{test:2, data: 'test'}, 'test(2)':{test:3, data: 'test'}}
+```
+
+Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
+
+**Meta**
+
+-   **since**: 1.1.0
+
+## uniqify
+
+-   **See: [itereeCallback](#itereecallback)**
+
+This function takes a collection and creates a unique id attribute for each item.
+
+**Parameters**
+
+-   `collection` **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** The Collection to create id attributes for.
+-   `idAttribute` **[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** The id attribute key name to assign to each item.
+    <br>It is the responsibility of the user to choose the desired value of `idAttribute`.
+    <br>If the input value of `idAttribute` is an existing key on an item, that item key's value will be overwritten. (optional, default `'uuid'`)
+-   `iteree` **itereeCallback?** Function to run that returns id value.
+    <br>If a duplicate id value is found in the collection the item's id value is appended with the item index value.
+    <br>If no iteree is defined the default value is value returned from `_.uniqueId(idAttribute + '_')`
+
+**Examples**
+
+```javascript
+var collection = [{test:1, data: 'test1'}, {test:2, data: 'test2'}];
+collectionHelpers.uniqify(collection);
+// returns [{uuid:'uuid_228', test:1, data: 'test1'}, {uuid:'uuid_229', test:2, data: 'test2'}]
+```
+
+```javascript
+var collection = [{test:1, data: 'test1'}, {test:2, data: 'test2'}];
+collectionHelpers.uniqify(collection, 'dataId');
+// returns [{dataId:'dataId_230', test:1, data: 'test1'}, {dataId:'dataId_231', test:2, data: 'test2'}]
+```
+
+```javascript
+var collection = [{test:1, data: 'test1'}, {test:2, data: 'test2'}];
+collectionHelpers.uniqify(collection, 'dataId', function(item, index){return item.data;});
+// returns [{dataId:'test1', test:1, data: 'test1'}, {dataId:'test2', test:2, data: 'test2'}]
+```
+
+```javascript
+var collection = [{test:1, data: 'test1'}, {test:2, data: 'test2'}, {test:3, data: 'test'}];
+collectionHelpers.uniqify(collection, 'dataId', function(item, index){return 'duplicate';});
+// returns [{dataId:'duplicate', test:1, data: 'test1'}, {dataId:'duplicate(1)', test:2, data: 'test2'}, {dataId:'duplicate(2)', test:3, data: 'test'}]
+```
+
+Returns **[Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)** Returns `collection` with unique Id
+
+**Meta**
+
+-   **since**: 1.1.0
+
 ## isCollection
 
 This function checks to see if input is an array of plain objects.
 
 **Parameters**
 
--   `value`  input any value or undefined
+-   `value` **any?** input any value or undefined
 
 **Examples**
 
@@ -60,7 +163,7 @@ and an array of key paths to pick or attribute mapping object to pick source key
 
 **Parameters**
 
--   `source` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array))** object or collection
+-   `source` **([Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array))** object or collection
 -   `attributeMap` **([Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array))** object of source key => destination key mappings or array of source keys to pick
 
 **Examples**
@@ -113,7 +216,7 @@ and will use attribute mapping object accordingly.
 
 **Parameters**
 
--   `source` **([String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array))** object or collection
+-   `source` **([Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object) \| [Array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array))** object or collection
 -   `attributeMap` **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** object of source key => destination key mappings or array of source keys to pick
 
 **Examples**
