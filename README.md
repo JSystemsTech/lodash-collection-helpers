@@ -1,7 +1,7 @@
 # Lodash Collection Helpers
 *Lodash plugin library for additional collection functions*
 
-[![NPM version](http://img.shields.io/npm/v/lodash-collection-helpers.svg?style=flat)][npm-url] [![NPM downloads](http://img.shields.io/npm/dm/lodash-collection-helpers.svg?style=flat)][npm-url] [![Build Status](https://travis-ci.org/JSystemsTech/lodash-collection-helpers.svg?branch=release%2F1-1-0)][travis-url] <a href="https://coveralls.io/github/JSystemsTech/lodash-collection-helpers?branch=release/1-1-0"><img src="https://coveralls.io/repos/github/JSystemsTech/lodash-collection-helpers/badge.svg?branch=release/1-1-0" alt="Coverage Status" /></a> [![Dependency Status](https://david-dm.org/JSystemsTech/lodash-collection-helpers.svg?style=flat&branch=release%2F1-1-0)][dependencies-url] [![devDependencies Status](https://david-dm.org/JSystemsTech/lodash-collection-helpers/dev-status.svg?branch=release%2F1-1-0)][dev-dependencies-url] [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license-url] <a href="https://github.com/JSystemsTech/lodash-collection-helpers#README"><img src="https://github.com/JSystemsTech/lodash-collection-helpers/raw/release/1-1-0/gulpCustomPlugins/customBadges/bower-badge.png" alt="Bower Package" height="30" width="130"></a>
+[![NPM version](http://img.shields.io/npm/v/lodash-collection-helpers.svg?style=flat)][npm-url] [![NPM downloads](http://img.shields.io/npm/dm/lodash-collection-helpers.svg?style=flat)][npm-url] [![Build Status](https://travis-ci.org/JSystemsTech/lodash-collection-helpers.svg?branch=master)][travis-url] <a href="https://coveralls.io/github/JSystemsTech/lodash-collection-helpers?branch=master"><img src="https://coveralls.io/repos/github/JSystemsTech/lodash-collection-helpers/badge.svg?branch=master" alt="Coverage Status" /></a> [![Dependency Status](https://david-dm.org/JSystemsTech/lodash-collection-helpers.svg?style=flat&branch=master)][dependencies-url] [![devDependencies Status](https://david-dm.org/JSystemsTech/lodash-collection-helpers/dev-status.svg?branch=master)][dev-dependencies-url] [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)][license-url] <a href="https://github.com/JSystemsTech/lodash-collection-helpers#README"><img src="https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/gulpCustomPlugins/customBadges/bower-badge.png" alt="Bower Package" height="30" width="130"></a>
 ## <a name="table-of-contents_2"></a>Table of Contents
 1. [Installation](#installation_3)
 
@@ -145,25 +145,25 @@ A more detailed page for Contributing.
 [license-url]: LICENSE
 [code-of-conduct-url]: CODE_OF_CONDUCT
 [npm-url]: https://www.npmjs.com/package/lodash-collection-helpers
-[travis-url]: https://travis-ci.org/JSystemsTech/lodash-collection-helpers?branch=release%2F1-1-0
-[dependencies-url]: https://david-dm.org/JSystemsTech/lodash-collection-helpers?branch=release%2F1-1-0
-[dev-dependencies-url]:https://david-dm.org/JSystemsTech/lodash-collection-helpers?type=dev&branch=release%2F1-1-0
-[coverage-url]: https://coveralls.io/github/JSystemsTech/lodash-collection-helpers?branch=release%2F1-1-0
-[documentation-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md
-[readme-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/README.md
-[isCollection-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#iscollection
-[pickAs-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#pickas
-[pickAllAs-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#pickallas
-[select-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#select
-[selectAll-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#selectall
-[joinOn-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#joinon
-[leftJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#leftjoin
-[rightJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#rightjoin
-[innerJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#innerjoin
-[fullJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#fulljoin
-[leftAntiJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#leftantijoin
-[rightAntiJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#rightantijoin
-[fullAntiJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#fullantijoin
-[indexBy-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#indexby
-[uniqify-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#uniqify
-[getCollectionHelpers-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/release/1-1-0/DOCUMENTATION.md#getcollectionhelpers
+[travis-url]: https://travis-ci.org/JSystemsTech/lodash-collection-helpers?branch=master
+[dependencies-url]: https://david-dm.org/JSystemsTech/lodash-collection-helpers?branch=master
+[dev-dependencies-url]:https://david-dm.org/JSystemsTech/lodash-collection-helpers?type=dev&branch=master
+[coverage-url]: https://coveralls.io/github/JSystemsTech/lodash-collection-helpers?branch=master
+[documentation-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md
+[readme-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/README.md
+[isCollection-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#iscollection
+[pickAs-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#pickas
+[pickAllAs-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#pickallas
+[select-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#select
+[selectAll-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#selectall
+[joinOn-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#joinon
+[leftJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#leftjoin
+[rightJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#rightjoin
+[innerJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#innerjoin
+[fullJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#fulljoin
+[leftAntiJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#leftantijoin
+[rightAntiJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#rightantijoin
+[fullAntiJoin-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#fullantijoin
+[indexBy-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#indexby
+[uniqify-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#uniqify
+[getCollectionHelpers-url]: https://github.com/JSystemsTech/lodash-collection-helpers/blob/master/DOCUMENTATION.md#getcollectionhelpers
