@@ -4,8 +4,6 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
-var packageDotJSON = require('./package');
-var _ = require('lodash');
 var buildReadme = require('./gulpCustomPlugins/build-readme.js');
 var buildUnitTests = require('./gulpCustomPlugins/build-unit-tests.js');
 var SOURCE_FILE_NAME = 'lodash-collection-helpers';
@@ -16,14 +14,14 @@ var SOURCE_FILE_PATH_ES5 = './dist/' + SOURCE_FILE_NAME_ES5 + '.js'
 gulp.task('build-readme', function() {
     return gulp.src('./readme.md')
         .pipe(buildReadme())
-        .pipe(gulp.dest('./'))
+        .pipe(gulp.dest('./'));
 });
 
 gulp.task('generate-lodash-unit', function() {
     return gulp.src('./test/unit-test-templates/lodash-integration.js')
         .pipe(buildUnitTests('lodash'))
         .pipe(rename('lodash-integration-spec.js'))
-        .pipe(gulp.dest('./src'))
+        .pipe(gulp.dest('./src'));
 });
 
 gulp.task('generate-get-collection-helpers-unit', function() {
@@ -53,7 +51,7 @@ gulp.task('transpile', function() {
             presets: ['es2015']
         }))
         .pipe(rename(SOURCE_FILE_NAME_ES5 + '.js'))
-        .pipe(gulp.dest('./dist'))
+        .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('minify', ['transpile'], function() {
