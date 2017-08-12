@@ -104,6 +104,9 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 
 See [CODE OF CONDUCT][code-of-conduct-url] for general contribution rules
 
+##### Coming Soon
+A more detailed page for Contributing.
+
 ## <a name="coverage-details_7"></a>Coverage Details
 ### Lines
 | Total | Covered | Skipped | Percent |
