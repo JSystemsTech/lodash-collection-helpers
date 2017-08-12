@@ -49,6 +49,8 @@ var collectionHelpers = require('lodash-collection-helpers/dist/lodash-collectio
 | [rightAntiJoin][rightAntiJoin-url] |
 | [fullAntiJoin][fullAntiJoin-url] |
 | [getCollectionHelpers][getCollectionHelpers-url] |
+| [indexBy][indexBy-url] |
+| [uniqify][uniqify-url] |
 
 For further instruction on how to use this library please referense the [Documentation][documentation-url]
 
@@ -77,6 +79,8 @@ _.mixin(collectionHelpers.getCollectionHelpers());
 | [_.leftAntiJoin][leftAntiJoin-url] |
 | [_.rightAntiJoin][rightAntiJoin-url] |
 | [_.fullAntiJoin][fullAntiJoin-url] |
+| [_.indexBy][indexBy-url] |
+| [_.uniqify][uniqify-url] |
 
 ## <a name="contributing_6"></a>Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style.

@@ -46,7 +46,9 @@
 				["[leftAntiJoin][leftAntiJoin-url]"],
 				["[rightAntiJoin][rightAntiJoin-url]"],
 				["[fullAntiJoin][fullAntiJoin-url]"],
-				["[getCollectionHelpers][getCollectionHelpers-url]"]
+				["[getCollectionHelpers][getCollectionHelpers-url]"],
+				["[indexBy][indexBy-url]"],
+				["[uniqify][uniqify-url]"]
 			]
 		}, {
 			"content": "For further instruction on how to use this library please referense the [Documentation][documentation-url]"
@@ -77,7 +79,9 @@
 				["[_.fullJoin][fullJoin-url]"],
 				["[_.leftAntiJoin][leftAntiJoin-url]"],
 				["[_.rightAntiJoin][rightAntiJoin-url]"],
-				["[_.fullAntiJoin][fullAntiJoin-url]"]
+				["[_.fullAntiJoin][fullAntiJoin-url]"],
+				["[_.indexBy][indexBy-url]"],
+				["[_.uniqify][uniqify-url]"]
 			]
 		}]
 	}, {
