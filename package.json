@@ -1,6 +1,6 @@
 {
   "name": "lodash-collection-helpers",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Lodash plugin library for additional collection functions",
   "main": "src/lodash-collection-helpers.js",
   "scripts": {
