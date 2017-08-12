@@ -4,14 +4,15 @@
 		"content": {
 			"type": "table",
 			"columns": [{
-				"lable": "Installation Type",
+				"label": "Installation Type",
 				"allignment": "center"
 			}, {
-				"lable": "Command"
+				"label": "Command"
 			}],
 			"rows": [
 				["npm", "npm install lodash-collection-helpers --save"],
-				["bower", "bower install lodash-collection-helpers"]
+				["bower", "bower install lodash-collection-helpers"],
+				["yarn", "yarn add lodash-collection-helpers"]
 			]
 		}
 	}, {
@@ -29,7 +30,7 @@
 		}, {
 			"type": "table",
 			"columns": [{
-				"lable": "Available Helpers in the Library"
+				"label": "Available Helpers in the Library"
 			}],
 			"rows": [
 				["[isCollection][isCollection-url]"],
@@ -45,7 +46,9 @@
 				["[leftAntiJoin][leftAntiJoin-url]"],
 				["[rightAntiJoin][rightAntiJoin-url]"],
 				["[fullAntiJoin][fullAntiJoin-url]"],
-				["[getCollectionHelpers][getCollectionHelpers-url]"]
+				["[getCollectionHelpers][getCollectionHelpers-url]"],
+				["[indexBy][indexBy-url]"],
+				["[uniqify][uniqify-url]"]
 			]
 		}, {
 			"content": "For further instruction on how to use this library please referense the [Documentation][documentation-url]"
@@ -61,7 +64,7 @@
 		}, {
 			"type": "table",
 			"columns": [{
-				"lable": "Integrated Lodash Function"
+				"label": "Integrated Lodash Function"
 			}],
 			"rows": [
 				["[_.isCollection][isCollection-url]"],
@@ -76,25 +79,69 @@
 				["[_.fullJoin][fullJoin-url]"],
 				["[_.leftAntiJoin][leftAntiJoin-url]"],
 				["[_.rightAntiJoin][rightAntiJoin-url]"],
-				["[_.fullAntiJoin][fullAntiJoin-url]"]
+				["[_.fullAntiJoin][fullAntiJoin-url]"],
+				["[_.indexBy][indexBy-url]"],
+				["[_.uniqify][uniqify-url]"]
 			]
 		}]
 	}, {
 		"title": "Contributing",
-		"content": "In lieu of a formal styleguide, take care to maintain the existing coding style.\nAdd unit tests for any new or changed functionality. Lint and test your code."
+		"content": [{
+			"content": "In lieu of a formal styleguide, take care to maintain the existing coding style.\nAdd unit tests for any new or changed functionality. Lint and test your code."
+		}, {
+			"type": "table",
+			"header":"Frequently used dev commands",
+			"columns": [{
+				"label": "Command"
+			}, {
+				"label": "Description"
+			}],
+			"rows": [
+				["npm test", "Generates and runs all unit and coverage tests"],
+				["npm run bundle", "Transpiles source code to ES5 file, minifys ES5 code to minified file, then builds [README.md][readme-url] file <br> A wrapper for *gulp package*"],
+				["npm run documantation", "Builds [DOCUMENTATION.md][documentation-url] file from JSDocs in source file"],
+				["npm run build", "Runs all 3 of the following commands: <br><ul><li>npm run documantation</li><li>npm run bundle</li><li>npm test</li></ul>"]
+			]
+		}, {
+			"type": "table",
+			"header":"Other dev commands",
+			"columns": [{
+				"label": "Command"
+			}, {
+				"label": "Description"
+			}],
+			"rows": [
+				["npm run unit", "Runs all unit and coverage tests"],
+				["npm run bower-unit", "Runs all unit tests for ES5 and minified ES5 files"],
+				["npm run generate-unit", "Generates all other related unit test files"],
+				["npm run coverage", "Runs coverage tests. ES5 and minified ES5 files are not counted in coverage since it is transpiled by [gulp-babel](https://www.npmjs.com/package/gulp-babel) and assumed to be working code."],
+				["gulp build-readme", "Builds [README.md][readme-url] file"],
+				["gulp transpile", "Transpiles source code to ES5 file"],
+				["gulp minify", "Transpiles source code to ES5 file and minifys ES5 code to minified file"],
+				["gulp package", "Transpiles source code to ES5 file, minifys ES5 code to minified file, then builds [README.md][readme-url] file"]
+			]
+		},{
+			"content":"See [CODE OF CONDUCT][code-of-conduct-url] for general contribution rules"
+		},{
+			"content":"##### Coming Soon\nA more detailed page for Contributing."
+		}]
+	}, {
+		"title": "Coverage Details",
+		"content": {
+			"type": "coverage-details"
+		}
 	}, {
 		"title": "Release History",
 		"content": {
-			"type": "table",
-			"columns": [{
-				"lable": "Release Number"
+			"type": "badge-list",
+			"list": [{
+				"label": "1.1.0",
+				"value": "Add indexBy and uniqify helpers. Deprecate uuid dependancy"
 			}, {
-				"lable": "Comment"
-			}],
-			"rows": [
-				["1.0.0", "Initial release"]
-			]
+				"label": "1.0.0",
+				"value": "Initial release"
+			}]
 		}
 	}],
-	"badges": ["npm", "downloads", "travis", "coverage", "dependencies", "license", "bower"]
+	"badges": ["npm", "downloads", "travis", "coverage", "dependencies", "dev-dependencies", "license", "bower"]
 }
