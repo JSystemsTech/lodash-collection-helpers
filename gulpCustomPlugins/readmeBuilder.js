@@ -5,7 +5,6 @@
     if (typeof exports == "object" && typeof require == "function") {
         module.exports = factory(require("lodash"),
             require("../src/lodash-collection-helpers"),
-            require("../coverage-summary"),
             require("../devconfig"),
             require("../readme"),
             require("../package"),
@@ -13,9 +12,9 @@
     }
     // AMD
     else if (typeof define == "function" && define.amd) {
-        define(["lodash", "../src/lodash-collection-helpers", "../coverage-summary", "../devconfig", "../readme", "../package", "../bower"], factory);
+        define(["lodash", "../src/lodash-collection-helpers", "../devconfig", "../readme", "../package", "../bower"], factory);
     }
-}(function(_, CollectionHelpers, coverageSummary, devConfig, readmeDotJSON, packageDotJSON, bowerDotJSON) {
+}(function(_, CollectionHelpers, devConfig, readmeDotJSON, packageDotJSON, bowerDotJSON) {
     var config = CollectionHelpers.leftJoin(
         [CollectionHelpers.selectAll(packageDotJSON, {
             main: 'npm.main'
@@ -66,6 +65,7 @@
         passed: '![#c5f015](https://placehold.it/15/c5f015/000000?text=+) `Good to go!`'
     };
     var getCoverageDetails = function() {
+        coverageSummary = require('../coverage-summary');
         var coverageDetails = CollectionHelpers.select(coverageSummary, {
             'total.lines': 'lines',
             'total.statements': 'statements',
