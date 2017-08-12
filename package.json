@@ -5,11 +5,12 @@
   "main": "src/lodash-collection-helpers.js",
   "scripts": {
     "unit": "mocha --require mocha-helper.js --recursive src/*-spec.js",
-    "bowerunit": "mocha --require mocha-helper.js --recursive dist/*-spec.js",
+    "bower-unit": "mocha --require mocha-helper.js --recursive dist/*-spec.js",
+    "generate-unit": "gulp generate-unit",
     "coverage": "node_modules/istanbul/lib/cli.js cover node_modules/mocha/bin/_mocha -- -R mocha-spec-json-reporter src/*-spec.js",
     "documentation": "documentation build ./src/lodash-collection-helpers.js -f md -o DOCUMENTATION.md",
-    "bundle":"gulp package",
-    "test": "npm-run-all unit bowerunit coverage",
+    "bundle": "gulp package",
+    "test": "npm-run-all generate-unit unit bower-unit coverage",
     "build": "npm-run-all documentation bundle test"
   },
   "repository": {

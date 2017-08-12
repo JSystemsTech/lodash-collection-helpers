@@ -710,6 +710,8 @@
              *-    [leftAntiJoin](#leftantijoin)
              *-    [rightAntiJoin](#rightantijoin)
              *-    [fullAntiJoin](#fullantijoin)
+             *-    [indexBy](#indexby)
+             *-    [uniqify](#uniqify)
              *
              * @since 1.0.0
              * @returns {Object}

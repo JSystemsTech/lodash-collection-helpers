@@ -580,6 +580,8 @@ functions in this library.
 -   [leftAntiJoin](#leftantijoin)
 -   [rightAntiJoin](#rightantijoin)
 -   [fullAntiJoin](#fullantijoin)
+-   [indexBy](#indexby)
+-   [uniqify](#uniqify)
 
 Returns **[Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object)** 
 

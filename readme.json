@@ -93,7 +93,7 @@
 				"label": "Description"
 			}],
 			"rows": [
-				["npm test", "Runs all unit and coverage tests"],
+				["npm test", "Generates and runs all unit and coverage tests"],
 				["npm run bundle", "Transpiles source code to ES5 file, minifys ES5 code to minified file, then builds [README.md][readme-url] file <br> A wrapper for *gulp package*"],
 				["npm run documantation", "Builds [DOCUMENTATION.md][documentation-url] file from JSDocs in source file"],
 				["npm run build", "Runs all 3 of the following commands: <br><ul><li>npm run documantation</li><li>npm run bundle</li><li>npm test</li></ul>"]
@@ -108,9 +108,10 @@
 			}],
 			"rows": [
 				["npm run unit", "Runs all unit and coverage tests"],
-				["npm run bowerunit", "Runs all unit tests for ES5 and minified ES5 files"],
+				["npm run bower-unit", "Runs all unit tests for ES5 and minified ES5 files"],
+				["npm run generate-unit", "Generates all other related unit test files"],
 				["npm run coverage", "Runs coverage tests. ES5 and minified ES5 files are not counted in coverage since it is transpiled by [gulp-babel](https://www.npmjs.com/package/gulp-babel) and assumed to be working code."],
-				["gulp buildreadme", "Builds [README.md][readme-url] file"],
+				["gulp build-readme", "Builds [README.md][readme-url] file"],
 				["gulp transpile", "Transpiles source code to ES5 file"],
 				["gulp minify", "Transpiles source code to ES5 file and minifys ES5 code to minified file"],
 				["gulp package", "Transpiles source code to ES5 file, minifys ES5 code to minified file, then builds [README.md][readme-url] file"]
