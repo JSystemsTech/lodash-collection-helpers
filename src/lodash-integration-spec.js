@@ -1,3 +1,8 @@
+/**
+ * This unit test file was auto generated via a gulp task.
+ * Any formatting issues can be ignored
+ */
+
 'use strict';
 var _ = require('lodash'),
 	expect = require('must'),
@@ -9,42 +14,8 @@ var _ = require('lodash'),
 _.mixin(lodashCollectionHelpers.getCollectionHelpers());
 
 describe('Testing Lodash Collection Helpers when integrated with the main _ object', function() {
-	describe('Verify Test Data', function() {
-		var testDataMap = {
-			bankUserInfo: {
-				data: bankUserInfoData,
-				dataFields: ['customerId', 'name', 'bank', 'balance'],
-				attrCount: 4
-			},
-			userInfo: {
-				data: userInfoData,
-				dataFields: ['uid', 'name', 'age', 'eyeColor', 'gender', 'isActive'],
-				attrCount: 6
-			},
-			fullNameInfo: {
-				data: fullNameInfoData,
-				dataFields: ['uid', 'name'],
-				attrCount: 2
-			},
-			workInfo: {
-				data: workInfoData,
-				dataFields: ['employeeId', 'name', 'company', 'email', 'phone', 'details', 'details.greeting', 'details.other'],
-				attrCount: 6
-			}
-		};
-		it('Test Data is Valid', function() {
-			_.each(testDataMap, function(dataConfig) {
-				expect(dataConfig.data.length).to.equal(20);
-				_.each(dataConfig.data, function(item, index) {
-					expect(_.keys(item).length).to.equal(dataConfig.attrCount);
-					_.each(dataConfig.dataFields, function(field) {
-						var validField = !_.isUndefined(_.get(item, field));
-						expect(validField).to.be(true);
-					});
-				});
-			});
-		});
-	});
+	
+describe('Testing Lodash Collection Helpers in release 1.0.0', function() {
 	describe('Testing isCollection', function() {
 		it('with undefined value', function() {
 			expect(_.isCollection()).to.be(false);
@@ -1225,4 +1196,200 @@ describe('Testing Lodash Collection Helpers when integrated with the main _ obje
 			});
 		});
 	});
+});
+describe('Testing Lodash Collection Helpers in release 1.1.0', function() {
+	describe('Testing indexBy', function() {
+		var collection;
+		beforeEach(function() {
+			collection = _.map(_.range(4), function(value) {
+				return {
+					uid: value,
+					test: 'test ' + value,
+					static: 'static-value',
+					data: {
+						list: _.range(value * 2)
+					}
+				};
+			});
+		});
+		it('Call with non-collection returns an empty plain Object', function() {
+			var indexedCollection = _.indexBy('non collection', 'uid');
+			expect(_.isPlainObject(indexedCollection)).to.be(true);
+			expect(_.isEmpty(indexedCollection)).to.be(true);
+		});
+		it('Call with missing iteree returns indexed on collection index number', function() {
+			var indexedCollection = _.indexBy(collection);
+			expect(_.isPlainObject(indexedCollection)).to.be(true);
+			expect(_.isEmpty(indexedCollection)).to.be(false);
+			expect(_.every(indexedCollection, function(item, uidKey) {
+				var originalItem = collection[_.parseInt(uidKey)];
+				return _.isPlainObject(item) && _.isPlainObject(originalItem) && _.isEqual(item, originalItem);
+			})).to.be(true);
+		});
+		it('Non-String Index value returns indexed on collection index number', function() {
+			var indexedCollection = _.indexBy(collection, 'data.list');
+			expect(_.isPlainObject(indexedCollection)).to.be(true);
+			expect(_.isEmpty(indexedCollection)).to.be(false);
+			expect(_.every(indexedCollection, function(item, uidKey) {
+				var originalItem = collection[_.parseInt(uidKey)];
+				return _.isPlainObject(item) && _.isPlainObject(originalItem) && _.isEqual(item, originalItem);
+			})).to.be(true);
+		});
+		it('Index by uid string key', function() {
+			var indexedCollection = _.indexBy(collection, 'uid');
+			expect(_.isPlainObject(indexedCollection)).to.be(true);
+			expect(_.isEmpty(indexedCollection)).to.be(false);
+			expect(_.every(indexedCollection, function(item, uidKey) {
+				var originalItem = _.find(collection, {
+					uid: _.parseInt(uidKey)
+				});
+				return _.isPlainObject(item) && _.isPlainObject(originalItem) && _.isEqual(item, originalItem);
+			})).to.be(true);
+		});
+		it('Index by function', function() {
+			var indexedCollection = _.indexBy(collection, function(item) {
+				return _.get(item, 'uid');
+			});
+			expect(_.isPlainObject(indexedCollection)).to.be(true);
+			expect(_.isEmpty(indexedCollection)).to.be(false);
+			expect(_.every(indexedCollection, function(item, uidKey) {
+				var originalItem = _.find(collection, {
+					uid: _.parseInt(uidKey)
+				});
+				return _.isPlainObject(item) && _.isPlainObject(originalItem) && _.isEqual(item, originalItem);
+			})).to.be(true);
+		});
+		it('Index by static value', function() {
+			var indexedCollection = _.indexBy(collection, 'static');
+			expect(_.isPlainObject(indexedCollection)).to.be(true);
+			expect(_.isEmpty(indexedCollection)).to.be(false);
+			expect(_.every(indexedCollection, function(item, key) {
+				var originalItem = _.find(collection, {
+					uid: _.parseInt(item.uid)
+				});
+				var expectedKey = 'static-value';
+				if (item.uid > 0) {
+					expectedKey = expectedKey + '(' + item.uid + ')';
+				}
+				return _.isPlainObject(item) && _.isPlainObject(originalItem) && _.isEqual(item, originalItem) && expectedKey === key;
+			})).to.be(true);
+		});
+
+	});
+	describe('Testing uniqify', function() {
+		var collection;
+		beforeEach(function() {
+			collection = _.map(_.range(4), function(value) {
+				return {
+					test: 'test ' + value,
+					static: 'static-value',
+					data: {
+						list: _.range(value * 2)
+					}
+				};
+			});
+		});
+		it('Call with non-collection returns original input value', function() {
+			var uniqifiedCollection = _.uniqify('non collection');
+			expect(_.isString(uniqifiedCollection)).to.be(true);
+			expect(uniqifiedCollection).to.equal('non collection');
+		});
+		it('Base uniqification', function() {
+			var idKey = 'uuid';
+			var uniqifiedCollection = _.uniqify(collection);
+			expect(_.isCollection(uniqifiedCollection)).to.be(true);
+			expect(_.every(uniqifiedCollection, function(item, index) {
+				var originalItem = collection[index];
+				var unUniqifiedItem = _.omit(_.cloneDeep(item), [idKey]);
+				var isUnique = _.filter(uniqifiedCollection, _.set({}, idKey, _.get(item, idKey))).length === 1;
+				return _.isString(_.get(item, idKey)) && isUnique && _.isPlainObject(originalItem) && _.isEqual(unUniqifiedItem, originalItem);
+			})).to.be(true);
+		});
+		it('Uniqify with "" id key', function() {
+			var idKey = 'uuid';
+			var uniqifiedCollection = _.uniqify(collection, "");
+			expect(_.isCollection(uniqifiedCollection)).to.be(true);
+			expect(_.every(uniqifiedCollection, function(item, index) {
+				var originalItem = collection[index];
+				var unUniqifiedItem = _.omit(_.cloneDeep(item), [idKey]);
+				var isUnique = _.filter(uniqifiedCollection, _.set({}, idKey, _.get(item, idKey))).length === 1;
+				return _.isString(_.get(item, idKey)) && isUnique && _.isPlainObject(originalItem) && _.isEqual(unUniqifiedItem, originalItem);
+			})).to.be(true);
+		});
+		it('Uniqify with null id key', function() {
+			var idKey = 'uuid';
+			var uniqifiedCollection = _.uniqify(collection, null);
+			expect(_.isCollection(uniqifiedCollection)).to.be(true);
+			expect(_.every(uniqifiedCollection, function(item, index) {
+				var originalItem = collection[index];
+				var unUniqifiedItem = _.omit(_.cloneDeep(item), [idKey]);
+				var isUnique = _.filter(uniqifiedCollection, _.set({}, idKey, _.get(item, idKey))).length === 1;
+				return _.isString(_.get(item, idKey)) && isUnique && _.isPlainObject(originalItem) && _.isEqual(unUniqifiedItem, originalItem);
+			})).to.be(true);
+		});
+		it('Uniqify with non-string id key', function() {
+			var idKey = 'uuid';
+			var uniqifiedCollection = _.uniqify(collection, {
+				test: 'test'
+			});
+			expect(_.isCollection(uniqifiedCollection)).to.be(true);
+			expect(_.every(uniqifiedCollection, function(item, index) {
+				var originalItem = collection[index];
+				var unUniqifiedItem = _.omit(_.cloneDeep(item), [idKey]);
+				var isUnique = _.filter(uniqifiedCollection, _.set({}, idKey, _.get(item, idKey))).length === 1;
+				return _.isString(_.get(item, idKey)) && isUnique && _.isPlainObject(originalItem) && _.isEqual(unUniqifiedItem, originalItem);
+			})).to.be(true);
+		});
+		it('Uniqify with user defined id key', function() {
+			var idKey = 'uid';
+			var uniqifiedCollection = _.uniqify(collection, idKey);
+			expect(_.isCollection(uniqifiedCollection)).to.be(true);
+			expect(_.every(uniqifiedCollection, function(item, index) {
+				var originalItem = collection[index];
+				var unUniqifiedItem = _.omit(_.cloneDeep(item), [idKey]);
+				var isUnique = _.filter(uniqifiedCollection, _.set({}, idKey, _.get(item, idKey))).length === 1;
+				return _.isString(_.get(item, idKey)) && isUnique && _.isPlainObject(originalItem) && _.isEqual(unUniqifiedItem, originalItem);
+			})).to.be(true);
+		});
+		it('Uniqify with user defined function', function() {
+			var idKey = 'uid';
+			var uniqifiedCollection = _.uniqify(collection, idKey, function(item) {
+				return _.get(item, 'test');
+			});
+			expect(_.isCollection(uniqifiedCollection)).to.be(true);
+			expect(_.every(uniqifiedCollection, function(item, index) {
+				var originalItem = collection[index];
+				var unUniqifiedItem = _.omit(_.cloneDeep(item), [idKey]);
+				var isUnique = _.filter(uniqifiedCollection, _.set({}, idKey, _.get(item, idKey))).length === 1;
+				return _.isString(_.get(item, idKey)) && isUnique && _.isPlainObject(originalItem) && _.isEqual(unUniqifiedItem, originalItem);
+			})).to.be(true);
+		});
+		it('Uniqify with user defined function that returns static value', function() {
+			var idKey = 'uid';
+			var uniqifiedCollection = _.uniqify(collection, idKey, function(item) {
+				return _.get(item, 'static');
+			});
+			expect(_.isCollection(uniqifiedCollection)).to.be(true);
+			expect(_.every(uniqifiedCollection, function(item, index) {
+				var originalItem = collection[index];
+				var unUniqifiedItem = _.omit(_.cloneDeep(item), [idKey]);
+				var isUnique = _.filter(uniqifiedCollection, _.set({}, idKey, _.get(item, idKey))).length === 1;
+				return _.isString(_.get(item, idKey)) && isUnique && _.isPlainObject(originalItem) && _.isEqual(unUniqifiedItem, originalItem);
+			})).to.be(true);
+		});
+		it('Uniqify with user defined function that returns non-string value', function() {
+			var idKey = 'uid';
+			var uniqifiedCollection = _.uniqify(collection, idKey, function(item) {
+				return _.get(item, 'data.list');
+			});
+			expect(_.isCollection(uniqifiedCollection)).to.be(true);
+			expect(_.every(uniqifiedCollection, function(item, index) {
+				var originalItem = collection[index];
+				var unUniqifiedItem = _.omit(_.cloneDeep(item), [idKey]);
+				var isUnique = _.filter(uniqifiedCollection, _.set({}, idKey, _.get(item, idKey))).length === 1;
+				return _.isString(_.get(item, idKey)) && isUnique && _.isPlainObject(originalItem) && _.isEqual(unUniqifiedItem, originalItem);
+			})).to.be(true);
+		});
+	});
+});
 });

@@ -10,13 +10,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     // CommonJS
 
     if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) == "object" && typeof require == "function") {
-        module.exports = factory(require("lodash"), require("uuid"));
+        module.exports = factory(require("lodash"));
     }
     // AMD
     else if (typeof define == "function" && define.amd) {
-            define(["lodash", "uuid"], factory);
+            define(["lodash"], factory);
         }
-})(function (_, uuid) {
+})(function (_) {
     "use strict";
 
     var _privateAttributes = new WeakMap();
@@ -24,8 +24,51 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var CollectionHelpers = function CollectionHelpers() {
         _classCallCheck(this, CollectionHelpers);
 
-        this._instanceId = uuid.v4();
+        this._instanceId = _.uniqueId('instanceId_');
         _privateAttributes.set(this, {
+            _indexBy: function _indexBy(collection, iteree) {
+                var indexedCollection = {};
+                if (_privateAttributes.get(this)._isCollection(collection)) {
+                    _.each(collection, function (item, index) {
+                        var indexedKey;
+                        if (_.isFunction(iteree)) {
+                            indexedKey = iteree(item, index);
+                        } else if (_.isString(iteree)) {
+                            indexedKey = _.get(item, iteree);
+                        }
+                        if (!_.isString(indexedKey)) {
+                            indexedKey = _.toString(index);
+                        }
+                        if (_.isPlainObject(_.get(indexedCollection, indexedKey))) {
+                            indexedKey = indexedKey + '(' + index + ')';
+                        }
+                        _.set(indexedCollection, indexedKey, _.cloneDeep(item));
+                    });
+                }
+                return indexedCollection;
+            },
+            _uniqify: function _uniqify(collection, idAttr, iteree) {
+                if (!_.isString(idAttr) || _.isEmpty(idAttr)) {
+                    idAttr = 'uuid';
+                }
+                var cloneCollection = _.cloneDeep(collection);
+                if (_privateAttributes.get(this)._isCollection(cloneCollection)) {
+                    _.each(cloneCollection, function (item, index) {
+                        var uuidValue = _.uniqueId(idAttr + '_');
+                        if (_.isFunction(iteree)) {
+                            var calculatedUUID = iteree(item, index);
+                            if (_.isString(calculatedUUID)) {
+                                uuidValue = calculatedUUID;
+                            }
+                        }
+                        if (_.isPlainObject(_.find(cloneCollection, _.set({}, idAttr, uuidValue)))) {
+                            uuidValue = uuidValue + '(' + index + ')';
+                        }
+                        _.set(item, idAttr, uuidValue);
+                    });
+                }
+                return cloneCollection;
+            },
             _isCollection: function _isCollection(collection) {
                 if (!_.isArray(collection)) {
                     return false;
@@ -146,8 +189,73 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
         });
         /**
+         * Iteree function that retuns a string value.
+         * @callback itereeCallback
+         * @param {String} item Item in the Collection
+         * @param {Integer} index Index of Item in the Collection
+         * @returns {String} Must return a string
+         */
+        /**
+         * This function takes a collection and creates an object with key values given by the iteree.
+         * @since 1.1.0
+         * @param {Array} collection The Collection to index
+         * @param {String|itereeCallback} [iteree] Item key to use as index value or function to run.
+         * <br>If a duplicate index is found the collection item's index is appended to the index value.
+         * <br>If no iteree is defined the default index is the index of the item in the collection.
+         * @see [itereeCallback](#itereecallback) 
+         * @returns {Object}
+         * @example 
+         * var collection = [{test:1, data: 'test1'}, {test:2, data: 'test2'}];
+         * collectionHelpers.indexBy(collection);
+         * // returns {'0':{test:1, data: 'test1'}, '1':{test:2, data: 'test2'}}
+         * @example 
+         * var collection = [{test:1, data: 'test1'}, {test:2, data: 'test2'}];
+         * collectionHelpers.indexBy(collection, 'data');
+         * // returns {'test1':{test:1, data: 'test1'}, 'test2':{test:2, data: 'test2'}}
+         * @example 
+         * var collection = [{test:1, data: 'test'}, {test:2, data: 'test'}, {test:3, data: 'test'}];
+         * collectionHelpers.indexBy(collection, 'data');
+         * // returns {'test':{test:1, data: 'test'}, 'test(1)':{test:2, data: 'test'}, 'test(2)':{test:3, data: 'test'}}
+         */
+        this.indexBy = function () {
+            return _privateAttributes.get(this)._indexBy.apply(this, arguments);
+        };
+        /**
+         * This function takes a collection and creates a unique id attribute for each item.
+         * @since 1.1.0
+         * @param {Array} collection The Collection to create id attributes for.
+         * @param {String} [idAttribute='uuid'] The id attribute key name to assign to each item.
+         * <br>It is the responsibility of the user to choose the desired value of `idAttribute`.
+         * <br>If the input value of `idAttribute` is an existing key on an item, that item key's value will be overwritten.
+         * @param {itereeCallback} [iteree] Function to run that returns id value.
+         * <br>If a duplicate id value is found in the collection the item's id value is appended with the item index value.
+         * <br>If no iteree is defined the default value is value returned from `_.uniqueId(idAttribute + '_')`
+         * @see [itereeCallback](#itereecallback) 
+         * @returns {Array} Returns `collection` with unique Id
+         * @example 
+         * var collection = [{test:1, data: 'test1'}, {test:2, data: 'test2'}];
+         * collectionHelpers.uniqify(collection);
+         * // returns [{uuid:'uuid_228', test:1, data: 'test1'}, {uuid:'uuid_229', test:2, data: 'test2'}]
+         * @example 
+         * var collection = [{test:1, data: 'test1'}, {test:2, data: 'test2'}];
+         * collectionHelpers.uniqify(collection, 'dataId');
+         * // returns [{dataId:'dataId_230', test:1, data: 'test1'}, {dataId:'dataId_231', test:2, data: 'test2'}]
+         * @example 
+         * var collection = [{test:1, data: 'test1'}, {test:2, data: 'test2'}];
+         * collectionHelpers.uniqify(collection, 'dataId', function(item, index){return item.data;});
+         * // returns [{dataId:'test1', test:1, data: 'test1'}, {dataId:'test2', test:2, data: 'test2'}]
+         * @example 
+         * var collection = [{test:1, data: 'test1'}, {test:2, data: 'test2'}, {test:3, data: 'test'}];
+         * collectionHelpers.uniqify(collection, 'dataId', function(item, index){return 'duplicate';});
+         * // returns [{dataId:'duplicate', test:1, data: 'test1'}, {dataId:'duplicate(1)', test:2, data: 'test2'}, {dataId:'duplicate(2)', test:3, data: 'test'}]
+         */
+        this.uniqify = function () {
+            return _privateAttributes.get(this)._uniqify.apply(this, arguments);
+        };
+        /**
          * This function checks to see if input is an array of plain objects.
-         * @param [value] input any value or undefined
+         * @since 1.0.0
+         * @param {*} [value] input any value or undefined
          * @returns {boolean}
          * @example 
          * collectionHelpers.isCollection('some string')
@@ -168,7 +276,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /**
          * This function acts similarly to _.pick except it can take a collection or an object source value 
          * and an array of key paths to pick or attribute mapping object to pick source keys as a different key value.
-         * @param {String|Array} source object or collection
+         * @since 1.0.0
+         * @param {Object|Array} source object or collection
          * @param {Object|Array} attributeMap object of source key => destination key mappings or array of source keys to pick
          * @returns {Object|Array} value returns object with selected keys from attributeMap
          * @example 
@@ -203,7 +312,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /**
          * Like pickAs except that it picks all keys from the source
          * and will use attribute mapping object accordingly.
-         * @param {String|Array} source object or collection
+         * @since 1.0.0
+         * @param {Object|Array} source object or collection
          * @param {Object} attributeMap object of source key => destination key mappings or array of source keys to pick
          * @returns {Object|Array} value returns object with selected keys from attributeMap
          * @example 
@@ -259,9 +369,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /**
          * This function acts similarly to _.pick except it can take a collection or an object source value 
          * and an array of key paths to pick or attribute mapping object to pick source keys as a different key value.
-         *
-         * alias: [pickAs](#pickas)
-         *
+         * @since 1.0.0
+         * @alias pickAs
+         * @see [pickAs](#pickas)
+         * @name select
          * @param {String|Array} source object or collection
          * @param {Object|Array} attributeMap object of source key => destination key mappings or array of source keys to pick
          * @returns {Object|Array} value returns object with selected keys from attributeMap
@@ -297,9 +408,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /**
          * Like pickAs except that it picks all keys from the source
          * and will use attribute mapping object accordingly.
-         *
-         * alias: [pickAllAs](#pickallas)
-         *
+         * @since 1.0.0
+         * @alias pickAllAs
+         * @see [pickAllAs](#pickallas)
+         * @name selectAll
          * @param {String|Array} source object or collection
          * @param {Object} attributeMap object of source key => destination key mappings or array of source keys to pick
          * @returns {Object|Array} with selected keys from attributeMap
@@ -356,11 +468,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          *
          * ![joinOn](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/leftJoin.png)
          *
+         * @since 1.0.0
          * @param {Array} leftCollection collection to join into from rightCollection
          * @param {Array} rightCollection collection to join into leftCollection
          * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
          * @param {String} [rightIdAttr=leftIdAttr] rightCollection attribute name to use for comparing match values
-         * @returns {Array} a collection of merged data where data id attributes are matched
+         * @returns {Array} Returns `collection` of merged data where data id attributes are matched
          * @example
          * var leftCollection = [{id: 'some-id-1', value: 'Some Value 1'},{id: 'some-id-2', value: 'Some Value 2'}];
          * var rightCollection = [{id: 'some-id-1', other: 'Other Value 1'}];
@@ -382,15 +495,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          * Merges matched data from two collections from matching id values and returns
          * the union of the left collection and the intersection of data that exist in both collections
          *
-         * alias: [JoinOn](#joinon)
-         *
          * ![leftJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/leftJoin.png)
          *
+         * @since 1.0.0
+         * @alias joinOn
+         * @see [joinOn](#joinon)
+         * @name leftJoin
          * @param {Array} leftCollection collection to join into from rightCollection
          * @param {Array} rightCollection collection to join into leftCollection
          * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
          * @param {String} [rightIdAttr=leftIdAttr] rightCollection attribute name to use for comparing match values
-         * @returns {Array} a collection of merged data where data id attributes are matched
+         * @returns {Array} Returns `collection` of merged data where data id attributes are matched
          * @example
          * var leftCollection = [{id: 'some-id-1', value: 'Some Value 1'},{id: 'some-id-2', value: 'Some Value 2'}];
          * var rightCollection = [{id: 'some-id-1', other: 'Other Value 1'}];
@@ -414,11 +529,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          *
          * ![rightJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/rightJoin.png)
          *
+         * @since 1.0.0
          * @param {Array} leftCollection collection to join into rightCollection
          * @param {Array} rightCollection collection to join into from leftCollection
          * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
          * @param {String} [rightIdAttr=leftIdAttr] rightCollection attribute name to use for comparing match values
-         * @returns {Array} a collection of merged data where data id attributes are matched
+         * @returns {Array} Returns `collection` of merged data where data id attributes are matched
          * @example
          * var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'}];
          * var rightCollection = [{id: 'some-id-1', value: 'Some Value 1'},{id: 'some-id-2', value: 'Some Value 2'}];
@@ -442,11 +558,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          *
          * ![innerJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/innerJoin.png)
          *
+         * @since 1.0.0
          * @param {Array} leftCollection collection to match in rightCollection
          * @param {Array} rightCollection collection to match in leftCollection
          * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
          * @param {String} [rightIdAttr=leftIdAttr] rightCollection attribute name to use for comparing match values
-         * @returns {Array} a collection of merged data where data id attributes are matched
+         * @returns {Array} Returns `collection` of merged data where data id attributes are matched
          * @example
          * var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
          * var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
@@ -470,11 +587,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          *
          * ![fullJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/fullJoin.png)
          *
+         * @since 1.0.0
          * @param {Array} leftCollection collection to match in rightCollection
          * @param {Array} rightCollection collection to match in leftCollection
          * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
          * @param {String} [rightIdAttr=leftIdAttr] rightCollection attribute name to use for comparing match values
-         * @returns {Array} a collection of merged data where data id attributes are matched
+         * @returns {Array} Returns `collection` of merged data where data id attributes are matched
          * @example
          * var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
          * var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
@@ -503,11 +621,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          *
          * ![leftAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/leftAntiJoin.png)
          *
+         * @since 1.0.0
          * @param {Array} leftCollection collection to match in rightCollection
          * @param {Array} rightCollection collection to match in leftCollection
          * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
          * @param {String} [rightIdAttr=leftIdAttr] rightCollection attribute name to use for comparing match values
-         * @returns {Array} a collection of merged data where data id attributes are matched
+         * @returns {Array} Returns `collection` of merged data where data id attributes are matched
          * @example
          * var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
          * var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
@@ -532,11 +651,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          *
          * ![rightAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/rightAntiJoin.png)
          *
+         * @since 1.0.0
          * @param {Array} leftCollection collection to match in rightCollection
          * @param {Array} rightCollection collection to match in leftCollection
          * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
          * @param {String} [rightIdAttr=leftIdAttr] rightCollection attribute name to use for comparing match values
-         * @returns {Array} a collection of merged data where data id attributes are matched
+         * @returns {Array} Returns `collection` of merged data where data id attributes are matched
          * @example
          * var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
          * var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
@@ -561,11 +681,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          *
          * ![fullAntiJoin](https://github.com/JSystemsTech/lodash-collection-helpers/raw/master/documentation-images/fullAntiJoin.png)
          *
+         * @since 1.0.0
          * @param {Array} leftCollection collection to match in rightCollection
          * @param {Array} rightCollection collection to match in leftCollection
          * @param {String} leftIdAttr leftCollection attribute name to use for comparing match values
          * @param {String} [rightIdAttr=leftIdAttr] rightCollection attribute name to use for comparing match values
-         * @returns {Array} a collection of merged data where data id attributes are matched
+         * @returns {Array} Returns `collection` of merged data where data id attributes are matched
          * @example
          * var leftCollection = [{id: 'some-id-1', other: 'Other Value 1'},{id: 'shared', other: 'Shared other'}];
          * var rightCollection = [{id: 'shared', value: 'Shared Value'},{id: 'some-id-2', value: 'Some Value 2'}];
@@ -599,7 +720,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
          *-    [leftAntiJoin](#leftantijoin)
          *-    [rightAntiJoin](#rightantijoin)
          *-    [fullAntiJoin](#fullantijoin)
+         *-    [indexBy](#indexby)
+         *-    [uniqify](#uniqify)
          *
+         * @since 1.0.0
          * @returns {Object}
          */
         this.getCollectionHelpers = function () {
@@ -617,7 +741,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 fullJoin: collectionHelpers._fullJoin.bind(this),
                 leftAntiJoin: collectionHelpers._leftAntiJoin.bind(this),
                 rightAntiJoin: collectionHelpers._rightAntiJoin.bind(this),
-                fullAntiJoin: collectionHelpers._fullAntiJoin.bind(this)
+                fullAntiJoin: collectionHelpers._fullAntiJoin.bind(this),
+                indexBy: collectionHelpers._indexBy.bind(this),
+                uniqify: collectionHelpers._uniqify.bind(this)
             };
         };
     };
