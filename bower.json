@@ -1,7 +1,7 @@
 {
   "name": "lodash-collection-helpers",
   "main": "dist/lodash-collection-helpers-es5.min.js",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "homepage": "https://github.com/JSystemsTech/lodash-collection-helpers",
   "authors": [
     "JSystemsTech <jsystemstech@gmail.com>"
