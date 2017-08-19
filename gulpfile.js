@@ -6,10 +6,23 @@ var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var buildReadme = require('./gulpCustomPlugins/build-readme.js');
 var buildUnitTests = require('./gulpCustomPlugins/build-unit-tests.js');
+var buildDeployConfigs = require('./gulpCustomPlugins/buildDeployConfigs.js');
 var SOURCE_FILE_NAME = 'lodash-collection-helpers';
 var SOURCE_FILE_NAME_ES5 = SOURCE_FILE_NAME + '-es5';
 var SOURCE_FILE_PATH = './src/' + SOURCE_FILE_NAME + '.js'
 var SOURCE_FILE_PATH_ES5 = './dist/' + SOURCE_FILE_NAME_ES5 + '.js'
+
+gulp.task('build-package', function() {
+    return gulp.src('./package.json')
+        .pipe(buildDeployConfigs())
+        .pipe(gulp.dest('./'));
+});
+
+gulp.task('build-bower', function() {
+    return gulp.src('./bower.json')
+        .pipe(buildDeployConfigs('bower'))
+        .pipe(gulp.dest('./'));
+});
 
 gulp.task('build-readme', function() {
     return gulp.src('./readme.md')
@@ -65,6 +78,6 @@ gulp.task('minify', ['transpile'], function() {
         .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('package', ['minify', 'build-readme']);
+gulp.task('package', ['minify', 'build-readme', 'build-package', 'build-bower']);
 
 gulp.task('default', ['transpile']);
